@@ -26,3 +26,6 @@ Mina keskendun programmeerimisel hetkel ainult funktsionaalsusele, ma ei säti m
 13. git add .
 14. git commit -m "Väike kirjeldus tehtu kohta"
 15. git push
+
+16. Kui tahad mingi muu päev jälle nikerdada, aga tõenäoliselt ma olen Githubis mingeid muudatusi sisse viinud, siis saad oma kausta sisu värskendada Terminali käsuga:
+17. git pull 
