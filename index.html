@@ -12,12 +12,21 @@
     <div id="avaleht"> 
         <button id="yksikM2ng" class="btn">Üksikmäng</button><br><br>
         <div id="juhistekonteiner"> 
-            <button id="juhistenupp">Mängu juhised</button>
-            <div id="juhised" class="hide"><span>Siia tulevad n2iteks juhised</span></div>
+            <button data-modal-target="#modal">Mängu juhised</button>
+            <div id="modal" class="modal">
+                <div class="modal-header">
+                    <div class="juhiste-pealkiri">Siit loed juhiseid</div>
+                    <button data-close-button class="close-btn">&times;</button> <!-- &times; kasutades tuleb iga fondiga ilus rist -->
+                </div>
+                <div class="modal-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic delectus et atque optio ad harum saepe aliquid doloremque dolorum facilis! Voluptas maxime maiores fuga id, similique nihil quasi cum facere.</div>
+
+            </div>
         </div>
     </div>
     <div id="loosiratas" class="hide"> 
         <button id="loosirattanupp">Keeruta loosiratast</button><br><br>
+        <img src="images/ratas.png" alt="Loosiratas" width="500"/>
+
       
     </div>
     <div id="kysimuseleht" class="hide"> 
@@ -30,6 +39,7 @@
         </div>
       
     </div>
+    <div id="overlay"></div> <!-- Et Modaalakna (juhised) taga oleks tumedam pilt -->
 <br><br>
 
     <script type="text/javascript" src="app.js"></script>

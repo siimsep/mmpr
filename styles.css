@@ -8,3 +8,58 @@
 .hide {
     display:none;
 }
+.modal {
+    position: fixed; /* modaalaken kerib kasutajaga kaasa */
+    top: 50%; /* keskjoondamiseks */
+    left: 50%; /* keskjoondamiseks */
+    transform: translate(-50%, -50%) scale(0); /* keskjoondamiseks, scale(0) peidab defaultina selle modaalakna */
+    transition: 200ms ease-in-out;
+    border: 1px solid black;
+    border-radius: 10px;  /* kasti nurgad ymarad */
+    z-index: 10;  /* modaalaken tuleb muu sisu "peale" */
+    background-color: white;
+    width: 500px;
+    max-width: 80%;
+}
+.modal.active {
+    transform: translate(-50%, -50%) scale(1); /* muudab modaalakna n2htavaks */
+}
+
+.modal-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+.modal-header .juhiste-pealkiri {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.modal-header .close-btn {
+    cursor: pointer; /* hiirega peale liikudes arusaadav et nupp */
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.modal-body {
+    padding: 10px 15px;
+}
+#overlay {
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+  }
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
+    
+}

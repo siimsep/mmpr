@@ -1,12 +1,10 @@
 const yksikNupp = document.getElementById('yksikM2ng');
-const juhistenupp = document.getElementById('juhistenupp');
-const juhised = document.getElementById('juhised');
 const avaleht = document.getElementById('avaleht');
 const loosiratas = document.getElementById('loosiratas');
 const loosirattaNupp = document.getElementById('loosirattanupp');
 const kysimuseleht = document.getElementById('kysimuseleht');
+
 yksikNupp.addEventListener('click', yksikM2ng);
-juhistenupp.addEventListener('click', n2itaJuhiseid)
 loosirattaNupp.addEventListener('click', kysimus); // l6plikult peaks keerutuse v2ljakutsumine tulema siia hoopis
 
 
@@ -18,10 +16,41 @@ function kysimus() {
     loosiratas.classList.add('hide')
     kysimuseleht.classList.remove('hide');
 }
-function n2itaJuhiseid() {
-    if(juhised.classList.value === 'hide') {
-        juhised.classList.remove('hide');
-    } else {
-        juhised.classList.add('hide')
-    }
+
+/////////////////////////////////////////////////////////////////////////
+// Modaalakna avamine/sulgemine. 
+// https://youtu.be/MBaw_6cPmAw
+// https://github.com/WebDevSimplified/Vanilla-JavaScript-Modal
+/////////////////////////////////////////////////////////////////////////
+const openModalButton = document.querySelectorAll('[data-modal-target]');
+const closeModalButton = document.querySelectorAll('[data-close-button]')
+const overlay = document.getElementById('overlay')
+openModalButton.forEach(button=> {
+    button.addEventListener('click', () => {
+        const modal = document.querySelector(button.dataset.modalTarget);
+        openModal(modal)
+    })
+})
+overlay.addEventListener('click', () => {
+    const modals = document.querySelectorAll('.modal.active')
+    modals.forEach(modal => {
+      closeModal(modal)
+    })
+  })
+closeModalButton.forEach(button=> {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal');
+        closeModal(modal)
+    })
+})
+function openModal(modal){
+    if (modal == null) return;
+    modal.classList.add('active');
+    overlay.classList.add('active')
 }
+function closeModal(modal){
+    if (modal == null) return;
+    modal.classList.remove('active');
+    overlay.classList.remove('active')
+}
+/////////////////////////////////////////////////////////////////////////
