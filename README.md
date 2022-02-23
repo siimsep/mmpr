@@ -5,6 +5,7 @@ Multimeediumi praktikum
 Töötav lahendus saadaval aadressil: 
 https://tigu.hk.tlu.ee/~siim.seppi/mmpr/app/
 
+Mina keskendun programmeerimisel hetkel ainult funktsionaalsusele, ma ei säti mingeid fonte, kirjasuuruseid, värve, tauste jms. Ainult minimaalselt (nt see juhiste nupu vajutamisel tekkiv modaalaken on natuke tuunitud.) KUI SUL ON HUVI JA TAHTMIST VÕID UURIDA JA KATSETADA MINGIT DISAINI. Nt nupud, taustad, värvid, tekstid. 
 
 1. Tee oma arvutis, kus iganes nt kooliasju hoiad, üks tühi kaust
 2. Visual Studio Code (VSC) pane käima, siis File->Open Folder..-> ja vali see kaust, mis tegid. Peaks vist uue aknaga lahti viskama selle kausta.
