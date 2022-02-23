@@ -1,17 +1,18 @@
 *, *::before, *::after {
     box-sizing: border-box;
   }
-
+/* btn grid on vastusekastide viisakamaks paigutuseks */
 .btn-grid {
     display: grid;
     grid-template-columns: repeat(2, auto);
     gap: 10px;
     margin: 20px 0;
 }
-
+/* sellega peidab veebilehel mingit sisu */
 .hide {
     display:none;
 }
+/* Mängu juhiste kuvamiseks on modaalaken, mille CSS on kirjeldatud allpool */
 .modal {
     position: fixed; /* modaalaken kerib kasutajaga kaasa */
     top: 50%; /* keskjoondamiseks */
@@ -67,3 +68,4 @@
     pointer-events: all;
     
 }
+/* Mängu juhiste kuvamiseks on modaalaken, mille CSS on kirjeldatud ülalpool */
