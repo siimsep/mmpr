@@ -3,19 +3,21 @@ const avaleht = document.getElementById('avaleht');
 const loosiratas = document.getElementById('loosiratas');
 const loosirattaNupp = document.getElementById('loosirattanupp');
 const kysimuseleht = document.getElementById('kysimuseleht');
-
-yksikNupp.addEventListener('click', yksikM2ng);
-loosirattaNupp.addEventListener('click', kysimus); // l6plikult peaks keerutuse v2ljakutsumine tulema siia hoopis
-
+const kvestion = {
+    question: "Kus asub Haanja?"
+}
 
 function yksikM2ng() {
     avaleht.classList.add('hide');
-    loosiratas.classList.remove('hide')
+    loosiratas.classList.remove('hide');
 }
 function kysimus() {
     loosiratas.classList.add('hide')
     kysimuseleht.classList.remove('hide');
 }
+yksikNupp.addEventListener('click', yksikM2ng);
+loosirattaNupp.addEventListener('click', kysimus); 
+
 
 /////////////////////////////////////////////////////////////////////////
 // Modaalakna avamine/sulgemine. 
