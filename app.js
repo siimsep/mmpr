@@ -1,3 +1,10 @@
+/////////////////////////////////////////////////////////////////////////
+// Firebase Firestore database
+//import db from './firebase.js'
+//}  
+/////////////////////////////////////////////////////////////////////////
+
+
 const yksikNupp = document.getElementById('yksikM2ng');
 const avaleht = document.getElementById('avaleht');
 const loosiratas = document.getElementById('loosiratas');
