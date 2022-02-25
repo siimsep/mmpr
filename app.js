@@ -3,9 +3,7 @@ const avaleht = document.getElementById('avaleht');
 const loosiratas = document.getElementById('loosiratas');
 const loosirattaNupp = document.getElementById('loosirattanupp');
 const kysimuseleht = document.getElementById('kysimuseleht');
-const kvestion = {
-    question: "Kus asub Haanja?"
-}
+
 
 function yksikM2ng() {
     avaleht.classList.add('hide');
