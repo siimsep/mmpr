@@ -1,5 +1,5 @@
 
-
+const avaleheNupp = document.getElementById('avalehele')
 const yksikNupp = document.getElementById('yksikM2ng');
 const avaleht = document.getElementById('avaleht');
 const loosiratas = document.getElementById('loosiratas');
@@ -11,6 +11,7 @@ const raskustase = document.getElementById('raskustasemevaade');
 const noobButton = document.getElementById('noob');
 const expertButton = document.getElementById('expert');
 let raskus = 1; //default 1, kui k6rgem tase siis muutub 2ks
+let score = 1500;
 noobButton.addEventListener('click', function() {
     raskustase.classList.add('hide')
     loosirattavaade();
@@ -21,7 +22,6 @@ expertButton.addEventListener('click', function() {
     raskus = 2; 
 });
 /////////////////////////////////////////////////////////////////////////
-
 
 function yksikM2ng() {
     avaleht.classList.add('hide');
@@ -34,6 +34,17 @@ function kysimus() {
     loosiratas.classList.add('hide')
     kysimuseleht.classList.remove('hide');
 }
+function mineAvalehele() { // v6iks kuidagi paremini selle nullimise teha, esialgu nii
+    if(confirm('Tahad minna tagasi avalehele?')==true) {
+        raskus = 1;
+        score = 1500; 
+        avaleht.classList.remove('hide');
+        raskustase.classList.add('hide');
+        loosiratas.classList.add('hide');
+        kysimuseleht.classList.add('hide');
+    } else {return}
+}
+avaleheNupp.addEventListener('click', mineAvalehele)
 yksikNupp.addEventListener('click', yksikM2ng);
 loosirattaNupp.addEventListener('click', kysimus); 
 

@@ -2,8 +2,6 @@
   import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const firebaseConfig = {
     apiKey: "AIzaSyDdQgId5KxG2njnNzXfPEDzcSVr1RP7oNs",
     authDomain: "eestikas-6f705.firebaseapp.com",
@@ -23,5 +21,14 @@
   function gotData(data)  {                 // Firebasest saadud objekti töötlemine
     let info = data.val();                  // Firebase snapshotist (data) Javascript objektiks muutmine (.val funktsioon)
    
-    console.log(info);
+    //console.log(info);
 }
+
+function kirjutaEdetabelisse(idnr,nickName, score, raskusTase) {
+  set(ref(db, 'edetabel/'+idnr), {
+  nickName: nickName,
+  score: score,
+  raskusTase: raskusTase
+})}
+//kirjutaEdetabelisse(123, 'Siim', 1500, 2);
+
