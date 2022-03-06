@@ -30,9 +30,19 @@ function yksikM2ng() {
 function loosirattavaade() {
     loosiratas.classList.remove('hide');
 }
+function kategooriaPopup() {
+    document.getElementById('kategooriaPopup').classList.add('hide');
+}
 function kysimus() {
-    loosiratas.classList.add('hide')
+    loosiratas.classList.add('hide');  
+    //setTimeout('kategooriaPopup()', 5000);  
     kysimuseleht.classList.remove('hide');
+    document.getElementById('kysimus').innerHTML=massiiv[0];
+    document.getElementById('variant1').innerHTML=massiiv[1];
+    document.getElementById('variant2').innerHTML=massiiv[2];
+    document.getElementById('variant3').innerHTML=massiiv[3];
+    document.getElementById('variant4').innerHTML=massiiv[4];
+
 }
 function mineAvalehele() { // v6iks kuidagi paremini selle nullimise teha, esialgu nii
     if(confirm('Tahad minna tagasi avalehele?')==true) {
@@ -85,4 +95,93 @@ function closeModal(modal){
     modal.classList.remove('active');
     overlay.classList.remove('active')
 }
+/////////////////////////////////////////////////////////////////////////
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
+import { getDatabase, ref, push, set, onValue, child, get } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDdQgId5KxG2njnNzXfPEDzcSVr1RP7oNs",
+  authDomain: "eestikas-6f705.firebaseapp.com",
+  databaseURL: "https://eestikas-6f705-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "eestikas-6f705",
+  storageBucket: "eestikas-6f705.appspot.com",
+  messagingSenderId: "1084995879544",
+  appId: "1:1084995879544:web:87291f0db37772320fa38d",
+  measurementId: "G-LGEX051Y8H"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase();
+const kataloog = ref(db, "kyssad/2/");
+
+/////////////////////////////////////////////////////////////////////////
+// Kasutaja skoor Firebase andmebaasi
+function kirjutaEdetabelisse(idnr,nickName, score, raskusTase) {
+set(ref(db, 'edetabel/'+idnr), {
+nickName: nickName,
+score: score,
+raskusTase: raskusTase
+})}
+//kirjutaEdetabelisse(123, 'Siim', 1500, 2);
+/////////////////////////////////////////////////////////////////////////
+// Kysimus Firebase andmebaasi
+function kirjutaKysimus(catId, kyss, v1, v2, v3, v4, nF) {
+const uusKyss = push(ref(db, "kyssad/"+catId)); 
+set(child(uusKyss, "kyss"), kyss);
+set(child(uusKyss, "v1"), v1);
+set(child(uusKyss, "v2"), v2);
+set(child(uusKyss, "v3"), v3);
+set(child(uusKyss, "v4"), v4);
+set(child(uusKyss, "nF"), nF);
+}
+//kirjutaKysimus(2, 'Mis linnas asub Haapsalu kolledz?', 'Jäneda', 'Vinni-Pajusti', 'Särevere', 'Haapsalu', 'Haapsalu kolledž asub Haapsalus, Lihula maanteel.')
+/////////////////////////////////////////////////////////////////////////
+
+// Firebasest kysimuse lugemine
+var massiiv = [];
+let rightAnswer;
+onValue(kataloog, gotData);               // Firebasest lugemise funktsioon
+function gotData(data)  {                 // Firebasest saadud objekti töötlemine
+let info = data.val();                  // Firebase snapshotist (data) Javascript objektiks muutmine (.val funktsioon)
+let keys = Object.keys(info);           // JS Objekti (info) töötlemine massiiviks (keys)
+for (let i =0;i<keys.length;i++){       // Massiivi läbikäimine
+let r = keys[i];
+massiiv.push(info[r].kyss);
+massiiv.push(info[r].v1);
+massiiv.push(info[r].v2);
+massiiv.push(info[r].v3);
+massiiv.push(info[r].v4);
+massiiv.push(info[r].nF);
+rightAnswer = massiiv[4];
+let questions = massiiv.slice(1,5);
+let randomizedQs = getShuffledArr(questions)
+massiiv[1]=randomizedQs[0];
+massiiv[2]=randomizedQs[1];
+massiiv[3]=randomizedQs[2];
+massiiv[4]=randomizedQs[3];
+}}
+/////////////////////////////////////////////////////////////////////////
+// Firebasest tulnud kysimuse vastuste randomizer
+const getShuffledArr = arr => {
+    const newArr = arr.slice()
+    for (let i = newArr.length - 1; i > 0; i--) {
+        const rand = Math.floor(Math.random() * (i + 1));
+        [newArr[i], newArr[rand]] = [newArr[rand], newArr[i]];
+    }
+    return newArr
+};
+/////////////////////////////////////////////////////////////////////////
+// Vastatud kysimuse v6rdlus
+const checkAnswer = function(event){
+    let vastatudVariant = event.target.innerHTML;
+    if(vastatudVariant == rightAnswer) {
+        console.log('paistab ilus');
+    } else { alert('vale')}
+ }
+document.getElementById('variant1').addEventListener('click', checkAnswer);
+document.getElementById('variant2').addEventListener('click', checkAnswer);
+document.getElementById('variant3').addEventListener('click', checkAnswer);
+document.getElementById('variant4').addEventListener('click', checkAnswer);
 /////////////////////////////////////////////////////////////////////////
