@@ -23,52 +23,7 @@ expertButton.addEventListener('click', function() {
 });
 /////////////////////////////////////////////////////////////////////////
 
-function yksikM2ng() {
-    avaleht.classList.add('hide');
-    raskustase.classList.remove('hide');
-}
-let kategooriaNr = 1;
-function loosirattavaade() {
-    loosiratas.classList.remove('hide');
-    const valik1 = document.getElementById('valik1');
-    const valik2 = document.getElementById('valik2');
-    valik1.addEventListener('click', function() {
-        kategooriaNr = valik1.value;
-        kysimus();
-    })
-    valik2.addEventListener('click', function() {
-        kategooriaNr = valik1.value;
-        kysimus();
-    })
-}
-/* function kategooriaPopup() {
-    document.getElementById('kategooriaPopup').classList.add('hide');
-} */
-function kysimus() {
-    loosiratas.classList.add('hide');  
-    //setTimeout('kategooriaPopup()', 5000);  
-    kysimuseleht.classList.remove('hide');
-    document.getElementById('kysimus').innerHTML=massiiv[0];
-    document.getElementById('variant1').innerHTML=massiiv[1];
-    document.getElementById('variant2').innerHTML=massiiv[2];
-    document.getElementById('variant3').innerHTML=massiiv[3];
-    document.getElementById('variant4').innerHTML=massiiv[4];
-    getFromFirebase();
 
-}
-function mineAvalehele() { // v6iks kuidagi paremini selle nullimise teha, esialgu nii
-    if(confirm('Tahad minna tagasi avalehele?')==true) {
-        raskus = 1;
-        score = 1500; 
-        avaleht.classList.remove('hide');
-        raskustase.classList.add('hide');
-        loosiratas.classList.add('hide');
-        kysimuseleht.classList.add('hide');
-    } else {return}
-}
-avaleheNupp.addEventListener('click', mineAvalehele)
-yksikNupp.addEventListener('click', yksikM2ng);
-loosirattaNupp.addEventListener('click', kysimus); 
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -124,10 +79,12 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 //const kataloog = ref(db, "kyssad/2/");
-//const kataloog = ref(db, `kyssad/${kategooriaNr}/`);
+//const kataloog = ref(db, `kyssad/`+kategooriaNr);
+
 /////////////////////////////////////////////////////////////////////////
 // Kasutaja skoor Firebase andmebaasi
 function kirjutaEdetabelisse(idnr,nickName, score, raskusTase) {
@@ -152,7 +109,7 @@ set(child(uusKyss, "nF"), nF);
 /////////////////////////////////////////////////////////////////////////
 
 // Firebasest kysimuse lugemine
-var massiiv = [];
+var massiiv = [1, 2, 3, 4, 5, 6];
 let rightAnswer;
 /* onValue(kataloog, gotData);               // Firebasest lugemise funktsioon
 function gotData(data)  {                 // Firebasest saadud objekti töötlemine
@@ -174,29 +131,93 @@ massiiv[2]=randomizedQs[1];
 massiiv[3]=randomizedQs[2];
 massiiv[4]=randomizedQs[3];
 }} */
-const getFromFirebase = async () => {
-    const kataloog = ref(db, `kyssad/${kategooriaNr}/`);
-    await onValue(kataloog, gotData);               // Firebasest lugemise funktsioon
-function gotData(data)  {                 // Firebasest saadud objekti töötlemine
-let info = data.val();                  // Firebase snapshotist (data) Javascript objektiks muutmine (.val funktsioon)
-let keys = Object.keys(info);           // JS Objekti (info) töötlemine massiiviks (keys)
-for (let i =0;i<keys.length;i++){       // Massiivi läbikäimine
-let r = keys[i];
-massiiv.push(info[r].kyss);
-massiiv.push(info[r].v1);
-massiiv.push(info[r].v2);
-massiiv.push(info[r].v3);
-massiiv.push(info[r].v4);
-massiiv.push(info[r].nF);
-rightAnswer = massiiv[4];
-let questions = massiiv.slice(1,5);
-let randomizedQs = getShuffledArr(questions)
-massiiv[1]=randomizedQs[0];
-massiiv[2]=randomizedQs[1];
-massiiv[3]=randomizedQs[2];
-massiiv[4]=randomizedQs[3];
-}}
+const dbRef = ref(getDatabase());
+const uusInfo =  function() {
+     get(child(dbRef, `kyssad/${kategooriaNr}`)).then((snapshot) => {
+        if (snapshot.exists()) {
+            let info = snapshot.val();                  // Firebase snapshotist (data) Javascript objektiks muutmine (.val funktsioon)
+            let keys = Object.keys(info);           // JS Objekti (info) töötlemine massiiviks (keys)
+            for (let i =0;i<keys.length;i++){       // Massiivi läbikäimine
+            let r = keys[i];
+            massiiv = [];
+            massiiv.push(info[r].kyss);
+            massiiv.push(info[r].v1);
+            massiiv.push(info[r].v2);
+            massiiv.push(info[r].v3);
+            massiiv.push(info[r].v4);
+            massiiv.push(info[r].nF);
+            rightAnswer = massiiv[4];
+            let questions = massiiv.slice(1,5);
+            let randomizedQs = getShuffledArr(questions)
+            massiiv[1]=randomizedQs[0];
+            massiiv[2]=randomizedQs[1];
+            massiiv[3]=randomizedQs[2];
+            massiiv[4]=randomizedQs[3];
+            massiivistKysimuseni(massiiv);
+            }
+        } else {
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
+      
 }
+function yksikM2ng() {
+    avaleht.classList.add('hide');
+    raskustase.classList.remove('hide');
+}
+let kategooriaNr = 1;
+function loosirattavaade() {
+    loosiratas.classList.remove('hide');
+    const valik1 = document.getElementById('valik1'); // kunagi peaks siis randomiga tulema numbrid
+    const valik2 = document.getElementById('valik2'); // aga praegu lihtsustamise huvides valik
+    valik1.addEventListener('click', function() {
+        kategooriaNr = valik1.value;
+        kysimus();
+    })
+    valik2.addEventListener('click', function() {
+        kategooriaNr = valik2.value;
+        kysimus();
+    })
+}
+/* function kategooriaPopup() {
+    document.getElementById('kategooriaPopup').classList.add('hide');
+} */
+
+const kysimus = function() {
+    loosiratas.classList.add('hide');  
+    //setTimeout('kategooriaPopup()', 5000);  
+    kysimuseleht.classList.remove('hide');
+    uusInfo();
+    
+/*     document.getElementById('kysimus').innerHTML=massiiv[0];
+    document.getElementById('variant1').innerHTML=massiiv[1];
+    document.getElementById('variant2').innerHTML=massiiv[2];
+    document.getElementById('variant3').innerHTML=massiiv[3];
+    document.getElementById('variant4').innerHTML=massiiv[4]; */
+
+}
+const massiivistKysimuseni = function(n2idis){
+    document.getElementById('kysimus').innerHTML=n2idis[0];
+    document.getElementById('variant1').innerHTML=n2idis[1];
+    document.getElementById('variant2').innerHTML=n2idis[2];
+    document.getElementById('variant3').innerHTML=n2idis[3];
+    document.getElementById('variant4').innerHTML=n2idis[4];
+}
+function mineAvalehele() { // v6iks kuidagi paremini selle nullimise teha, esialgu nii
+    if(confirm('Tahad minna tagasi avalehele?')==true) {
+        raskus = 1;
+        score = 1500; 
+        avaleht.classList.remove('hide');
+        raskustase.classList.add('hide');
+        loosiratas.classList.add('hide');
+        kysimuseleht.classList.add('hide');
+    } else {return}
+}
+avaleheNupp.addEventListener('click', mineAvalehele)
+yksikNupp.addEventListener('click', yksikM2ng);
+loosirattaNupp.addEventListener('click', kysimus); 
 /////////////////////////////////////////////////////////////////////////
 // Firebasest tulnud kysimuse vastuste randomizer
 const getShuffledArr = arr => {
