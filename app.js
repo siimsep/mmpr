@@ -190,13 +190,6 @@ const kysimus = function() {
     //setTimeout('kategooriaPopup()', 5000);  
     kysimuseleht.classList.remove('hide');
     uusInfo();
-    
-/*     document.getElementById('kysimus').innerHTML=massiiv[0];
-    document.getElementById('variant1').innerHTML=massiiv[1];
-    document.getElementById('variant2').innerHTML=massiiv[2];
-    document.getElementById('variant3').innerHTML=massiiv[3];
-    document.getElementById('variant4').innerHTML=massiiv[4]; */
-
 }
 const massiivistKysimuseni = function(n2idis){
     document.getElementById('kysimus').innerHTML=n2idis[0];
@@ -268,8 +261,18 @@ const checkAnswer = (event) =>{
 
     } else { 
         alert('vale');
+        if(v1btn.innerHTML == rightAnswer){
+            v1btn.style.cssText = "background-color: green;"
+        } else if(v2btn.innerHTML == rightAnswer){
+            v2btn.style.cssText = "background-color: green;"
+        } else if(v3btn.innerHTML == rightAnswer){
+            v3btn.style.cssText = "background-color: green;"
+        } else if(v4btn.innerHTML == rightAnswer){
+            v4btn.style.cssText = "background-color: green;"
+        };
         event.target.style.cssText = "background-color: red;";
         btnDisabler();
+        showNerdFact();
         nextQ.classList.remove('hide');
     };
 }
@@ -281,7 +284,7 @@ const uueleRingile = () => {
     btnEnabler();
     kysimuseleht.classList.add('hide');
     nerdFactContainer.classList.add('hide');
-
+    nextQ.classList.add('hide');
     loosirattavaade();
 }
 nextQ.addEventListener('click', uueleRingile);
