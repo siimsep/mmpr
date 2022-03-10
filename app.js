@@ -1,31 +1,3 @@
-
-const avaleheNupp = document.getElementById('avalehele')
-const yksikNupp = document.getElementById('yksikM2ng');
-const avaleht = document.getElementById('avaleht');
-const loosiratas = document.getElementById('loosiratas');
-const loosirattaNupp = document.getElementById('loosirattanupp');
-const kysimuseleht = document.getElementById('kysimuseleht');
-/////////////////////////////////////////////////////////////////////////
-// Raskustaseme valimine 
-const raskustase = document.getElementById('raskustasemevaade');
-const noobButton = document.getElementById('noob');
-const expertButton = document.getElementById('expert');
-let raskus = 1; //default 1, kui k6rgem tase siis muutub 2ks
-let score = 1500;
-noobButton.addEventListener('click', function() {
-    raskustase.classList.add('hide')
-    loosirattavaade();
-});
-expertButton.addEventListener('click', function() {
-    raskustase.classList.add('hide');
-    loosirattavaade();
-    raskus = 2; 
-});
-/////////////////////////////////////////////////////////////////////////
-
-
-
-
 /////////////////////////////////////////////////////////////////////////
 // Modaalakna avamine/sulgemine. 
 // https://youtu.be/MBaw_6cPmAw
@@ -63,10 +35,32 @@ function closeModal(modal){
     overlay.classList.remove('active')
 }
 /////////////////////////////////////////////////////////////////////////
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
-import { getDatabase, ref, push, set, onValue, child, get } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
-
-
+const avaleheNupp = document.getElementById('avalehele')
+const yksikNupp = document.getElementById('yksikM2ng');
+const avaleht = document.getElementById('avaleht');
+const loosiratas = document.getElementById('loosiratas');
+const loosirattaNupp = document.getElementById('loosirattanupp');
+const kysimuseleht = document.getElementById('kysimuseleht');
+/////////////////////////////////////////////////////////////////////////
+// Raskustaseme valimine 
+const raskustase = document.getElementById('raskustasemevaade');
+const noobButton = document.getElementById('noob');
+const expertButton = document.getElementById('expert');
+let raskus = 1; //default 1, kui k6rgem tase siis muutub 2ks
+let score = 1500;
+noobButton.addEventListener('click', function() {
+    raskustase.classList.add('hide')
+    loosirattavaade();
+});
+expertButton.addEventListener('click', function() {
+    raskustase.classList.add('hide');
+    loosirattavaade();
+    raskus = 2; 
+});
+/////////////////////////////////////////////////////////////////////////
+// Firebase 
+import { initializeApp} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
+import { getDatabase, ref, push, set, child, get} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 const firebaseConfig = {
   apiKey: "AIzaSyDdQgId5KxG2njnNzXfPEDzcSVr1RP7oNs",
   authDomain: "eestikas-6f705.firebaseapp.com",
@@ -84,7 +78,6 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 //const kataloog = ref(db, "kyssad/2/");
 //const kataloog = ref(db, `kyssad/`+kategooriaNr);
-
 /////////////////////////////////////////////////////////////////////////
 // Kasutaja skoor Firebase andmebaasi
 function kirjutaEdetabelisse(idnr,nickName, score, raskusTase) {
@@ -93,6 +86,7 @@ nickName: nickName,
 score: score,
 raskusTase: raskusTase
 })}
+
 //kirjutaEdetabelisse(123, 'Siim', 1500, 2);
 /////////////////////////////////////////////////////////////////////////
 // Kysimus Firebase andmebaasi
@@ -106,46 +100,63 @@ set(child(uusKyss, "v4"), v4);
 set(child(uusKyss, "nF"), nF);
 }
 //kirjutaKysimus(2, 'Mis linnas asub Haapsalu kolledz?', 'Jäneda', 'Vinni-Pajusti', 'Särevere', 'Haapsalu', 'Haapsalu kolledž asub Haapsalus, Lihula maanteel.')
-/////////////////////////////////////////////////////////////////////////
 
+/////////////////////////////////////////////////////////////////////////
 // Firebasest kysimuse lugemine
-var massiiv = [1, 2, 3, 4, 5, 6];
-let rightAnswer;
-/* onValue(kataloog, gotData);               // Firebasest lugemise funktsioon
-function gotData(data)  {                 // Firebasest saadud objekti töötlemine
-let info = data.val();                  // Firebase snapshotist (data) Javascript objektiks muutmine (.val funktsioon)
-let keys = Object.keys(info);           // JS Objekti (info) töötlemine massiiviks (keys)
-for (let i =0;i<keys.length;i++){       // Massiivi läbikäimine
-let r = keys[i];
-massiiv.push(info[r].kyss);
-massiiv.push(info[r].v1);
-massiiv.push(info[r].v2);
-massiiv.push(info[r].v3);
-massiiv.push(info[r].v4);
-massiiv.push(info[r].nF);
-rightAnswer = massiiv[4];
-let questions = massiiv.slice(1,5);
-let randomizedQs = getShuffledArr(questions)
-massiiv[1]=randomizedQs[0];
-massiiv[2]=randomizedQs[1];
-massiiv[3]=randomizedQs[2];
-massiiv[4]=randomizedQs[3];
-}} */
 const dbRef = ref(getDatabase());
-const uusInfo =  function() {
-     get(child(dbRef, `kyssad/${kategooriaNr}`)).then((snapshot) => {
+let massiiv;
+let rightAnswer;
+let kategooriaNr = 1;
+let kysimusedDbst = [];
+let vastatudKysimused = [];
+let juhuslikValik;
+const valik =  function(items) {
+    juhuslikValik = items[Math.floor(Math.random()*items.length)];
+    
+    function what() {
+        if(vastatudKysimused.includes(juhuslikValik)) {
+            kysimus();
+        } else {
+            vastatudKysimused.push(juhuslikValik);
+            uusInfo();           
+}}
+what();
+    
+}
+const kategooriaJargiKysimused = function() {
+    get(child(dbRef, `kyssad/${kategooriaNr}`)).then((snapshot) => {
         if (snapshot.exists()) {
             let info = snapshot.val();                  // Firebase snapshotist (data) Javascript objektiks muutmine (.val funktsioon)
             let keys = Object.keys(info);           // JS Objekti (info) töötlemine massiiviks (keys)
             for (let i =0;i<keys.length;i++){       // Massiivi läbikäimine
             let r = keys[i];
+            kysimusedDbst.push(r);
+            
+        } valik(kysimusedDbst);
+        } else {
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
+}
+
+
+
+const uusInfo =  function() {
+    get(child(dbRef, `kyssad/${kategooriaNr}`)).then((snapshot) => {
+        if(snapshot.exists()) {
+            let info = snapshot.val(); 
+            let keys = Object.keys(info);               // JS Objekti (info) töötlemine massiiviks (keys)
+            const index = keys.findIndex(item => item === juhuslikValik);
+            let kysimus = (info[keys[index]]);
             massiiv = [];
-            massiiv.push(info[r].kyss);
-            massiiv.push(info[r].v1);
-            massiiv.push(info[r].v2);
-            massiiv.push(info[r].v3);
-            massiiv.push(info[r].v4);
-            massiiv.push(info[r].nF);
+            massiiv.push(kysimus.kyss);
+            massiiv.push(kysimus.v1);
+            massiiv.push(kysimus.v2);
+            massiiv.push(kysimus.v3);
+            massiiv.push(kysimus.v4);
+            massiiv.push(kysimus.nF);
             rightAnswer = massiiv[4];
             let questions = massiiv.slice(1,5);
             let randomizedQs = getShuffledArr(questions)
@@ -155,19 +166,14 @@ const uusInfo =  function() {
             massiiv[4]=randomizedQs[3];
             massiivistKysimuseni(massiiv);
             }
-        } else {
-          console.log("No data available");
-        }
-      }).catch((error) => {
-        console.error(error);
-      });
-      
+    })
 }
+
 function yksikM2ng() {
     avaleht.classList.add('hide');
     raskustase.classList.remove('hide');
 }
-let kategooriaNr = 1;
+
 function loosirattavaade() {
     loosiratas.classList.remove('hide');
     const valik1 = document.getElementById('valik1'); // kunagi peaks siis randomiga tulema numbrid
@@ -189,7 +195,10 @@ const kysimus = function() {
     loosiratas.classList.add('hide');  
     //setTimeout('kategooriaPopup()', 5000);  
     kysimuseleht.classList.remove('hide');
-    uusInfo();
+    //uusInfo();
+    kategooriaJargiKysimused(); 
+    
+    
 }
 const massiivistKysimuseni = function(n2idis){
     document.getElementById('kysimus').innerHTML=n2idis[0];
