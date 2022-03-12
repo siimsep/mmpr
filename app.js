@@ -71,13 +71,8 @@ const firebaseConfig = {
   appId: "1:1084995879544:web:87291f0db37772320fa38d",
   measurementId: "G-LGEX051Y8H"
 };
-
-// Initialize Firebase
-
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
-//const kataloog = ref(db, "kyssad/2/");
-//const kataloog = ref(db, `kyssad/`+kategooriaNr);
 /////////////////////////////////////////////////////////////////////////
 // Kasutaja skoor Firebase andmebaasi
 function kirjutaEdetabelisse(idnr,nickName, score, raskusTase) {
@@ -99,8 +94,7 @@ set(child(uusKyss, "v3"), v3);
 set(child(uusKyss, "v4"), v4);
 set(child(uusKyss, "nF"), nF);
 }
-//kirjutaKysimus(2, 'Mis linnas asub Haapsalu kolledz?', 'Jäneda', 'Vinni-Pajusti', 'Särevere', 'Haapsalu', 'Haapsalu kolledž asub Haapsalus, Lihula maanteel.')
-
+//kirjutaKysimus(2, 'Mis teed veel?', 'Vastan', 'Mõtlen küsimusi', 'Arendan', 'Katsetan', 'Eks ta ole.')
 /////////////////////////////////////////////////////////////////////////
 // Firebasest kysimuse lugemine
 const dbRef = ref(getDatabase());
@@ -110,20 +104,22 @@ let kategooriaNr = 1;
 let kysimusedDbst = [];
 let vastatudKysimused = [];
 let juhuslikValik;
+
+
 const valik =  function(items) {
-    juhuslikValik = items[Math.floor(Math.random()*items.length)];
-    
-    function what() {
-        if(vastatudKysimused.includes(juhuslikValik)) {
-            kysimus();
-        } else {
-            vastatudKysimused.push(juhuslikValik);
-            uusInfo();           
-}}
-what();
+    juhuslikValik = items[Math.floor(Math.random()*items.length)];   
+    if(!vastatudKysimused.includes(juhuslikValik)) {
+        vastatudKysimused.push(juhuslikValik);
+        return uusInfo();
+    } else {
+        valik(kysimusedDbst)}
+        //valik(kysimusedDbst) siin peab midagi kavalat v2lja m6tlema!
+        //console.log(juhuslikValik+' on juba kysitud'); };
     
 }
-const kategooriaJargiKysimused = function() {
+
+
+const kategooriaJargiKysimused =  function() {
     get(child(dbRef, `kyssad/${kategooriaNr}`)).then((snapshot) => {
         if (snapshot.exists()) {
             let info = snapshot.val();                  // Firebase snapshotist (data) Javascript objektiks muutmine (.val funktsioon)
@@ -132,7 +128,7 @@ const kategooriaJargiKysimused = function() {
             let r = keys[i];
             kysimusedDbst.push(r);
             
-        } valik(kysimusedDbst);
+        } return valik(kysimusedDbst);
         } else {
           console.log("No data available");
         }
@@ -140,16 +136,14 @@ const kategooriaJargiKysimused = function() {
         console.error(error);
       });
 }
-
-
-
-const uusInfo =  function() {
+const uusInfo =  async function() {
     get(child(dbRef, `kyssad/${kategooriaNr}`)).then((snapshot) => {
         if(snapshot.exists()) {
             let info = snapshot.val(); 
-            let keys = Object.keys(info);               // JS Objekti (info) töötlemine massiiviks (keys)
+            let keys = Object.keys(info);               
             const index = keys.findIndex(item => item === juhuslikValik);
             let kysimus = (info[keys[index]]);
+            console.log(kysimus);
             massiiv = [];
             massiiv.push(kysimus.kyss);
             massiiv.push(kysimus.v1);
@@ -164,7 +158,7 @@ const uusInfo =  function() {
             massiiv[2]=randomizedQs[1];
             massiiv[3]=randomizedQs[2];
             massiiv[4]=randomizedQs[3];
-            massiivistKysimuseni(massiiv);
+            return massiivistKysimuseni(massiiv);
             }
     })
 }
@@ -172,21 +166,15 @@ const uusInfo =  function() {
 function yksikM2ng() {
     avaleht.classList.add('hide');
     raskustase.classList.remove('hide');
+    return
 }
-
+let m2nguVali = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 function loosirattavaade() {
     loosiratas.classList.remove('hide');
-    const valik1 = document.getElementById('valik1'); // kunagi peaks siis randomiga tulema numbrid
-    const valik2 = document.getElementById('valik2'); // aga praegu lihtsustamise huvides valik
-    valik1.addEventListener('click', function() {
-        kategooriaNr = valik1.value;
-        kysimus();
-    })
-    valik2.addEventListener('click', function() {
-        kategooriaNr = valik2.value;
-        kysimus();
-    })
 }
+function getRand(){
+    return m2nguVali.splice(Math.random() * m2nguVali.length | 0, 1)[0];
+  }
 /* function kategooriaPopup() {
     document.getElementById('kategooriaPopup').classList.add('hide');
 } */
@@ -196,8 +184,8 @@ const kysimus = function() {
     //setTimeout('kategooriaPopup()', 5000);  
     kysimuseleht.classList.remove('hide');
     //uusInfo();
-    kategooriaJargiKysimused(); 
-    
+    kategooriaNr = getRand();
+    return kategooriaJargiKysimused();   
     
 }
 const massiivistKysimuseni = function(n2idis){
@@ -206,15 +194,19 @@ const massiivistKysimuseni = function(n2idis){
     document.getElementById('variant2').innerHTML=n2idis[2];
     document.getElementById('variant3').innerHTML=n2idis[3];
     document.getElementById('variant4').innerHTML=n2idis[4];
+    return
 }
 function mineAvalehele() { // v6iks kuidagi paremini selle nullimise teha, esialgu nii
     if(confirm('Tahad minna tagasi avalehele?')==true) {
         raskus = 1;
         score = 1500; 
+        juhuslikValik = '';
+        kysimusedDbst = [];
         avaleht.classList.remove('hide');
         raskustase.classList.add('hide');
         loosiratas.classList.add('hide');
         kysimuseleht.classList.add('hide');
+        return
     } else {return}
 }
 avaleheNupp.addEventListener('click', mineAvalehele)
@@ -266,7 +258,10 @@ const checkAnswer = (event) =>{
         event.target.style.cssText = "background-color: green;"; 
         showNerdFact();
         btnDisabler();
-        nextQ.classList.remove('hide');
+        if(m2nguVali.length === 0){
+            alert('braavo, said k6ik kysimused vastatud!! skoor on mega ja puha'); 
+        } else {
+            nextQ.classList.remove('hide');}
 
     } else { 
         alert('vale');
@@ -294,7 +289,7 @@ const uueleRingile = () => {
     kysimuseleht.classList.add('hide');
     nerdFactContainer.classList.add('hide');
     nextQ.classList.add('hide');
-    loosirattavaade();
+    return loosirattavaade();
 }
 nextQ.addEventListener('click', uueleRingile);
 
