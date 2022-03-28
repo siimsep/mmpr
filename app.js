@@ -46,16 +46,24 @@ const kysimuseleht = document.getElementById('kysimuseleht');
 const raskustase = document.getElementById('raskustasemevaade');
 const noobButton = document.getElementById('noob');
 const expertButton = document.getElementById('expert');
-let raskus = 1; //default 1, kui k6rgem tase siis muutub 2ks
-let score = 1500;
+let valedVastused = 0;
+let maxVigu;
+let maxVigu1 = 3;
+let maxVigu2 = 5;
+let m2nguVali;
+let m2nguVali1 = [1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+let m2nguVali2 = [1, 1, 2, 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 noobButton.addEventListener('click', function() {
     raskustase.classList.add('hide')
+    m2nguVali = m2nguVali1;
+    maxVigu = maxVigu1;
     loosirattavaade();
 });
 expertButton.addEventListener('click', function() {
     raskustase.classList.add('hide');
+    maxVigu = maxVigu2;
+    m2nguVali = m2nguVali2
     loosirattavaade();
-    raskus = 2; 
 });
 /////////////////////////////////////////////////////////////////////////
 // Firebase 
@@ -117,9 +125,25 @@ const valik =  function(items) {
         //console.log(juhuslikValik+' on juba kysitud'); };
     
 }
+/* const andmebaasist =  function() {
+    
+    get(child(dbRef, `kyssad`)).then((snapshot) => {
+        if (snapshot.exists()) {
+            let info = snapshot.val();                  // Firebase snapshotist (data) Javascript objektiks muutmine (.val funktsioon)
+            let keys = Object.keys(info);           // JS Objekti (info) töötlemine massiiviks (keys)
+            console.log(keys);
+        } else {
+            //kategooriaJargiKysimused();
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
+}
 
-
+ */
 const kategooriaJargiKysimused =  function() {
+    
     get(child(dbRef, `kyssad/${kategooriaNr}`)).then((snapshot) => {
         if (snapshot.exists()) {
             let info = snapshot.val();                  // Firebase snapshotist (data) Javascript objektiks muutmine (.val funktsioon)
@@ -127,23 +151,22 @@ const kategooriaJargiKysimused =  function() {
             for (let i =0;i<keys.length;i++){       // Massiivi läbikäimine
             let r = keys[i];
             kysimusedDbst.push(r);
-            
         } return valik(kysimusedDbst);
         } else {
+            //kategooriaJargiKysimused();
           console.log("No data available");
         }
       }).catch((error) => {
         console.error(error);
       });
 }
-const uusInfo =  async function() {
-    get(child(dbRef, `kyssad/${kategooriaNr}`)).then((snapshot) => {
+const uusInfo =  function() {
+     get(child(dbRef, `kyssad/${kategooriaNr}`)).then((snapshot) => {
         if(snapshot.exists()) {
             let info = snapshot.val(); 
             let keys = Object.keys(info);               
             const index = keys.findIndex(item => item === juhuslikValik);
             let kysimus = (info[keys[index]]);
-            console.log(kysimus);
             massiiv = [];
             massiiv.push(kysimus.kyss);
             massiiv.push(kysimus.v1);
@@ -159,7 +182,12 @@ const uusInfo =  async function() {
             massiiv[3]=randomizedQs[2];
             massiiv[4]=randomizedQs[3];
             return massiivistKysimuseni(massiiv);
-            }
+            } else {
+                console.log("No data available");
+              }
+            }).catch((error) => {
+              console.error(error);
+            
     })
 }
 
@@ -168,7 +196,6 @@ function yksikM2ng() {
     raskustase.classList.remove('hide');
     return
 }
-let m2nguVali = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 function loosirattavaade() {
     loosiratas.classList.remove('hide');
 }
@@ -198,14 +225,16 @@ const massiivistKysimuseni = function(n2idis){
 }
 function mineAvalehele() { // v6iks kuidagi paremini selle nullimise teha, esialgu nii
     if(confirm('Tahad minna tagasi avalehele?')==true) {
-        raskus = 1;
-        score = 1500; 
+        vastatudKysimused = [];
         juhuslikValik = '';
         kysimusedDbst = [];
         avaleht.classList.remove('hide');
         raskustase.classList.add('hide');
         loosiratas.classList.add('hide');
         kysimuseleht.classList.add('hide');
+	nerdFactContainer.classList.add('hide');
+	btnEnabler();
+	nextQ.classList.add('hide');
         return
     } else {return}
 }
@@ -258,13 +287,32 @@ const checkAnswer = (event) =>{
         event.target.style.cssText = "background-color: green;"; 
         showNerdFact();
         btnDisabler();
+        kysimusedDbst = [];
         if(m2nguVali.length === 0){
             alert('braavo, said k6ik kysimused vastatud!! skoor on mega ja puha'); 
         } else {
             nextQ.classList.remove('hide');}
 
-    } else { 
-        alert('vale');
+    } else{ 
+        ++valedVastused;
+        if(valedVastused === maxVigu){
+            alert('vastasid liiga palju kordi valesti. :( loodetavasti kunagi tuleb siia skoor, mille saad edetabelisse lykata');
+            if(v1btn.innerHTML == rightAnswer){
+                v1btn.style.cssText = "background-color: green;"
+            } else if(v2btn.innerHTML == rightAnswer){
+                v2btn.style.cssText = "background-color: green;"
+            } else if(v3btn.innerHTML == rightAnswer){
+                v3btn.style.cssText = "background-color: green;"
+            } else if(v4btn.innerHTML == rightAnswer){
+                v4btn.style.cssText = "background-color: green;"
+            };
+            event.target.style.cssText = "background-color: red;";
+            btnDisabler();
+            showNerdFact();
+        } else {
+        alert('vale');    
+        kysimusedDbst = [];
+
         if(v1btn.innerHTML == rightAnswer){
             v1btn.style.cssText = "background-color: green;"
         } else if(v2btn.innerHTML == rightAnswer){
@@ -277,7 +325,7 @@ const checkAnswer = (event) =>{
         event.target.style.cssText = "background-color: red;";
         btnDisabler();
         showNerdFact();
-        nextQ.classList.remove('hide');
+        nextQ.classList.remove('hide');}
     };
 }
 v1btn.addEventListener('click', checkAnswer);
@@ -287,9 +335,9 @@ v4btn.addEventListener('click', checkAnswer);
 const uueleRingile = () => {
     btnEnabler();
     kysimuseleht.classList.add('hide');
-    nerdFactContainer.classList.add('hide');
     nextQ.classList.add('hide');
-    return loosirattavaade();
+    nerdFactContainer.classList.add('hide');
+    loosirattavaade();
 }
 nextQ.addEventListener('click', uueleRingile);
 
@@ -299,6 +347,37 @@ const nerdFactContainer = document.getElementById('nerdFactContainer');
 const nF = document.getElementById('nF');
 const showNerdFact = () => {
     nerdFactContainer.classList.remove('hide');
-    nF.innerHTML = "Nerdfact: " + massiiv[5];
+    nF.innerHTML = "Fakte nohikutele: " + massiiv[5];
 }
 /////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+// Kasutaja Kysimus Firebase andmebaasi
+
+window.kysimusKasutajalt = function() {
+    const submitCategory = document.getElementById('submitCat').value;
+    const submitQuestion = document.getElementById("submittedQuestion");
+    const submitV1 = document.getElementById("v1");
+    const submitV2 = document.getElementById("v2");
+    const submitV3 = document.getElementById("v3");
+    const submitV4 = document.getElementById("v4");
+    const submitNf = document.getElementById("nfact");
+    const submitJuser = document.getElementById("juser");
+    const uusKyss = push(ref(db, `kyssadKasutajatelt/`+submitCategory)); 
+    set(child(uusKyss, "kyss"), submitQuestion.value);
+    set(child(uusKyss, "v1"), submitV1.value);
+    set(child(uusKyss, "v2"), submitV2.value);
+    set(child(uusKyss, "v3"), submitV3.value);
+    set(child(uusKyss, "v4"), submitV4.value);
+    set(child(uusKyss, "nF"), submitNf.value);
+    set(child(uusKyss, "juser"), submitJuser.value);
+    submitQuestion.value = '';
+    submitV1.value = '';
+    submitV2.value = '';
+    submitV3.value = '';
+    submitV4.value = '';
+    submitNf.value='';
+    submitJuser.value='';
+    alert('meie t2name')
+}
+
+//kysimusKasutajalt(2, 'Mis teed veel?', 'Vastan', 'Mõtlen küsimusi', 'Arendan', 'Katsetan', 'Eks ta ole.', "siim")

@@ -41,12 +41,10 @@
                     <div class="juhiste-pealkiri">Siit saaks lisada kysimuse</div>
                     <button data-close-button class="close-btn">&times;</button> <!-- &times; kasutades tuleb iga fondiga ilus rist -->
                 </div>
-                <div class="modal-body"><p>Saada meile oma kysimus! Kui admin on selle heaks kiitnud, v6id oma kysimust juba 6ige pea m2ngus kohata.</p>
-                    <form>
-                        <label>Kysimus</label>
-                        <input type="text" id="submittedQuestion"><br><br>
+                <div class="modal-body" id="lisaKysimus"><p>Saada meile oma kysimus! Kui admin on selle heaks kiitnud, v6id oma kysimust juba 6ige pea m2ngus kohata.</p>
+                    <form id ="myForm">
                         <label for="category">Vali maakond:</label>
-                        <select name="cat" id="submitCat">
+                        <select id="submitCat">
                           <option value="1">Harju maakond</option>
                           <option value="2">Hiiu maakond</option>
                           <option value="3">Ida-Viru maakond</option>
@@ -63,6 +61,8 @@
                           <option value="14">Viljandi maakond</option>
                           <option value="15">Võru maakond</option>
                         </select><br><br>
+                        <label>Kysimus</label>
+                        <input type="text" id="submittedQuestion"><br><br>
                         <label>Vastusevariant 1:</label>
                         <input type="text" id="v1"<br><br>
                           <label>Vastusevariant 2:</label>
@@ -73,7 +73,9 @@
                         <input type="text" id="v4"<br><br>
                         <label>Mingi huvitav lisafakt küsimuse kohta</label>
                         <input type="text" id="nfact"<br><br>
-                        <input type="submit" value="Edasta oma kysimus">
+                        <label>Lisa oma nimi ka, siis teised näevad ka, kes nii ägeda küsimuse lisas</label>
+                        <input type="text" id="juser"<br><br>
+                        <input type="button" value="Edasta oma kysimus" onclick="kysimusKasutajalt()">
                       </form>
 
 
