@@ -143,7 +143,6 @@ const valik =  function(items) {
 
  */
 const kategooriaJargiKysimused =  function() {
-    
     get(child(dbRef, `kyssad/${kategooriaNr}`)).then((snapshot) => {
         if (snapshot.exists()) {
             let info = snapshot.val();                  // Firebase snapshotist (data) Javascript objektiks muutmine (.val funktsioon)
@@ -154,7 +153,7 @@ const kategooriaJargiKysimused =  function() {
         } return valik(kysimusedDbst);
         } else {
             //kategooriaJargiKysimused();
-          console.log("No data available");
+          console.log("No data available :D");
         }
       }).catch((error) => {
         console.error(error);
@@ -183,7 +182,7 @@ const uusInfo =  function() {
             massiiv[4]=randomizedQs[3];
             return massiivistKysimuseni(massiiv);
             } else {
-                console.log("No data available");
+                console.log("No data available :(");
               }
             }).catch((error) => {
               console.error(error);
@@ -194,6 +193,7 @@ const uusInfo =  function() {
 function yksikM2ng() {
     avaleht.classList.add('hide');
     raskustase.classList.remove('hide');
+    avaleheNupp.classList.remove('hide');
     return
 }
 function loosirattavaade() {
@@ -207,36 +207,46 @@ function getRand(){
 } */
 
 const kysimus = function() {
+    console.log(m2nguVali);
     loosiratas.classList.add('hide');  
     //setTimeout('kategooriaPopup()', 5000);  
     kysimuseleht.classList.remove('hide');
-    //uusInfo();
     kategooriaNr = getRand();
+    skoorike.classList.remove('hide');
     return kategooriaJargiKysimused();   
     
 }
+let startCountDown;
 const massiivistKysimuseni = function(n2idis){
     document.getElementById('kysimus').innerHTML=n2idis[0];
     document.getElementById('variant1').innerHTML=n2idis[1];
     document.getElementById('variant2').innerHTML=n2idis[2];
     document.getElementById('variant3').innerHTML=n2idis[3];
     document.getElementById('variant4').innerHTML=n2idis[4];
+    startCountDown = setInterval(countDown, 1000)
     return
 }
+
 function mineAvalehele() { // v6iks kuidagi paremini selle nullimise teha, esialgu nii
-    if(confirm('Tahad minna tagasi avalehele?')==true) {
-        vastatudKysimused = [];
-        juhuslikValik = '';
-        kysimusedDbst = [];
-        avaleht.classList.remove('hide');
-        raskustase.classList.add('hide');
-        loosiratas.classList.add('hide');
-        kysimuseleht.classList.add('hide');
-	nerdFactContainer.classList.add('hide');
-	btnEnabler();
-	nextQ.classList.add('hide');
-        return
-    } else {return}
+if(confirm('Tahad minna tagasi avalehele?')==true) {
+    vastatudKysimused = [];
+    juhuslikValik = '';
+    kysimusedDbst = [];
+    avaleht.classList.remove('hide');
+    raskustase.classList.add('hide');
+    loosiratas.classList.add('hide');
+    kysimuseleht.classList.add('hide');
+    nerdFactContainer.classList.add('hide');
+    btnEnabler();
+    nextQ.classList.add('hide');
+    avaleheNupp.classList.add('hide');
+    skoorike.classList.add('hide');
+    skoorike.innerHTML = '';
+    totalScore = 0;
+    m2nguVali1 = [1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    m2nguVali2 = [1, 1, 2, 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+    return
+} else {return}
 }
 avaleheNupp.addEventListener('click', mineAvalehele)
 yksikNupp.addEventListener('click', yksikM2ng);
@@ -244,12 +254,12 @@ loosirattaNupp.addEventListener('click', kysimus);
 /////////////////////////////////////////////////////////////////////////
 // Firebasest tulnud kysimuse vastuste randomizer
 const getShuffledArr = arr => {
-    const newArr = arr.slice()
-    for (let i = newArr.length - 1; i > 0; i--) {
-        const rand = Math.floor(Math.random() * (i + 1));
-        [newArr[i], newArr[rand]] = [newArr[rand], newArr[i]];
-    }
-    return newArr
+const newArr = arr.slice()
+for (let i = newArr.length - 1; i > 0; i--) {
+    const rand = Math.floor(Math.random() * (i + 1));
+    [newArr[i], newArr[rand]] = [newArr[rand], newArr[i]];
+}
+return newArr
 };
 /////////////////////////////////////////////////////////////////////////
 // vastusenuppude sissetoomine
@@ -258,43 +268,53 @@ const v2btn = document.getElementById('variant2');
 const v3btn = document.getElementById('variant3');
 const v4btn = document.getElementById('variant4');
 const nextQ = document.getElementById('nextQuest');
+const skoorike = document.getElementById('skoorike');
 /////////////////////////////////////////////////////////////////////////
 // Vastamise korral vastuste nuppude deaktiveerimine
 const btnDisabler = ()=> {
-    v1btn.disabled = true;
-    v2btn.disabled = true;
-    v3btn.disabled = true;
-    v4btn.disabled = true;
+v1btn.disabled = true;
+v2btn.disabled = true;
+v3btn.disabled = true;
+v4btn.disabled = true;
 }
 /////////////////////////////////////////////////////////////////////////
 // Uue kyssa korral vastuste nuppude aktiveerimine
 const btnEnabler = ()=> {
-    v1btn.disabled = false;
-    v2btn.disabled = false;
-    v3btn.disabled = false;
-    v4btn.disabled = false;
-    v1btn.style.cssText = ""; // et vastatud nupu v2rvist lahti saada! 
-    v2btn.style.cssText = ""; // loll lahendus, aga praegu t88tab nii
-    v3btn.style.cssText = ""; 
-    v4btn.style.cssText = ""; 
+v1btn.disabled = false;
+v2btn.disabled = false;
+v3btn.disabled = false;
+v4btn.disabled = false;
+v1btn.style.cssText = ""; // et vastatud nupu v2rvist lahti saada! 
+v2btn.style.cssText = ""; // loll lahendus, aga praegu t88tab nii
+v3btn.style.cssText = ""; 
+v4btn.style.cssText = ""; 
 }
 /////////////////////////////////////////////////////////////////////////
 // Vastatud kysimuse v6rdlus
 const checkAnswer = (event) =>{
     let vastatudVariant = event.target.innerHTML;
     if(vastatudVariant == rightAnswer) {
+        //console.log('aeg',timeLeft);
+        clearInterval(startCountDown);
+        totalScore += timeLeft;
+        //console.log('skoor: ',totalScore);
+        skoorike.innerHTML=`Skoor: ${totalScore}`;
+        timeLeft = 60;
         alert('õige'); 
         event.target.style.cssText = "background-color: green;"; 
         showNerdFact();
         btnDisabler();
         kysimusedDbst = [];
         if(m2nguVali.length === 0){
-            alert('braavo, said k6ik kysimused vastatud!! skoor on mega ja puha'); 
+            alert(`braavo, said k6ik kysimused vastatud! Sinu kogutud punktisummaks tuli ${totalScore}`); 
         } else {
             nextQ.classList.remove('hide');}
 
-    } else{ 
+    } else { 
         ++valedVastused;
+        m2nguVali.push(kategooriaNr);
+        clearInterval(startCountDown);
+        timeLeft = 60;
         if(valedVastused === maxVigu){
             alert('vastasid liiga palju kordi valesti. :( loodetavasti kunagi tuleb siia skoor, mille saad edetabelisse lykata');
             if(v1btn.innerHTML == rightAnswer){
@@ -337,6 +357,7 @@ const uueleRingile = () => {
     kysimuseleht.classList.add('hide');
     nextQ.classList.add('hide');
     nerdFactContainer.classList.add('hide');
+    skoorike.classList.add('hide');
     loosirattavaade();
 }
 nextQ.addEventListener('click', uueleRingile);
@@ -381,3 +402,16 @@ window.kysimusKasutajalt = function() {
 }
 
 //kysimusKasutajalt(2, 'Mis teed veel?', 'Vastan', 'Mõtlen küsimusi', 'Arendan', 'Katsetan', 'Eks ta ole.', "siim")
+/////////////////////////////////////////////////////////////////////////
+// Punktimajandus
+//let startCountDown = setInterval(countDown, 1000)
+let timeLeft = 60
+let totalScore = 0
+function countDown(){
+    timeLeft--;
+    if(timeLeft === 0){
+        clearInterval(startCountDown);
+        console.log('aeg sai otsa')
+    }
+}
+
