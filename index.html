@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eesti mäng</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/40978ebb6b.js" crossorigin="anonymous"></script>
+
 </head>
 <body class="container">   
-    <h1>Eesti mäng</h1>
-    <button id="avalehele" class="btn hide">Liigu avalehele, rsk</button><br><br>
+    <h1>Eesti mäng <i class="fa-solid fa-flag"></i>  </h1>
+    <button id="avalehele" class="btn hide"><i class="fa-solid fa-house"></i> Liigu avalehele</button><br><br>
     <div id="avaleht"> 
-        <button id="yksikM2ng" class="btn">Alusta mängu</button><br><br>
+        <button id="yksikM2ng" class="btn">Alusta</button><br><br>
         <div id="juhistekonteiner"> 
-            <button data-modal-target="#modal">Mängu juhised</button>
+            <button data-modal-target="#modal">Juhised</button>
             <div id="modal" class="modal">
                 <div class="modal-header">
                     <div class="juhiste-pealkiri">Siit loed juhiseid</div>
@@ -23,19 +25,24 @@
 
             </div>
         </div>
-        <div id="edetabelikonteiner"> 
-            <button data-modal-target="#modal2">Edetabel</button>
+        <div id="edetabelikonteiner">  
+            <button data-modal-target="#modal2"><i class="fa-solid fa-restroom"></i> Edetabel</button>
             <div id="modal2" class="modal">
                 <div class="modal-header">
                     <div class="juhiste-pealkiri">Siit näeks edetabelit</div>
                     <button data-close-button class="close-btn">&times;</button> <!-- &times; kasutades tuleb iga fondiga ilus rist -->
                 </div>
-                <div class="modal-body"><p>Kergema raskustasemega: 1. Siim 30 punkti 4/03/2022</p><p>Raskema raskustasemega: 1. Siim 50 punkti 4/03/2022</p></div>
+                <div class="modal-body">
+                    <p>Kergema raskustasemega: <br><br>
+                         <span id="kergeKasutaja"></span></p><br><hr>
+                    <p>Raskema raskustasemega: <br><br>
+                        <span id="raskeKasutaja"></span>
+                       </p>
 
-            </div>
+                </div>
         </div>
         <div id="lisakysimus"> 
-            <button data-modal-target="#modal3">Esita m2ngu oma kysimus</button>
+            <button data-modal-target="#modal3">Saada oma küsimus</button>
             <div id="modal3" class="modal">
                 <div class="modal-header">
                     <div class="juhiste-pealkiri">Siit saaks lisada kysimuse</div>
@@ -73,6 +80,8 @@
                         <input type="text" id="v4"<br><br>
                         <label>Mingi huvitav lisafakt küsimuse kohta</label>
                         <input type="text" id="nfact"<br><br>
+                        <label>Allikas, viide, link, kommentaar</label>
+                        <input type="text" id="memo"<br><br>
                         <label>Lisa oma nimi ka, siis teised näevad ka, kes nii ägeda küsimuse lisas</label>
                         <input type="text" id="juser"<br><br>
                         <input type="button" value="Edasta oma kysimus" onclick="kysimusKasutajalt()">
@@ -83,15 +92,15 @@
 
             </div>
         </div>
-    </div>
-<div id="raskustasemevaade" class="hide"> 
+    </div></div>
+<div id="raskustasemevaade" class="hide">
     <button id="noob">Kerge tase</button><br><br>
     <button id="expert">Raske tase</button>
 </div>
 
 <div id="loosiratas" class="hide"> 
-    <button id="loosirattanupp">Keeruta loosiratast</button><br><br>
-    <img src="images/ratas.png" alt="Loosiratas" width="500"/>    
+    <button id="loosirattanupp">Hakka pihta!</button><br><br>
+    
 </div>
 <!-- <div id="kategooriaPopup"><br><br><p>Said mingi sellise teema!</p></div> -->
 <div id="skoorike" class="hide"></div>
@@ -106,10 +115,19 @@
 <div id="nerdFactContainer" class="hide"> 
     <div id="nF"></div></div>
 <div id="nextQuest" class="hide"><button class="btn">Järgmist küsimust vastama!</button></div>
+
+</div>
+<div id="skoorEdetabelisse" class="modal">
+<div id="gameEnd" class="hide"><p>Skoor lisatud andmebaasi.</p><br><br><input type="button" id='mineAvaleheleModaalist' value="Mine tagasi avalehele"></div>
+<div id="skoorEdetabelisseInput">
+<div id="skoorEdetabelisseHtmlDiv"></div>
+<label>Mängija nimi:</label>
+<input type="text" id="m2ngijaNimi"<br><br>
+<input type="button" value="Lisa edetabelisse" onclick="skoorFirebase()"></div>
 </div>
 <div id="overlay"></div> <!-- Et Modaalakna (juhised) taga oleks tumedam pilt -->
 <br><br>
-
+<i id="audioIcon" class="fa-solid fa-volume-high"></i>
 <script type="module" src="app.js" defer></script>
 <script type="module" src="firebase.js"></script>
 

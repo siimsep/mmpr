@@ -9,6 +9,8 @@ const overlay = document.getElementById('overlay')
 openModalButton.forEach(button=> {
     button.addEventListener('click', () => {
         const modal = document.querySelector(button.dataset.modalTarget);
+        kergeRaskusEdekas();
+        raskeRaskusEdekas();
         openModal(modal)
     })
 })
@@ -51,18 +53,21 @@ let maxVigu;
 let maxVigu1 = 3;
 let maxVigu2 = 5;
 let m2nguVali;
-let m2nguVali1 = [1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-let m2nguVali2 = [1, 1, 2, 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+let m2nguVali1 = [1, 2/* , 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15 */];
+let m2nguVali2 = [1, 1, 2, /* 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15 */];
+let raskusTaseNr;
 noobButton.addEventListener('click', function() {
     raskustase.classList.add('hide')
     m2nguVali = m2nguVali1;
     maxVigu = maxVigu1;
+    raskusTaseNr = 1;
     loosirattavaade();
 });
 expertButton.addEventListener('click', function() {
     raskustase.classList.add('hide');
     maxVigu = maxVigu2;
     m2nguVali = m2nguVali2
+    raskusTaseNr = 2;
     loosirattavaade();
 });
 /////////////////////////////////////////////////////////////////////////
@@ -81,16 +86,6 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
-/////////////////////////////////////////////////////////////////////////
-// Kasutaja skoor Firebase andmebaasi
-function kirjutaEdetabelisse(idnr,nickName, score, raskusTase) {
-set(ref(db, 'edetabel/'+idnr), {
-nickName: nickName,
-score: score,
-raskusTase: raskusTase
-})}
-
-//kirjutaEdetabelisse(123, 'Siim', 1500, 2);
 /////////////////////////////////////////////////////////////////////////
 // Kysimus Firebase andmebaasi
 function kirjutaKysimus(catId, kyss, v1, v2, v3, v4, nF) {
@@ -120,28 +115,9 @@ const valik =  function(items) {
         vastatudKysimused.push(juhuslikValik);
         return uusInfo();
     } else {
-        valik(kysimusedDbst)}
-        //valik(kysimusedDbst) siin peab midagi kavalat v2lja m6tlema!
-        //console.log(juhuslikValik+' on juba kysitud'); };
-    
-}
-/* const andmebaasist =  function() {
-    
-    get(child(dbRef, `kyssad`)).then((snapshot) => {
-        if (snapshot.exists()) {
-            let info = snapshot.val();                  // Firebase snapshotist (data) Javascript objektiks muutmine (.val funktsioon)
-            let keys = Object.keys(info);           // JS Objekti (info) töötlemine massiiviks (keys)
-            console.log(keys);
-        } else {
-            //kategooriaJargiKysimused();
-          console.log("No data available");
-        }
-      }).catch((error) => {
-        console.error(error);
-      });
+        valik(kysimusedDbst)}   
 }
 
- */
 const kategooriaJargiKysimused =  function() {
     get(child(dbRef, `kyssad/${kategooriaNr}`)).then((snapshot) => {
         if (snapshot.exists()) {
@@ -243,8 +219,14 @@ if(confirm('Tahad minna tagasi avalehele?')==true) {
     skoorike.classList.add('hide');
     skoorike.innerHTML = '';
     totalScore = 0;
-    m2nguVali1 = [1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-    m2nguVali2 = [1, 1, 2, 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+    m2nguVali1 = [1, 2/* , 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15 */];
+    m2nguVali2 = [1, 1, 2, /* 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15 */];
+    skoorEdetabelisse.classList.add('hide');
+    skoorEdetabelisseInput.classList.remove('hide');
+    skoorEdetabelisseHtmlDiv.innerHTML = ("");
+    const gameEnd = document.getElementById('gameEnd');
+    gameEnd.classList.add('hide');
+    closeModal(skoorEdetabelisse);
     return
 } else {return}
 }
@@ -291,22 +273,29 @@ v4btn.style.cssText = "";
 }
 /////////////////////////////////////////////////////////////////////////
 // Vastatud kysimuse v6rdlus
-const checkAnswer = (event) =>{
+const checkAnswer = async (event) =>{
     let vastatudVariant = event.target.innerHTML;
+    
     if(vastatudVariant == rightAnswer) {
         //console.log('aeg',timeLeft);
         clearInterval(startCountDown);
         totalScore += timeLeft;
         //console.log('skoor: ',totalScore);
         skoorike.innerHTML=`Skoor: ${totalScore}`;
-        timeLeft = 60;
-        alert('õige'); 
+        timeLeft = 20;
+        //alert('õige'); 
         event.target.style.cssText = "background-color: green;"; 
+        await wait(500);
         showNerdFact();
         btnDisabler();
         kysimusedDbst = [];
         if(m2nguVali.length === 0){
-            alert(`braavo, said k6ik kysimused vastatud! Sinu kogutud punktisummaks tuli ${totalScore}`); 
+            await wait(1000);
+            //kysimuseleht.classList.add('hide');
+            skoorEdetabelisse.classList.remove('hide');
+            skoorEdetabelisseHtmlDiv.classList.remove("hide");
+            skoorEdetabelisseHtmlDiv.innerHTML = (`Palju õnne, mäng sai läbi. <br><br>Sinu skooriks tuli: ${totalScore}<br>`);
+            openModal(skoorEdetabelisse);
         } else {
             nextQ.classList.remove('hide');}
 
@@ -314,9 +303,12 @@ const checkAnswer = (event) =>{
         ++valedVastused;
         m2nguVali.push(kategooriaNr);
         clearInterval(startCountDown);
-        timeLeft = 60;
+        timeLeft = 20;
         if(valedVastused === maxVigu){
-            alert('vastasid liiga palju kordi valesti. :( loodetavasti kunagi tuleb siia skoor, mille saad edetabelisse lykata');
+            skoorEdetabelisse.classList.remove('hide');
+            skoorEdetabelisseHtmlDiv.classList.remove("hide");
+            skoorEdetabelisseHtmlDiv.innerHTML = (`Vastasid liiga palju kordi valesti, sinu mängu skooriks tuli: ${totalScore}<br>`);
+            openModal(skoorEdetabelisse);
             if(v1btn.innerHTML == rightAnswer){
                 v1btn.style.cssText = "background-color: green;"
             } else if(v2btn.innerHTML == rightAnswer){
@@ -330,7 +322,7 @@ const checkAnswer = (event) =>{
             btnDisabler();
             showNerdFact();
         } else {
-        alert('vale');    
+        //alert('vale');    
         kysimusedDbst = [];
 
         if(v1btn.innerHTML == rightAnswer){
@@ -343,8 +335,9 @@ const checkAnswer = (event) =>{
             v4btn.style.cssText = "background-color: green;"
         };
         event.target.style.cssText = "background-color: red;";
-        btnDisabler();
+        await wait(500);
         showNerdFact();
+        btnDisabler();
         nextQ.classList.remove('hide');}
     };
 }
@@ -363,6 +356,13 @@ const uueleRingile = () => {
 nextQ.addEventListener('click', uueleRingile);
 
 /////////////////////////////////////////////////////////////////////////
+// Taimer pausi tekitamiseks
+function wait(timeout) {
+    return new Promise(resolve => {
+        setTimeout(resolve, timeout);
+    });
+}
+/////////////////////////////////////////////////////////////////////////
 // Nedfacti kuvamine
 const nerdFactContainer = document.getElementById('nerdFactContainer');
 const nF = document.getElementById('nF');
@@ -371,41 +371,26 @@ const showNerdFact = () => {
     nF.innerHTML = "Fakte nohikutele: " + massiiv[5];
 }
 /////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-// Kasutaja Kysimus Firebase andmebaasi
-
-window.kysimusKasutajalt = function() {
-    const submitCategory = document.getElementById('submitCat').value;
-    const submitQuestion = document.getElementById("submittedQuestion");
-    const submitV1 = document.getElementById("v1");
-    const submitV2 = document.getElementById("v2");
-    const submitV3 = document.getElementById("v3");
-    const submitV4 = document.getElementById("v4");
-    const submitNf = document.getElementById("nfact");
-    const submitJuser = document.getElementById("juser");
-    const uusKyss = push(ref(db, `kyssadKasutajatelt/`+submitCategory)); 
-    set(child(uusKyss, "kyss"), submitQuestion.value);
-    set(child(uusKyss, "v1"), submitV1.value);
-    set(child(uusKyss, "v2"), submitV2.value);
-    set(child(uusKyss, "v3"), submitV3.value);
-    set(child(uusKyss, "v4"), submitV4.value);
-    set(child(uusKyss, "nF"), submitNf.value);
-    set(child(uusKyss, "juser"), submitJuser.value);
-    submitQuestion.value = '';
-    submitV1.value = '';
-    submitV2.value = '';
-    submitV3.value = '';
-    submitV4.value = '';
-    submitNf.value='';
-    submitJuser.value='';
-    alert('meie t2name')
+// Kasutaja skoor Firebase andmebaasi
+const skoorEdetabelisseInput = document.getElementById('skoorEdetabelisseInput');
+window.skoorFirebase = async function() {
+    const edeTabelisse = push(ref(db, `edetabel/${raskusTaseNr}`));
+    const m2ngijaNimi = document.getElementById('m2ngijaNimi').value;
+    set(child(edeTabelisse, 'm2ngijaNimi'), m2ngijaNimi);
+    set(child(edeTabelisse, 'skoor'), totalScore);
+    skoorEdetabelisseHtmlDiv.classList.add('hide');
+    skoorEdetabelisseInput.classList.add('hide');
+    gameEnd.classList.remove('hide');
 }
+
+const modaaliKodunupp = document.getElementById('mineAvaleheleModaalist');
+modaaliKodunupp.addEventListener('click', mineAvalehele)
 
 //kysimusKasutajalt(2, 'Mis teed veel?', 'Vastan', 'Mõtlen küsimusi', 'Arendan', 'Katsetan', 'Eks ta ole.', "siim")
 /////////////////////////////////////////////////////////////////////////
 // Punktimajandus
 //let startCountDown = setInterval(countDown, 1000)
-let timeLeft = 60
+let timeLeft = 20
 let totalScore = 0
 function countDown(){
     timeLeft--;
@@ -414,4 +399,53 @@ function countDown(){
         console.log('aeg sai otsa')
     }
 }
+/////////////////////////////////////////////////////////////////////////
+// Edetabel
+let info = null;
+const kergeKasutaja = document.getElementById("kergeKasutaja")
+const raskeKasutaja = document.getElementById("raskeKasutaja")
+
+const kergeRaskusEdekas = function() {
+    get(child(dbRef, `edetabel/1`)).then((snapshot) => {
+        if (snapshot.exists()) {
+            info = snapshot.val();
+            //let keys = Object.keys(info); 
+            let nm = Object.values(info);      
+            for (let i =0;i<nm.length;i++){       
+            let r = nm[i]; 
+            kergeKasutaja.innerHTML += r.m2ngijaNimi + ` ` + r.skoor +`<br>`;
+            }
+            
+        } else {
+            console.log("No data available :X");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
+}
+const raskeRaskusEdekas = function() {
+    get(child(dbRef, `edetabel/2`)).then((snapshot) => {
+        if (snapshot.exists()) {
+            info = snapshot.val();
+            //let keys = Object.keys(info); 
+            let nm = Object.values(info);      
+            for (let i =0;i<nm.length;i++){       
+            let r = nm[i]; 
+            raskeKasutaja.innerHTML += r.m2ngijaNimi + ` ` + r.skoor +`<br>`;
+            }
+            
+        } else {
+            console.log("No data available :X");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
+}
+
+/////////////////////////////////////////////////////////////////////////
+// Audio on-off icon toggle
+const ico = document.getElementById("audioIcon");
+ico.addEventListener("click", function(){
+    ico.classList.toggle("fa-volume-off")
+})
 
