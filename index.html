@@ -10,18 +10,18 @@
 
 </head>
 <body class="container">   
-    <h1>Eesti mäng <i class="fa-solid fa-flag"></i>  </h1>
+    <h1>Eesti mäng</h1>
     <button id="avalehele" class="btn hide"><i class="fa-solid fa-house"></i> Liigu avalehele</button><br><br>
     <div id="avaleht"> 
         <button id="yksikM2ng" class="btn">Alusta</button><br><br>
         <div id="juhistekonteiner"> 
             <button data-modal-target="#modal">Juhised</button>
             <div id="modal" class="modal">
-                <div class="modal-header">
+                <!-- <div class="modal-header">
                     <div class="juhiste-pealkiri">Siit loed juhiseid</div>
-                    <button data-close-button class="close-btn">&times;</button> <!-- &times; kasutades tuleb iga fondiga ilus rist -->
-                </div>
-                <div class="modal-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic delectus et atque optio ad harum saepe aliquid doloremque dolorum facilis! Voluptas maxime maiores fuga id, similique nihil quasi cum facere.</div>
+                    <button data-close-button class="close-btn">&times;</button> &times; kasutades tuleb iga fondiga ilus rist
+                </div> -->
+                <div class="modal-body"><object data="juhised.html" width="640" height="720"></object></div>
 
             </div>
         </div>
@@ -96,13 +96,9 @@
 <div id="raskustasemevaade" class="hide">
     <button id="noob">Kerge tase</button><br><br>
     <button id="expert">Raske tase</button>
+</div> 
 </div>
-
-<div id="loosiratas" class="hide"> 
-    <button id="loosirattanupp">Hakka pihta!</button><br><br>
-    
-</div>
-<!-- <div id="kategooriaPopup"><br><br><p>Said mingi sellise teema!</p></div> -->
+<div id="kategooriaPopup" class="hide"><br><br><p><p class="loading"></p></p></div>
 <div id="skoorike" class="hide"></div>
 <div id="kysimuseleht" class="hide"> 
 <div id="kysimus">Siin on kysimus!?</div>
@@ -118,7 +114,7 @@
 
 </div>
 <div id="skoorEdetabelisse" class="modal">
-<div id="gameEnd" class="hide"><p>Skoor lisatud andmebaasi.</p><br><br><input type="button" id='mineAvaleheleModaalist' value="Mine tagasi avalehele"></div>
+<div id="gameEnd" class="hide"><p >Skoor lisatud andmebaasi.</p><br><br><input type="button" id='mineAvaleheleModaalist' value="Mine tagasi avalehele"></div>
 <div id="skoorEdetabelisseInput">
 <div id="skoorEdetabelisseHtmlDiv"></div>
 <label>Mängija nimi:</label>

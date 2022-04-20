@@ -40,8 +40,6 @@ function closeModal(modal){
 const avaleheNupp = document.getElementById('avalehele')
 const yksikNupp = document.getElementById('yksikM2ng');
 const avaleht = document.getElementById('avaleht');
-const loosiratas = document.getElementById('loosiratas');
-const loosirattaNupp = document.getElementById('loosirattanupp');
 const kysimuseleht = document.getElementById('kysimuseleht');
 /////////////////////////////////////////////////////////////////////////
 // Raskustaseme valimine 
@@ -51,24 +49,24 @@ const expertButton = document.getElementById('expert');
 let valedVastused = 0;
 let maxVigu;
 let maxVigu1 = 3;
-let maxVigu2 = 5;
+let maxVigu2 = 3;
 let m2nguVali;
 let m2nguVali1 = [1, 2/* , 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15 */];
-let m2nguVali2 = [1, 1, 2, /* 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15 */];
+let m2nguVali2 = [1, 1, 2, 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 let raskusTaseNr;
 noobButton.addEventListener('click', function() {
     raskustase.classList.add('hide')
     m2nguVali = m2nguVali1;
     maxVigu = maxVigu1;
     raskusTaseNr = 1;
-    loosirattavaade();
+    kysimus()
 });
 expertButton.addEventListener('click', function() {
     raskustase.classList.add('hide');
     maxVigu = maxVigu2;
     m2nguVali = m2nguVali2
     raskusTaseNr = 2;
-    loosirattavaade();
+    kysimus()
 });
 /////////////////////////////////////////////////////////////////////////
 // Firebase 
@@ -172,26 +170,58 @@ function yksikM2ng() {
     avaleheNupp.classList.remove('hide');
     return
 }
-function loosirattavaade() {
-    loosiratas.classList.remove('hide');
-}
 function getRand(){
     return m2nguVali.splice(Math.random() * m2nguVali.length | 0, 1)[0];
   }
-/* function kategooriaPopup() {
-    document.getElementById('kategooriaPopup').classList.add('hide');
-} */
 
-const kysimus = function() {
-    console.log(m2nguVali);
-    loosiratas.classList.add('hide');  
-    //setTimeout('kategooriaPopup()', 5000);  
-    kysimuseleht.classList.remove('hide');
-    kategooriaNr = getRand();
-    skoorike.classList.remove('hide');
-    return kategooriaJargiKysimused();   
-    
+const popup = document.getElementById('kategooriaPopup');
+let popupinit = popup.innerHTML;
+const showCategory = function(nr) {
+    if(nr == 1) {
+        popup.innerHTML = `<img width="500px" src="images/harju.png"/>`;
+    } else if (nr == 2) {
+        popup.innerHTML = `<img width="500px" src="images/hiiu.png"/>`;
+    } else if (nr == 3) {
+        popup.innerHTML = `<img width="500px" src="images/idaviru.png"/>`;
+    } else if (nr == 4) {
+        popup.innerHTML = `<img width="500px" src="images/jarvamaa.png"/>`;
+    } else if (nr == 5) {
+        popup.innerHTML = `<img width="500px" src="images/jogeva.png"/>`;
+    } else if (nr == 6) {
+        popup.innerHTML = `<img width="500px" src="images/laanemaa.png"/>`;
+    } else if (nr == 7) {
+        popup.innerHTML = `<img width="500px" src="images/laaneviru.png"/>`;
+    } else if (nr == 8) {
+        popup.innerHTML = `<img width="500px" src="images/parnu.png"/>`;
+    } else if (nr == 9) {
+        popup.innerHTML = `<img width="500px" src="images/polva.png"/>`;
+    } else if (nr == 10) {
+        popup.innerHTML = `<img width="500px" src="images/raplamaa.png"/>`;
+    } else if (nr == 11) {
+        popup.innerHTML = `<img width="500px" src="images/saare.png"/>`;
+    } else if (nr == 12) {
+        popup.innerHTML = `<img width="500px" src="images/tartumaa.png"/>`;
+    } else if (nr == 13) {
+        popup.innerHTML = `<img width="500px" src="images/valga.png"/>`;
+    } else if (nr == 14) {
+        popup.innerHTML = `<img width="500px" src="images/viljandi.png"/>`;
+    } else if (nr == 15) {
+        popup.innerHTML = `<img width="500px" src="images/voru.png"/>`;
+    }
 }
+const kysimus = async function() {
+    kategooriaNr = getRand();
+    popup.classList.remove('hide');
+    await wait(1000);
+    showCategory(kategooriaNr);
+    await wait(1300);
+    popup.classList.add('hide');
+    popup.innerHTML = popupinit;
+    //kysimuseleht.classList.remove('hide');
+    skoorike.classList.remove('hide');
+    return kategooriaJargiKysimused();       
+}
+
 let startCountDown;
 const massiivistKysimuseni = function(n2idis){
     document.getElementById('kysimus').innerHTML=n2idis[0];
@@ -199,6 +229,7 @@ const massiivistKysimuseni = function(n2idis){
     document.getElementById('variant2').innerHTML=n2idis[2];
     document.getElementById('variant3').innerHTML=n2idis[3];
     document.getElementById('variant4').innerHTML=n2idis[4];
+    kysimuseleht.classList.remove('hide');
     startCountDown = setInterval(countDown, 1000)
     return
 }
@@ -210,7 +241,6 @@ if(confirm('Tahad minna tagasi avalehele?')==true) {
     kysimusedDbst = [];
     avaleht.classList.remove('hide');
     raskustase.classList.add('hide');
-    loosiratas.classList.add('hide');
     kysimuseleht.classList.add('hide');
     nerdFactContainer.classList.add('hide');
     btnEnabler();
@@ -220,7 +250,8 @@ if(confirm('Tahad minna tagasi avalehele?')==true) {
     skoorike.innerHTML = '';
     totalScore = 0;
     m2nguVali1 = [1, 2/* , 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15 */];
-    m2nguVali2 = [1, 1, 2, /* 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15 */];
+    m2nguVali2 = [1, 1, 2, 2, 3, 3, /* 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15 */];
+    valedVastused = 0;
     skoorEdetabelisse.classList.add('hide');
     skoorEdetabelisseInput.classList.remove('hide');
     skoorEdetabelisseHtmlDiv.innerHTML = ("");
@@ -232,7 +263,7 @@ if(confirm('Tahad minna tagasi avalehele?')==true) {
 }
 avaleheNupp.addEventListener('click', mineAvalehele)
 yksikNupp.addEventListener('click', yksikM2ng);
-loosirattaNupp.addEventListener('click', kysimus); 
+
 /////////////////////////////////////////////////////////////////////////
 // Firebasest tulnud kysimuse vastuste randomizer
 const getShuffledArr = arr => {
@@ -351,7 +382,7 @@ const uueleRingile = () => {
     nextQ.classList.add('hide');
     nerdFactContainer.classList.add('hide');
     skoorike.classList.add('hide');
-    loosirattavaade();
+    kysimus()
 }
 nextQ.addEventListener('click', uueleRingile);
 
@@ -411,7 +442,7 @@ const kergeRaskusEdekas = function() {
             info = snapshot.val();
             //let keys = Object.keys(info); 
             let nm = Object.values(info);      
-            for (let i =0;i<nm.length;i++){       
+            for (let i =0;i<10;i++){       
             let r = nm[i]; 
             kergeKasutaja.innerHTML += r.m2ngijaNimi + ` ` + r.skoor +`<br>`;
             }
@@ -429,7 +460,7 @@ const raskeRaskusEdekas = function() {
             info = snapshot.val();
             //let keys = Object.keys(info); 
             let nm = Object.values(info);      
-            for (let i =0;i<nm.length;i++){       
+            for (let i =0;i<5;i++){       
             let r = nm[i]; 
             raskeKasutaja.innerHTML += r.m2ngijaNimi + ` ` + r.skoor +`<br>`;
             }
