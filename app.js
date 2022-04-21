@@ -399,7 +399,7 @@ const nerdFactContainer = document.getElementById('nerdFactContainer');
 const nF = document.getElementById('nF');
 const showNerdFact = () => {
     nerdFactContainer.classList.remove('hide');
-    nF.innerHTML = "Fakte nohikutele: " + massiiv[5];
+    nF.innerHTML = massiiv[5];
 }
 /////////////////////////////////////////////////////////////////////////
 // Kasutaja skoor Firebase andmebaasi
@@ -479,4 +479,19 @@ const ico = document.getElementById("audioIcon");
 ico.addEventListener("click", function(){
     ico.classList.toggle("fa-volume-off")
 })
+/////////////////////////////////////////////////////////////////////////
+// Audio on-off icon toggle
+var acc = document.getElementsByClassName("accordion");
+var i;
 
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}

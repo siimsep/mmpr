@@ -1,12 +1,18 @@
 *, *::before, *::after {
     box-sizing: border-box;
   }
+body {
+    background-image: url('images/taust.png'); /* https://www.w3schools.com/cssref/pr_background-image.asp */
+    background-size: 872px 619px;
+    background-repeat: no-repeat;
+  }
 /* btn grid on vastusekastide viisakamaks paigutuseks */
 .btn-grid {
     display: grid;
     grid-template-columns: repeat(2, auto);
     gap: 10px;
     margin: 20px 0;
+    width: 800px;
 }
 /* sellega peidab veebilehel mingit sisu */
 .hide {
@@ -99,5 +105,120 @@
 #kategooriaPopup {
   color: white;
   font: 300 4em/150% Impact;
-  text-align: center;}
-
+  text-align: center;
+}
+.vastusenupp {
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 6px;
+}
+#nerdFactContainer {
+  border: none;
+  background-color: rgb(231, 231, 231);
+  width: 800px;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+}
+#kysimus {
+  border: none;
+  background-color: rgb(231, 231, 231);
+  width: 800px;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+}
+.j2rgminekyss {
+  border: none;
+  background-color: rgb(190, 167, 211);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 6px;
+}
+#avalehele {
+  border: none;
+  background-color: rgb(231, 231, 231);
+  width: 200px;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+}
+#yksikM2ng {
+  border: none;
+  background-color: rgb(231, 231, 231);
+  width: 200px;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+}
+.edetabelinupp {
+  border: none;
+  background-color: rgb(231, 231, 231);
+  width: 200px;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.juhisenupp {
+  border: none;
+  background-color: rgb(231, 231, 231);
+  width: 200px;
+  padding: 15px 32px;
+  margin-bottom: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+}
+.saadakyss {
+  border: none;
+  background-color: rgb(231, 231, 231);
+  width: 200px;
+  padding: 15px 32px;
+  margin-bottom: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+}
+#noob {
+  border: none;
+  background-color: rgb(231, 231, 231);
+  width: 200px;
+  padding: 15px 32px;
+  margin-bottom: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+}
+#expert {
+  border: none;
+  background-color: rgb(231, 231, 231);
+  width: 200px;
+  padding: 15px 32px;
+  margin-bottom: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+}

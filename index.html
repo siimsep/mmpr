@@ -10,120 +10,116 @@
 
 </head>
 <body class="container">   
-    <h1>Eesti mäng</h1>
-    <button id="avalehele" class="btn hide"><i class="fa-solid fa-house"></i> Liigu avalehele</button><br><br>
-    <div id="avaleht"> 
-        <button id="yksikM2ng" class="btn">Alusta</button><br><br>
-        <div id="juhistekonteiner"> 
-            <button data-modal-target="#modal">Juhised</button>
-            <div id="modal" class="modal">
-                <!-- <div class="modal-header">
-                    <div class="juhiste-pealkiri">Siit loed juhiseid</div>
-                    <button data-close-button class="close-btn">&times;</button> &times; kasutades tuleb iga fondiga ilus rist
-                </div> -->
-                <div class="modal-body"><object data="juhised.html" width="640" height="720"></object></div>
-
+    <div id="kogusisu">
+        <h1>Eesti mäng</h1>
+        <button id="avalehele" class="btn hide"><i class="fa-solid fa-house"></i> Liigu avalehele</button><br><br>
+        <div id="avaleht">
+            <button id="yksikM2ng" class="btn">Alusta</button><br><br>
+            <div id="juhistekonteiner">
+                <button data-modal-target="#modal" class="juhisenupp">Juhised</button>
+                <div id="modal" class="modal">
+                    <!-- <div class="modal-header">
+                        <div class="juhiste-pealkiri">Siit loed juhiseid</div>
+                        <button data-close-button class="close-btn">&times;</button> &times; kasutades tuleb iga fondiga ilus rist
+                    </div> -->
+                    <div class="modal-body"><object data="juhised.html" width="640" height="720"></object></div>
+                </div>
             </div>
-        </div>
-        <div id="edetabelikonteiner">  
-            <button data-modal-target="#modal2"><i class="fa-solid fa-restroom"></i> Edetabel</button>
-            <div id="modal2" class="modal">
-                <div class="modal-header">
-                    <div class="juhiste-pealkiri">Siit näeks edetabelit</div>
-                    <button data-close-button class="close-btn">&times;</button> <!-- &times; kasutades tuleb iga fondiga ilus rist -->
-                </div>
-                <div class="modal-body">
-                    <p>Kergema raskustasemega: <br><br>
-                         <span id="kergeKasutaja"></span></p><br><hr>
-                    <p>Raskema raskustasemega: <br><br>
-                        <span id="raskeKasutaja"></span>
-                       </p>
-
-                </div>
-        </div>
-        <div id="lisakysimus"> 
-            <button data-modal-target="#modal3">Saada oma küsimus</button>
-            <div id="modal3" class="modal">
-                <div class="modal-header">
-                    <div class="juhiste-pealkiri">Siit saaks lisada kysimuse</div>
-                    <button data-close-button class="close-btn">&times;</button> <!-- &times; kasutades tuleb iga fondiga ilus rist -->
-                </div>
-                <div class="modal-body" id="lisaKysimus"><p>Saada meile oma kysimus! Kui admin on selle heaks kiitnud, v6id oma kysimust juba 6ige pea m2ngus kohata.</p>
-                    <form id ="myForm">
-                        <label for="category">Vali maakond:</label>
-                        <select id="submitCat">
-                          <option value="1">Harju maakond</option>
-                          <option value="2">Hiiu maakond</option>
-                          <option value="3">Ida-Viru maakond</option>
-                          <option value="4">Jõgeva maakond</option>
-                          <option value="5">Järva maakond</option>
-                          <option value="6">Lääne maakond</option>
-                          <option value="7">Lääne-Viru maakond</option>
-                          <option value="8">Põlva maakond</option>
-                          <option value="9">Pärnu maakond</option>
-                          <option value="10">Rapla maakond</option>
-                          <option value="11">Saare maakond</option>
-                          <option value="12">Tartu maakond</option>
-                          <option value="13">Valga maakond</option>
-                          <option value="14">Viljandi maakond</option>
-                          <option value="15">Võru maakond</option>
-                        </select><br><br>
-                        <label>Kysimus</label>
-                        <input type="text" id="submittedQuestion"><br><br>
-                        <label>Vastusevariant 1:</label>
-                        <input type="text" id="v1"<br><br>
-                          <label>Vastusevariant 2:</label>
-                        <input type="text" id="v2"<br><br>
-                          <label>Vastusevariant 3:</label>
-                        <input type="text" id="v3"<br><br>
-                          <label>Vastusevariant 4 ja yhtlasi 6ige:</label>
-                        <input type="text" id="v4"<br><br>
-                        <label>Mingi huvitav lisafakt küsimuse kohta</label>
-                        <input type="text" id="nfact"<br><br>
-                        <label>Allikas, viide, link, kommentaar</label>
-                        <input type="text" id="memo"<br><br>
-                        <label>Lisa oma nimi ka, siis teised näevad ka, kes nii ägeda küsimuse lisas</label>
-                        <input type="text" id="juser"<br><br>
-                        <input type="button" value="Edasta oma kysimus" onclick="kysimusKasutajalt()">
-                      </form>
-
-
-                </div>
-
+            <div id="edetabelikonteiner">
+                <button data-modal-target="#modal2" class="edetabelinupp"> Edetabel</button>
+                <div id="modal2" class="modal">
+                    <div class="modal-header">
+                        <div class="juhiste-pealkiri">Siit näeks edetabelit</div>
+                        <button data-close-button class="close-btn">&times;</button> <!-- &times; kasutades tuleb iga fondiga ilus rist -->
+                    </div>
+                    <div class="modal-body">
+                        <p>Kergema raskustasemega: <br><br>
+                             <span id="kergeKasutaja"></span></p><br><hr>
+                        <p>Raskema raskustasemega: <br><br>
+                            <span id="raskeKasutaja"></span>
+                           </p>
+                    </div>
             </div>
+            <div id="lisakysimus">
+                <button data-modal-target="#modal3" class="saadakyss">Saada oma küsimus</button>
+                <div id="modal3" class="modal">
+                    <div class="modal-header">
+                        <div class="juhiste-pealkiri">Siit saaks lisada kysimuse</div>
+                        <button data-close-button class="close-btn">&times;</button> <!-- &times; kasutades tuleb iga fondiga ilus rist -->
+                    </div>
+                    <div class="modal-body" id="lisaKysimus"><p>Saada meile oma kysimus! Kui admin on selle heaks kiitnud, v6id oma kysimust juba 6ige pea m2ngus kohata.</p>
+                        <form id ="myForm">
+                            <label for="category">Vali maakond:</label>
+                            <select id="submitCat">
+                              <option value="1">Harju maakond</option>
+                              <option value="2">Hiiu maakond</option>
+                              <option value="3">Ida-Viru maakond</option>
+                              <option value="4">Jõgeva maakond</option>
+                              <option value="5">Järva maakond</option>
+                              <option value="6">Lääne maakond</option>
+                              <option value="7">Lääne-Viru maakond</option>
+                              <option value="8">Põlva maakond</option>
+                              <option value="9">Pärnu maakond</option>
+                              <option value="10">Rapla maakond</option>
+                              <option value="11">Saare maakond</option>
+                              <option value="12">Tartu maakond</option>
+                              <option value="13">Valga maakond</option>
+                              <option value="14">Viljandi maakond</option>
+                              <option value="15">Võru maakond</option>
+                            </select><br><br>
+                            <label>Kysimus</label>
+                            <input type="text" id="submittedQuestion"><br><br>
+                            <label>Vastusevariant 1:</label>
+                            <input type="text" id="v1"<br><br>
+                              <label>Vastusevariant 2:</label>
+                            <input type="text" id="v2"<br><br>
+                              <label>Vastusevariant 3:</label>
+                            <input type="text" id="v3"<br><br>
+                              <label>Vastusevariant 4 ja yhtlasi 6ige:</label>
+                            <input type="text" id="v4"<br><br>
+                            <label>Mingi huvitav lisafakt küsimuse kohta</label>
+                            <input type="text" id="nfact"<br><br>
+                            <label>Allikas, viide, link, kommentaar</label>
+                            <input type="text" id="memo"<br><br>
+                            <label>Lisa oma nimi ka, siis teised näevad ka, kes nii ägeda küsimuse lisas</label>
+                            <input type="text" id="juser"<br><br>
+                            <input type="button" value="Edasta oma kysimus" onclick="kysimusKasutajalt()">
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div></div>
+        <div id="raskustasemevaade" class="hide">
+        <button id="noob">Kerge tase</button><br><br>
+        <button id="expert">Raske tase</button>
+        </div> 
         </div>
-    </div></div>
-<div id="raskustasemevaade" class="hide">
-    <button id="noob">Kerge tase</button><br><br>
-    <button id="expert">Raske tase</button>
-</div> 
-</div>
-<div id="kategooriaPopup" class="hide"><br><br><p><p class="loading"></p></p></div>
-<div id="skoorike" class="hide"></div>
-<div id="kysimuseleht" class="hide"> 
-<div id="kysimus">Siin on kysimus!?</div>
-<div id="vastusenupud" class="btn-grid">
-    <button class="btn" id="variant1">Vastus 1</button>
-    <button class="btn" id="variant2">Vastus 2</button>
-    <button class="btn" id="variant3">Vastus 3</button>
-    <button class="btn" id="variant4">Vastus 4</button>
-</div>
-<div id="nerdFactContainer" class="hide"> 
-    <div id="nF"></div></div>
-<div id="nextQuest" class="hide"><button class="btn">Järgmist küsimust vastama!</button></div>
-
-</div>
-<div id="skoorEdetabelisse" class="modal">
-<div id="gameEnd" class="hide"><p >Skoor lisatud andmebaasi.</p><br><br><input type="button" id='mineAvaleheleModaalist' value="Mine tagasi avalehele"></div>
-<div id="skoorEdetabelisseInput">
-<div id="skoorEdetabelisseHtmlDiv"></div>
-<label>Mängija nimi:</label>
-<input type="text" id="m2ngijaNimi"<br><br>
-<input type="button" value="Lisa edetabelisse" onclick="skoorFirebase()"></div>
-</div>
-<div id="overlay"></div> <!-- Et Modaalakna (juhised) taga oleks tumedam pilt -->
-<br><br>
-<i id="audioIcon" class="fa-solid fa-volume-high"></i>
+        <div id="kategooriaPopup" class="hide"><br><br><p><p class="loading"></p></p></div>
+        <div id="skoorike" class="hide"></div>
+        <div id="kysimuseleht" class="hide"> 
+        <div id="kysimus">Siin on kysimus!?</div>
+        <div id="vastusenupud" class="btn-grid">
+        <button class="btn vastusenupp" id="variant1">Vastus 1</button>
+        <button class="btn vastusenupp" id="variant2">Vastus 2</button>
+        <button class="btn vastusenupp" id="variant3">Vastus 3</button>
+        <button class="btn vastusenupp" id="variant4">Vastus 4</button>
+        </div>
+        <div id="nerdFactContainer" class="hide">
+        <div id="nF"></div></div>
+        <div id="nextQuest" class="hide"><button class="btn j2rgminekyss">Järgmist küsimust vastama!</button></div>
+        </div>
+        <div id="skoorEdetabelisse" class="modal">
+        <div id="gameEnd" class="hide"><p >Skoor lisatud andmebaasi.</p><br><br><input type="button" id='mineAvaleheleModaalist' value="Mine tagasi avalehele"></div>
+        <div id="skoorEdetabelisseInput">
+        <div id="skoorEdetabelisseHtmlDiv"></div>
+        <label>Mängija nimi:</label>
+        <input type="text" id="m2ngijaNimi"<br><br>
+        <input type="button" value="Lisa edetabelisse" onclick="skoorFirebase()"></div>
+        </div>
+        <div id="overlay"></div> <!-- Et Modaalakna (juhised) taga oleks tumedam pilt -->
+        <br><br>
+        <i id="audioIcon" class="fa-solid fa-volume-high"></i>
+    </div>
 <script type="module" src="app.js" defer></script>
 <script type="module" src="firebase.js"></script>
 
