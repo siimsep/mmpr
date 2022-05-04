@@ -11,8 +11,7 @@
 </head>
 <body class="container">   
     <div id="kogusisu">
-        <h1>Eesti mäng</h1>
-        <button id="avalehele" class="btn hide"><i class="fa-solid fa-house"></i> Liigu avalehele</button><br><br>
+        <button id="avalehele" class="btn hide">Liigu avalehele</button><br><br>
         <div id="avaleht">
             <button id="yksikM2ng" class="btn">Alusta</button><br><br>
             <div id="juhistekonteiner">
@@ -28,16 +27,14 @@
             <div id="edetabelikonteiner">
                 <button data-modal-target="#modal2" class="edetabelinupp"> Edetabel</button>
                 <div id="modal2" class="modal">
-                    <div class="modal-header">
-                        <div class="juhiste-pealkiri">Siit näeks edetabelit</div>
-                        <button data-close-button class="close-btn">&times;</button> <!-- &times; kasutades tuleb iga fondiga ilus rist -->
-                    </div>
                     <div class="modal-body">
-                        <p>Kergema raskustasemega: <br><br>
-                             <span id="kergeKasutaja"></span></p><br><hr>
-                        <p>Raskema raskustasemega: <br><br>
-                            <span id="raskeKasutaja"></span>
-                           </p>
+                        <div id="edetabelisisu">
+                            <p>Kergema raskustasemega: <br><br>
+                                 <span id="kergeKasutaja"></span></p><br><hr>
+                            <p>Raskema raskustasemega: <br><br>
+                                <span id="raskeKasutaja"></span>
+                               </p>
+                        </div>
                     </div>
             </div>
             <div id="lisakysimus">
@@ -93,8 +90,11 @@
         <button id="noob">Kerge tase</button><br><br>
         <button id="expert">Raske tase</button>
         </div> 
+    
+        <div id="kategooriaPopup" class="hide">
+            <img class="county" width="500px" src="images/eesti-hall.png"/>
+            <img class="county" width="500px" src="images/harju.png"/>
         </div>
-        <div id="kategooriaPopup" class="hide"><br><br><p><p class="loading"></p></p></div>
         <div id="skoorike" class="hide"></div>
         <div id="kysimuseleht" class="hide"> 
         <div id="kysimus">Siin on kysimus!?</div>
@@ -118,7 +118,8 @@
         </div>
         <div id="overlay"></div> <!-- Et Modaalakna (juhised) taga oleks tumedam pilt -->
         <br><br>
-        <i id="audioIcon" class="fa-solid fa-volume-high"></i>
+        <!-- <i id="audioIcon" class="fa-solid fa-volume-high"></i> -->
+    </div>
     </div>
 <script type="module" src="app.js" defer></script>
 <script type="module" src="firebase.js"></script>

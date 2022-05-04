@@ -34,7 +34,9 @@ function openModal(modal){
 function closeModal(modal){
     if (modal == null) return;
     modal.classList.remove('active');
-    overlay.classList.remove('active')
+    overlay.classList.remove('active');
+    kergeKasutaja.innerHTML = '';
+    raskeKasutaja.innerHTML = '';
 }
 /////////////////////////////////////////////////////////////////////////
 const avaleheNupp = document.getElementById('avalehele')
@@ -55,14 +57,14 @@ let m2nguVali1 = [1, 2/* , 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15 */];
 let m2nguVali2 = [1, 1, 2, 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 let raskusTaseNr;
 noobButton.addEventListener('click', function() {
-    raskustase.classList.add('hide')
+    raskustase.style.setProperty('display', 'none');
     m2nguVali = m2nguVali1;
     maxVigu = maxVigu1;
     raskusTaseNr = 1;
     kysimus()
 });
 expertButton.addEventListener('click', function() {
-    raskustase.classList.add('hide');
+    raskustase.style.setProperty('display', 'none');
     maxVigu = maxVigu2;
     m2nguVali = m2nguVali2
     raskusTaseNr = 2;
@@ -165,8 +167,8 @@ const uusInfo =  function() {
 }
 
 function yksikM2ng() {
-    avaleht.classList.add('hide');
-    raskustase.classList.remove('hide');
+    avaleht.style.setProperty('display', 'none');
+    raskustase.style.setProperty('display', 'flex');
     avaleheNupp.classList.remove('hide');
     return
 }
@@ -177,7 +179,7 @@ function getRand(){
 const popup = document.getElementById('kategooriaPopup');
 let popupinit = popup.innerHTML;
 const showCategory = function(nr) {
-    if(nr == 1) {
+    /* if(nr == 1) {
         popup.innerHTML = `<img width="500px" src="images/harju.png"/>`;
     } else if (nr == 2) {
         popup.innerHTML = `<img width="500px" src="images/hiiu.png"/>`;
@@ -207,7 +209,7 @@ const showCategory = function(nr) {
         popup.innerHTML = `<img width="500px" src="images/viljandi.png"/>`;
     } else if (nr == 15) {
         popup.innerHTML = `<img width="500px" src="images/voru.png"/>`;
-    }
+    } */
 }
 const kysimus = async function() {
     kategooriaNr = getRand();
@@ -219,6 +221,7 @@ const kysimus = async function() {
     popup.innerHTML = popupinit;
     //kysimuseleht.classList.remove('hide');
     skoorike.classList.remove('hide');
+    timeLeft = 20;
     return kategooriaJargiKysimused();       
 }
 
@@ -239,7 +242,7 @@ if(confirm('Tahad minna tagasi avalehele?')==true) {
     vastatudKysimused = [];
     juhuslikValik = '';
     kysimusedDbst = [];
-    avaleht.classList.remove('hide');
+    avaleht.style.setProperty('display', 'flex');
     raskustase.classList.add('hide');
     kysimuseleht.classList.add('hide');
     nerdFactContainer.classList.add('hide');
@@ -425,7 +428,7 @@ let timeLeft = 20
 let totalScore = 0
 function countDown(){
     timeLeft--;
-    if(timeLeft === 0){
+    if(timeLeft == 0){
         clearInterval(startCountDown);
         console.log('aeg sai otsa')
     }
@@ -441,8 +444,11 @@ const kergeRaskusEdekas = function() {
         if (snapshot.exists()) {
             info = snapshot.val();
             //let keys = Object.keys(info); 
-            let nm = Object.values(info);      
-            for (let i =0;i<10;i++){       
+            let nm = Object.values(info); 
+            nm.sort((a, b) => {
+                return b.skoor - a.skoor;
+            });     
+            for (let i =0;i<5;i++){       
             let r = nm[i]; 
             kergeKasutaja.innerHTML += r.m2ngijaNimi + ` ` + r.skoor +`<br>`;
             }
@@ -455,11 +461,15 @@ const kergeRaskusEdekas = function() {
       });
 }
 const raskeRaskusEdekas = function() {
-    get(child(dbRef, `edetabel/2`)).then((snapshot) => {
+     get(child(dbRef, `edetabel/2`)).then((snapshot) => {
         if (snapshot.exists()) {
             info = snapshot.val();
             //let keys = Object.keys(info); 
-            let nm = Object.values(info);      
+            let nm = Object.values(info);     
+            nm.sort((a, b) => {
+                return b.skoor - a.skoor;
+            });
+
             for (let i =0;i<5;i++){       
             let r = nm[i]; 
             raskeKasutaja.innerHTML += r.m2ngijaNimi + ` ` + r.skoor +`<br>`;
@@ -470,7 +480,7 @@ const raskeRaskusEdekas = function() {
         }
       }).catch((error) => {
         console.error(error);
-      });
+      });   
 }
 
 /////////////////////////////////////////////////////////////////////////
