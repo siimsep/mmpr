@@ -179,9 +179,14 @@ function getRand(){
 const popup = document.getElementById('kategooriaPopup');
 let popupinit = popup.innerHTML;
 const showCategory = function(nr) {
-    /* if(nr == 1) {
-        popup.innerHTML = `<img width="500px" src="images/harju.png"/>`;
-    } else if (nr == 2) {
+    if (!m2nguVali.includes(1)){
+        popup.innerHTML += `<img class="county" width="500px" src="images/harju.png"/>`;
+
+    }
+   /*  if(nr == 1) {
+        popup.innerHTML += `<img class="county" width="500px" src="images/harju.png"/>`;  
+    }  */
+    /* else if (nr == 2) {
         popup.innerHTML = `<img width="500px" src="images/hiiu.png"/>`;
     } else if (nr == 3) {
         popup.innerHTML = `<img width="500px" src="images/idaviru.png"/>`;
@@ -213,9 +218,11 @@ const showCategory = function(nr) {
 }
 const kysimus = async function() {
     kategooriaNr = getRand();
-    popup.classList.remove('hide');
-    await wait(1000);
     showCategory(kategooriaNr);
+
+    popup.classList.remove('hide');
+
+    //await wait(1000);
     await wait(1300);
     popup.classList.add('hide');
     popup.innerHTML = popupinit;
