@@ -53,7 +53,7 @@ let maxVigu;
 let maxVigu1 = 3;
 let maxVigu2 = 3;
 let m2nguVali;
-let m2nguVali1 = [1, 2/* , 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15 */];
+let m2nguVali1 = [1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 let m2nguVali2 = [1, 1, 2, 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 let raskusTaseNr;
 noobButton.addEventListener('click', function() {
@@ -178,53 +178,111 @@ function getRand(){
 
 const popup = document.getElementById('kategooriaPopup');
 let popupinit = popup.innerHTML;
-const showCategory = function(nr) {
-    if (!m2nguVali.includes(1)){
-        popup.innerHTML += `<img class="county" width="500px" src="images/harju.png"/>`;
-
-    }
-   /*  if(nr == 1) {
-        popup.innerHTML += `<img class="county" width="500px" src="images/harju.png"/>`;  
-    }  */
-    /* else if (nr == 2) {
-        popup.innerHTML = `<img width="500px" src="images/hiiu.png"/>`;
+const showCategory = async function(nr) {
+     if(nr == 1) {
+        await wait(2000);
+        popup.innerHTML += `<img class="county" width="500px" src="images/harju.png"/><img class="county" width="500px" src="images/harjutekst.png"/>`;
+    } else if (nr == 2) {
+        await wait(2000);
+        popup.innerHTML += `<img class="county" width="500px" src="images/hiiu.png"/><img class="county" width="500px" src="images/hiiutekst.png"/>`;
     } else if (nr == 3) {
-        popup.innerHTML = `<img width="500px" src="images/idaviru.png"/>`;
+        await wait(2000);
+        popup.innerHTML += `<img class="county" width="500px" src="images/idaviru.png"/><img class="county" width="500px" src="images/idatekst.png"/>`;
     } else if (nr == 4) {
-        popup.innerHTML = `<img width="500px" src="images/jarvamaa.png"/>`;
-    } else if (nr == 5) {
-        popup.innerHTML = `<img width="500px" src="images/jogeva.png"/>`;
-    } else if (nr == 6) {
-        popup.innerHTML = `<img width="500px" src="images/laanemaa.png"/>`;
+        await wait(2000);
+        popup.innerHTML += `<img class="county" width="500px" src="images/jarvemaa.png"/><img class="county" width="500px" src="images/jarvatekst.png"/>`;
+    }
+    else if (nr == 5) {
+        await wait(2000);
+        popup.innerHTML += `<img class="county" width="500px" src="images/jogeva.png"/><img class="county" width="500px" src="images/jogevatekst.png"/>`;
+    }
+    else if (nr == 6) {
+        await wait(2000);
+        popup.innerHTML += `<img class="county" width="500px" src="images/laanemaa.png"/><img class="county" width="500px" src="images/laanetekst.png"/>`;
     } else if (nr == 7) {
-        popup.innerHTML = `<img width="500px" src="images/laaneviru.png"/>`;
+        await wait(2000);
+        popup.innerHTML += `<img class="county" width="500px" src="images/laaneviru.png"/><img class="county" width="500px" src="images/laanevirutekst.png"/>`;
     } else if (nr == 8) {
-        popup.innerHTML = `<img width="500px" src="images/parnu.png"/>`;
+        await wait(2000);
+        popup.innerHTML += `<img class="county" width="500px" src="images/parnu.png"/><img class="county" width="500px" src="images/parnutekst.png"/>`;
     } else if (nr == 9) {
-        popup.innerHTML = `<img width="500px" src="images/polva.png"/>`;
+        await wait(2000);
+        popup.innerHTML += `<img class="county" width="500px" src="images/polva.png"/><img class="county" width="500px" src="images/polvatekst.png"/>`;
     } else if (nr == 10) {
-        popup.innerHTML = `<img width="500px" src="images/raplamaa.png"/>`;
+        await wait(2000);
+        popup.innerHTML += `<img class="county" width="500px" src="images/raplamaa.png"/><img class="county" width="500px" src="images/raplatekst.png"/>`;
     } else if (nr == 11) {
-        popup.innerHTML = `<img width="500px" src="images/saare.png"/>`;
+        await wait(2000);
+        popup.innerHTML += `<img class="county" width="500px" src="images/saare.png"/><img class="county" width="500px" src="images/saaretekst.png"/>`;
     } else if (nr == 12) {
-        popup.innerHTML = `<img width="500px" src="images/tartumaa.png"/>`;
+        await wait(2000);
+        popup.innerHTML += `<img class="county" width="500px" src="images/tartumaa.png"/><img class="county" width="500px" src="images/tartutekst.png"/>`;
     } else if (nr == 13) {
-        popup.innerHTML = `<img width="500px" src="images/valga.png"/>`;
+        await wait(2000);
+        popup.innerHTML += `<img class="county" width="500px" src="images/valga.png"/><img class="county" width="500px" src="images/valgatekst.png"/>`;
     } else if (nr == 14) {
-        popup.innerHTML = `<img width="500px" src="images/viljandi.png"/>`;
+        await wait(2000);
+        popup.innerHTML += `<img class="county" width="500px" src="images/viljandi.png"/><img class="county" width="500px" src="images/viljanditekst.png"/>`;
     } else if (nr == 15) {
-        popup.innerHTML = `<img width="500px" src="images/voru.png"/>`;
-    } */
+        await wait(2000);
+        popup.innerHTML += `<img class="county" width="500px" src="images/voru.png"/><img class="county" width="500px" src="images/vorutekst.png"/>`;
+    }    
+}
+const showMap = function() {
+    if (!m2nguVali.includes(1)) {
+        popup.innerHTML += `<img class="county" width="500px" src="images/harju.png"/>` 
+    } 
+    if (!m2nguVali.includes(2)) {
+        popup.innerHTML += `<img class="county" width="500px" src="images/hiiu.png"/>`
+    }
+    if (!m2nguVali.includes(3)) {
+        popup.innerHTML += `<img class="county" width="500px" src="images/idaviru.png"/>`
+    }
+    if (!m2nguVali.includes(4)) {
+        popup.innerHTML += `<img class="county" width="500px" src="images/jarvemaa.png"/>`;
+    }
+/*     if (!m2nguVali.includes(5)) {
+        popup.innerHTML += `<img class="county" width="500px" src="images/jogeva.png"/>`;
+    } 
+    if (!m2nguVali.includes(6)) {
+        popup.innerHTML += `<img class="county"  width="500px" src="images/laanemaa.png"/>`;
+    }  */
+    if (!m2nguVali.includes(7)) {
+        popup.innerHTML += `<img class="county"  width="500px" src="images/laaneviru.png"/>`;
+    } 
+    if (!m2nguVali.includes(8)) {
+        popup.innerHTML += `<img class="county"  width="500px" src="images/parnu.png"/>`;
+    } 
+    if (!m2nguVali.includes(9)) {
+        popup.innerHTML += `<img class="county"  width="500px" src="images/polva.png"/>`;
+    } 
+    if (!m2nguVali.includes(10)) {
+        popup.innerHTML += `<img class="county"  width="500px" src="images/raplamaa.png"/>`;
+    } 
+    if (!m2nguVali.includes(11)) {
+        popup.innerHTML += `<img class="county"  width="500px" src="images/saare.png"/>`;
+    } 
+    if (!m2nguVali.includes(12)) {
+        popup.innerHTML += `<img class="county"  width="500px" src="images/tartumaa.png"/>`;
+    } 
+    if (!m2nguVali.includes(13)) {
+        popup.innerHTML += `<img class="county"  width="500px" src="images/valga.png"/>`;
+    } 
+    if (!m2nguVali.includes(14)) {
+        popup.innerHTML += `<img class="county"  width="500px" src="images/viljandi.png"/>`;
+    } 
+    if (!m2nguVali.includes(15)) {
+        popup.innerHTML += `<img class="county"  width="500px" src="images/voru.png"/>`;
+    } 
 }
 const kysimus = async function() {
+    showMap();
     kategooriaNr = getRand();
     showCategory(kategooriaNr);
-
-    popup.classList.remove('hide');
-
+    popup.style.setProperty("display", "flex")
     //await wait(1000);
-    await wait(1300);
-    popup.classList.add('hide');
+    await wait(4000);
+    popup.style.setProperty("display", "none")
     popup.innerHTML = popupinit;
     //kysimuseleht.classList.remove('hide');
     skoorike.classList.remove('hide');
@@ -259,7 +317,7 @@ if(confirm('Tahad minna tagasi avalehele?')==true) {
     skoorike.classList.add('hide');
     skoorike.innerHTML = '';
     totalScore = 0;
-    m2nguVali1 = [1, 2/* , 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15 */];
+    m2nguVali1 = [1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15];
     m2nguVali2 = [1, 1, 2, 2, 3, 3, /* 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15 */];
     valedVastused = 0;
     skoorEdetabelisse.classList.add('hide');

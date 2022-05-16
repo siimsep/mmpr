@@ -2,7 +2,7 @@
     box-sizing: border-box;
   }
 html { 
-  background: url(images/taust.png) no-repeat center center fixed; 
+  background: url(images/tst.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -106,6 +106,20 @@ html {
 
 
 #kategooriaPopup {
+  display: none;
+  margin: auto;
+  justify-content: center;
+    
+}
+@keyframes grow {
+  0% {
+      transform: scale(1.0);
+      
+  }
+  100% {
+      transform: scale(2.0);
+      
+  }
 }
 .county {
   position: absolute;
@@ -156,93 +170,183 @@ html {
   background-color: rgb(231, 231, 231);
   width: 200px;
   padding: 15px 32px;
-  text-align: center;
   text-decoration: none;
   font-size: 16px;
   border-radius: 4px;
 }
 #yksikM2ng {
-  border: none;
-  background-color: rgba(212, 221, 212, .9);
-  width: 250px;
+  margin-top: 15px;
+  display: inline-block;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	box-shadow: 0 1px 2px rgba(255, 0, 0, 0.2);
+  width: 200px;
   padding: 15px 32px;
   text-align: center;
+   font-weight:bold;
   text-decoration: none;
-  font-size: 16px;
-  border-radius: 16px;
+  font-size: 18px;
+  color: #fef4e9;
+	border: solid 1px #ff8c00;
+  background:#fa6b05;
 }
 #yksikM2ng:hover {
-  background-color: rgb(69, 75, 75);
-  color: black;
+  background:#faa51a;
+
+
 }
-.edetabelinupp {
-  border: none;
-  background-color:  rgba(212, 221, 212, .9);
+#edetabelinupp {
+  margin-top: 15px;
+  font-weight:bold;
+  display: inline-block;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	box-shadow: 0 1px 2px rgba(255, 0, 0, 0.2);
   width: 200px;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
-  border-radius: 4px;
-  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fef4e9;
+	border: solid 1px #00BAEE;
+  background:#00BAEE;
 }
+#edetabelinupp:hover {
+  background:#00c8ff ;
+  
+}
+
 .juhisenupp {
-  border: none;
-  background-color:  rgba(212, 221, 212, .9);
+  margin-top: 15px;
+  display: inline-block;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	box-shadow: 0 1px 2px rgba(255, 0, 0, 0.2);
   width: 200px;
   padding: 15px 32px;
-  margin-bottom: 10px;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
-  border-radius: 4px;
+  font-size: 20px;
+  font-weight:bold;
+  color: #fef4e9;
+	border: solid 1px #FFE000;
+  background:#ffd000;
+}
+.juhisenupp:hover {
+  background:#ffe100af ;
+  
 }
 .saadakyss {
-  border: none;
-  background-color:  rgba(212, 221, 212, .9);
+  font-weight:bold;
+  margin-top: 15px;
+  display: inline-block;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	box-shadow: 0 1px 2px rgba(255, 0, 0, 0.2);
   width: 200px;
   padding: 15px 32px;
-  margin-bottom: 10px;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
-  border-radius: 4px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fef4e9;
+	border: solid 1px #63B34A;
+  background:#63B34A;
+}
+.saadakyss:hover {
+  background:#3fc018 ;
+  
 }
 #noob {
-  border: none;
-  background-color: rgb(231, 231, 231);
+  font-weight:bold;
+  margin-top: 15px;
+  display: inline-block;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	box-shadow: 0 1px 2px rgba(255, 0, 0, 0.2);
   width: 200px;
   padding: 15px 32px;
-  margin-bottom: 10px;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
-  border-radius: 4px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fef4e9;
+	border: solid 1px #23cfc7;
+  background:#1CBBB4;
+}
+#noob:hover {
+  background:#22cec5 ;
 }
 #expert {
-  border: none;
-  background-color: rgb(231, 231, 231);
+  font-weight:bold;
+  margin-top: 15px;
+  display: inline-block;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	box-shadow: 0 1px 2px rgba(255, 0, 0, 0.2);
   width: 200px;
   padding: 15px 32px;
-  margin-bottom: 10px;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
-  border-radius: 4px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fef4e9;
+	border: solid 1px #ed317e;
+  background:#ed317e;
+}
+#expert:hover {
+  background:#fd026b ;
 }
 #kogusisu {
   margin: 150px auto;
   width: 800px;
   height: 619px;
   border-radius: 5px;
-  background-color: rgba(124, 130, 131, 0.37);
+  background-color: rgb(220, 225, 226);
   
 }  
 #avaleht {
   display: flex;
   flex-direction: column;
   align-items: center; 
-  margin-top: 250px;   
+  margin-top: 10px;   
   /* background: url('images/taust.png') no-repeat center; /* https://www.w3schools.com/cssref/pr_background-image.asp */
 } 
 #avalehele {
@@ -258,7 +362,7 @@ html {
   display: hide;
   flex-direction: column;
   align-items: center;   
-  margin-top: 250px;   
+  margin-top: 250px;
 }
 .btn {
   transition-duration: 0.4s;

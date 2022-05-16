@@ -13,9 +13,10 @@
     <div id="kogusisu">
         <button id="avalehele" class="btn hide">Liigu avalehele</button><br><br>
         <div id="avaleht">
-            <button id="yksikM2ng" class="btn">Alusta</button><br><br>
+            <img src="images/eestilogo.png" alt="eestimang" style="width:400px">
+            <button id="yksikM2ng" class="btn">UUS MÄNG</button>
             <div id="juhistekonteiner">
-                <button data-modal-target="#modal" class="juhisenupp">Juhised</button>
+                <button data-modal-target="#modal" class="juhisenupp">JUHISED</button>
                 <div id="modal" class="modal">
                     <!-- <div class="modal-header">
                         <div class="juhiste-pealkiri">Siit loed juhiseid</div>
@@ -25,7 +26,7 @@
                 </div>
             </div>
             <div id="edetabelikonteiner">
-                <button data-modal-target="#modal2" class="edetabelinupp"> Edetabel</button>
+                <button data-modal-target="#modal2" id="edetabelinupp">EDETABEL</button>
                 <div id="modal2" class="modal">
                     <div class="modal-body">
                         <div id="edetabelisisu">
@@ -37,56 +38,57 @@
                         </div>
                     </div>
             </div>
-            <div id="lisakysimus">
-                <button data-modal-target="#modal3" class="saadakyss">Saada oma küsimus</button>
-                <div id="modal3" class="modal">
-                    <div class="modal-header">
-                        <div class="juhiste-pealkiri">Siit saaks lisada kysimuse</div>
-                        <button data-close-button class="close-btn">&times;</button> <!-- &times; kasutades tuleb iga fondiga ilus rist -->
-                    </div>
-                    <div class="modal-body" id="lisaKysimus"><p>Saada meile oma kysimus! Kui admin on selle heaks kiitnud, v6id oma kysimust juba 6ige pea m2ngus kohata.</p>
-                        <form id ="myForm">
-                            <label for="category">Vali maakond:</label>
-                            <select id="submitCat">
-                              <option value="1">Harju maakond</option>
-                              <option value="2">Hiiu maakond</option>
-                              <option value="3">Ida-Viru maakond</option>
-                              <option value="4">Jõgeva maakond</option>
-                              <option value="5">Järva maakond</option>
-                              <option value="6">Lääne maakond</option>
-                              <option value="7">Lääne-Viru maakond</option>
-                              <option value="8">Põlva maakond</option>
-                              <option value="9">Pärnu maakond</option>
-                              <option value="10">Rapla maakond</option>
-                              <option value="11">Saare maakond</option>
-                              <option value="12">Tartu maakond</option>
-                              <option value="13">Valga maakond</option>
-                              <option value="14">Viljandi maakond</option>
-                              <option value="15">Võru maakond</option>
-                            </select><br><br>
-                            <label>Kysimus</label>
-                            <input type="text" id="submittedQuestion"><br><br>
-                            <label>Vastusevariant 1:</label>
-                            <input type="text" id="v1"<br><br>
-                              <label>Vastusevariant 2:</label>
-                            <input type="text" id="v2"<br><br>
-                              <label>Vastusevariant 3:</label>
-                            <input type="text" id="v3"<br><br>
-                              <label>Vastusevariant 4 ja yhtlasi 6ige:</label>
-                            <input type="text" id="v4"<br><br>
-                            <label>Mingi huvitav lisafakt küsimuse kohta</label>
-                            <input type="text" id="nfact"<br><br>
-                            <label>Allikas, viide, link, kommentaar</label>
-                            <input type="text" id="memo"<br><br>
-                            <label>Lisa oma nimi ka, siis teised näevad ka, kes nii ägeda küsimuse lisas</label>
-                            <input type="text" id="juser"<br><br>
-                            <input type="button" value="Edasta oma kysimus" onclick="kysimusKasutajalt()">
-                          </form>
-                    </div>
+            
+        </div><div id="lisakysimus">
+            <button data-modal-target="#modal3" class="saadakyss">PAKU KÜSIMUSI</button>
+            <div id="modal3" class="modal">
+                <div class="modal-header">
+                    <div class="juhiste-pealkiri">Siit saaks lisada kysimuse</div>
+                    <button data-close-button class="close-btn">&times;</button> <!-- &times; kasutades tuleb iga fondiga ilus rist -->
+                </div>
+                <div class="modal-body" id="lisaKysimus"><p>Saada meile oma kysimus! Kui admin on selle heaks kiitnud, v6id oma kysimust juba 6ige pea m2ngus kohata.</p>
+                    <form id ="myForm">
+                        <label for="category">Vali maakond:</label>
+                        <select id="submitCat">
+                          <option value="1">Harju maakond</option>
+                          <option value="2">Hiiu maakond</option>
+                          <option value="3">Ida-Viru maakond</option>
+                          <option value="4">Jõgeva maakond</option>
+                          <option value="5">Järva maakond</option>
+                          <option value="6">Lääne maakond</option>
+                          <option value="7">Lääne-Viru maakond</option>
+                          <option value="8">Põlva maakond</option>
+                          <option value="9">Pärnu maakond</option>
+                          <option value="10">Rapla maakond</option>
+                          <option value="11">Saare maakond</option>
+                          <option value="12">Tartu maakond</option>
+                          <option value="13">Valga maakond</option>
+                          <option value="14">Viljandi maakond</option>
+                          <option value="15">Võru maakond</option>
+                        </select><br><br>
+                        <label>Kysimus</label>
+                        <input type="text" id="submittedQuestion"><br><br>
+                        <label>Vastusevariant 1:</label>
+                        <input type="text" id="v1"<br><br>
+                          <label>Vastusevariant 2:</label>
+                        <input type="text" id="v2"<br><br>
+                          <label>Vastusevariant 3:</label>
+                        <input type="text" id="v3"<br><br>
+                          <label>Vastusevariant 4 ja yhtlasi 6ige:</label>
+                        <input type="text" id="v4"<br><br>
+                        <label>Mingi huvitav lisafakt küsimuse kohta</label>
+                        <input type="text" id="nfact"<br><br>
+                        <label>Allikas, viide, link, kommentaar</label>
+                        <input type="text" id="memo"<br><br>
+                        <label>Lisa oma nimi ka, siis teised näevad ka, kes nii ägeda küsimuse lisas</label>
+                        <input type="text" id="juser"<br><br>
+                        <input type="button" value="Edasta oma kysimus" onclick="kysimusKasutajalt()">
+                      </form>
                 </div>
             </div>
         </div></div>
         <div id="raskustasemevaade" class="hide">
+        <!-- <img class="county" src="images/eesti.png" width="800px"/> -->
         <button id="noob">Kerge tase</button><br><br>
         <button id="expert">Raske tase</button>
         </div> 
