@@ -7,6 +7,9 @@
     <title>Eesti mäng</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/40978ebb6b.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap" rel="stylesheet">
 
 </head>
 <body class="container">   
@@ -22,7 +25,7 @@
                         <div class="juhiste-pealkiri">Siit loed juhiseid</div>
                         <button data-close-button class="close-btn">&times;</button> &times; kasutades tuleb iga fondiga ilus rist
                     </div> -->
-                    <div class="modal-body"><object data="juhised.html" width="640" height="720"></object></div>
+                    <div class="modal-body"><object data="juhised.html" width=100% height="720"></object></div>
                 </div>
             </div>
             <div id="edetabelikonteiner">
@@ -40,13 +43,9 @@
             </div>
             
         </div><div id="lisakysimus">
-            <button data-modal-target="#modal3" class="saadakyss">PAKU KÜSIMUSI</button>
+            <button data-modal-target="#modal3" class="saadakyss">PAKU KÜSIMUS</button>
             <div id="modal3" class="modal">
-                <div class="modal-header">
-                    <div class="juhiste-pealkiri">Siit saaks lisada kysimuse</div>
-                    <button data-close-button class="close-btn">&times;</button> <!-- &times; kasutades tuleb iga fondiga ilus rist -->
-                </div>
-                <div class="modal-body" id="lisaKysimus"><p>Saada meile oma kysimus! Kui admin on selle heaks kiitnud, v6id oma kysimust juba 6ige pea m2ngus kohata.</p>
+                <div class="modal-body" id="lisaKysimus">
                     <form id ="myForm">
                         <label for="category">Vali maakond:</label>
                         <select id="submitCat">
@@ -66,23 +65,23 @@
                           <option value="14">Viljandi maakond</option>
                           <option value="15">Võru maakond</option>
                         </select><br><br>
-                        <label>Kysimus</label>
+                        <label>Küsimus</label>
                         <input type="text" id="submittedQuestion"><br><br>
                         <label>Vastusevariant 1:</label>
-                        <input type="text" id="v1"<br><br>
+                        <input type="text" id="v1"><br>
                           <label>Vastusevariant 2:</label>
-                        <input type="text" id="v2"<br><br>
+                        <input type="text" id="v2"><br>
                           <label>Vastusevariant 3:</label>
-                        <input type="text" id="v3"<br><br>
-                          <label>Vastusevariant 4 ja yhtlasi 6ige:</label>
-                        <input type="text" id="v4"<br><br>
+                        <input type="text" id="v3"><br>
+                          <label>Vastusevariant 4 ja ühtlasi õige:</label>
+                        <input type="text" id="v4"><br>
                         <label>Mingi huvitav lisafakt küsimuse kohta</label>
-                        <input type="text" id="nfact"<br><br>
+                        <input type="text" id="nfact"><br>
                         <label>Allikas, viide, link, kommentaar</label>
-                        <input type="text" id="memo"<br><br>
+                        <input type="text" id="memo"><br>
                         <label>Lisa oma nimi ka, siis teised näevad ka, kes nii ägeda küsimuse lisas</label>
-                        <input type="text" id="juser"<br><br>
-                        <input type="button" value="Edasta oma kysimus" onclick="kysimusKasutajalt()">
+                        <input type="text" id="juser"><br>
+                        <input type="button" value="Saada ära!" onclick="kysimusKasutajalt()">
                       </form>
                 </div>
             </div>
@@ -97,7 +96,7 @@
             <img class="county" width="500px" src="images/eesti-hall.png"/>
         </div>
         <div id="skoorike" class="hide"></div>
-        <div id="kysimuseleht" class="hide"> 
+        <div id="kysimuseleht" class="hide fade-in"> 
         <div id="kysimus">Siin on kysimus!?</div>
         <div id="vastusenupud" class="btn-grid">
         <button class="btn vastusenupp" id="variant1">Vastus 1</button>
@@ -105,9 +104,9 @@
         <button class="btn vastusenupp" id="variant3">Vastus 3</button>
         <button class="btn vastusenupp" id="variant4">Vastus 4</button>
         </div>
-        <div id="nerdFactContainer" class="hide">
+        <div id="nerdFactContainer" class="hide fade-in">
         <div id="nF"></div></div>
-        <div id="nextQuest" class="hide"><button class="btn j2rgminekyss">Järgmist küsimust vastama!</button></div>
+        <div id="nextQuest"><button class="btn j2rgminekyss">Järgmist küsimust vastama!</button></div>
         </div>
         <div id="skoorEdetabelisse" class="modal">
         <div id="gameEnd" class="hide"><p >Skoor lisatud andmebaasi.</p><br><br><input type="button" id='mineAvaleheleModaalist' value="Mine tagasi avalehele"></div>

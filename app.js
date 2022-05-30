@@ -180,52 +180,52 @@ const popup = document.getElementById('kategooriaPopup');
 let popupinit = popup.innerHTML;
 const showCategory = async function(nr) {
      if(nr == 1) {
-        await wait(2000);
-        popup.innerHTML += `<img class="county" width="500px" src="images/harju.png"/><img class="county" width="500px" src="images/harjutekst.png"/>`;
+        await wait(700);
+        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/harju.png"/><img class="county zoomword" src="images/harjutekst.png"/>`;
     } else if (nr == 2) {
-        await wait(2000);
-        popup.innerHTML += `<img class="county" width="500px" src="images/hiiu.png"/><img class="county" width="500px" src="images/hiiutekst.png"/>`;
+        await wait(700);
+        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/hiiu.png"/><img class="county zoomword" src="images/hiiutekst.png"/>`;
     } else if (nr == 3) {
-        await wait(2000);
-        popup.innerHTML += `<img class="county" width="500px" src="images/idaviru.png"/><img class="county" width="500px" src="images/idatekst.png"/>`;
+        await wait(700);
+        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/idaviru.png"/><img class="county zoomword" src="images/idatekst.png"/>`;
     } else if (nr == 4) {
-        await wait(2000);
-        popup.innerHTML += `<img class="county" width="500px" src="images/jarvemaa.png"/><img class="county" width="500px" src="images/jarvatekst.png"/>`;
+        await wait(700);
+        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/jarvemaa.png"/><img class="county zoomword" src="images/jarvatekst.png"/>`;
     }
     else if (nr == 5) {
-        await wait(2000);
-        popup.innerHTML += `<img class="county" width="500px" src="images/jogeva.png"/><img class="county" width="500px" src="images/jogevatekst.png"/>`;
+        await wait(700);
+        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/jogeva.png"/><img class="county zoomword" src="images/jogevatekst.png"/>`;
     }
     else if (nr == 6) {
-        await wait(2000);
-        popup.innerHTML += `<img class="county" width="500px" src="images/laanemaa.png"/><img class="county" width="500px" src="images/laanetekst.png"/>`;
+        await wait(700);
+        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/laanemaa.png"/><img class="county zoomword" src="images/laanetekst.png"/>`;
     } else if (nr == 7) {
-        await wait(2000);
-        popup.innerHTML += `<img class="county" width="500px" src="images/laaneviru.png"/><img class="county" width="500px" src="images/laanevirutekst.png"/>`;
+        await wait(700);
+        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/laaneviru.png"/><img class="county zoomword" src="images/laanevirutekst.png"/>`;
     } else if (nr == 8) {
-        await wait(2000);
-        popup.innerHTML += `<img class="county" width="500px" src="images/parnu.png"/><img class="county" width="500px" src="images/parnutekst.png"/>`;
+        await wait(700);
+        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/parnu.png"/><img class="county zoomword" src="images/parnutekst.png"/>`;
     } else if (nr == 9) {
-        await wait(2000);
-        popup.innerHTML += `<img class="county" width="500px" src="images/polva.png"/><img class="county" width="500px" src="images/polvatekst.png"/>`;
+        await wait(700);
+        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/polva.png"/><img class="county zoomword" src="images/polvatekst.png"/>`;
     } else if (nr == 10) {
-        await wait(2000);
-        popup.innerHTML += `<img class="county" width="500px" src="images/raplamaa.png"/><img class="county" width="500px" src="images/raplatekst.png"/>`;
+        await wait(700);
+        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/raplamaa.png"/><img class="county zoomword" src="images/raplatekst.png"/>`;
     } else if (nr == 11) {
-        await wait(2000);
-        popup.innerHTML += `<img class="county" width="500px" src="images/saare.png"/><img class="county" width="500px" src="images/saaretekst.png"/>`;
+        await wait(700);
+        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/saare.png"/><img class="county zoomword" src="images/saaretekst.png"/>`;
     } else if (nr == 12) {
-        await wait(2000);
-        popup.innerHTML += `<img class="county" width="500px" src="images/tartumaa.png"/><img class="county" width="500px" src="images/tartutekst.png"/>`;
+        await wait(700);
+        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/tartumaa.png"/><img class="county zoomword" src="images/tartutekst.png"/>`;
     } else if (nr == 13) {
-        await wait(2000);
-        popup.innerHTML += `<img class="county" width="500px" src="images/valga.png"/><img class="county" width="500px" src="images/valgatekst.png"/>`;
+        await wait(700);
+        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/valga.png"/><img class="county zoomword" src="images/valgatekst.png"/>`;
     } else if (nr == 14) {
-        await wait(2000);
-        popup.innerHTML += `<img class="county" width="500px" src="images/viljandi.png"/><img class="county" width="500px" src="images/viljanditekst.png"/>`;
+        await wait(700);
+        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/viljandi.png"/><img class="county zoomword" src="images/viljanditekst.png"/>`;
     } else if (nr == 15) {
-        await wait(2000);
-        popup.innerHTML += `<img class="county" width="500px" src="images/voru.png"/><img class="county" width="500px" src="images/vorutekst.png"/>`;
+        await wait(700);
+        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/voru.png"/><img class="county zoomword" src="images/vorutekst.png"/>`;
     }    
 }
 const showMap = function() {
@@ -281,7 +281,7 @@ const kysimus = async function() {
     showCategory(kategooriaNr);
     popup.style.setProperty("display", "flex")
     //await wait(1000);
-    await wait(4000);
+    await wait(3300);
     popup.style.setProperty("display", "none")
     popup.innerHTML = popupinit;
     //kysimuseleht.classList.remove('hide');
@@ -312,13 +312,14 @@ if(confirm('Tahad minna tagasi avalehele?')==true) {
     kysimuseleht.classList.add('hide');
     nerdFactContainer.classList.add('hide');
     btnEnabler();
-    nextQ.classList.add('hide');
+    nextQ.style.setProperty("display", "none")
+    //nextQ.classList.add('hide');
     avaleheNupp.classList.add('hide');
     skoorike.classList.add('hide');
     skoorike.innerHTML = '';
     totalScore = 0;
     m2nguVali1 = [1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-    m2nguVali2 = [1, 1, 2, 2, 3, 3, /* 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15 */];
+    m2nguVali2 = [1, 1, 2, 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
     valedVastused = 0;
     skoorEdetabelisse.classList.add('hide');
     skoorEdetabelisseInput.classList.remove('hide');
@@ -396,7 +397,9 @@ const checkAnswer = async (event) =>{
             skoorEdetabelisseHtmlDiv.innerHTML = (`Palju õnne, mäng sai läbi. <br><br>Sinu skooriks tuli: ${totalScore}<br>`);
             openModal(skoorEdetabelisse);
         } else {
-            nextQ.classList.remove('hide');}
+           // nextQ.classList.remove('hide');
+            nextQ.style.setProperty("display", "flex")    
+        }
 
     } else { 
         ++valedVastused;
@@ -437,7 +440,9 @@ const checkAnswer = async (event) =>{
         await wait(500);
         showNerdFact();
         btnDisabler();
-        nextQ.classList.remove('hide');}
+        //nextQ.classList.remove('hide');
+        nextQ.style.setProperty("display", "flex")    
+    }
     };
 }
 v1btn.addEventListener('click', checkAnswer);
@@ -447,7 +452,8 @@ v4btn.addEventListener('click', checkAnswer);
 const uueleRingile = () => {
     btnEnabler();
     kysimuseleht.classList.add('hide');
-    nextQ.classList.add('hide');
+    nextQ.style.setProperty("display", "none")
+    //nextQ.classList.add('hide');
     nerdFactContainer.classList.add('hide');
     skoorike.classList.add('hide');
     kysimus()
