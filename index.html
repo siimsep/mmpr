@@ -14,9 +14,10 @@
 </head>
 <body class="container">   
     <div id="kogusisu">
-        <button id="avalehele" class="btn hide">Liigu avalehele</button><br><br>
+        <i id="avalehele" class="btn hide fade-in"><i class="fa-solid fa-house"></i></i><br><br>
         <div id="avaleht">
-            <img src="images/eestilogo.png" alt="eestimang" style="width:400px">
+            <img src="images/eestivalge.png" alt="eestimang" id="m2ngulogo">
+            <div id="avalehenupud">
             <button id="yksikM2ng" class="btn">UUS MÄNG</button>
             <div id="juhistekonteiner">
                 <button data-modal-target="#modal" class="juhisenupp">JUHISED</button>
@@ -85,14 +86,16 @@
                       </form>
                 </div>
             </div>
-        </div></div>
-        <div id="raskustasemevaade" class="hide">
-        <!-- <img class="county" src="images/eesti.png" width="800px"/> -->
-        <button id="noob">Kerge tase</button><br><br>
-        <button id="expert">Raske tase</button>
-        </div> 
+
+        </div></div>        
+        <div id="raskustasemevaade">
+            <button id="noob">Kerge tase</button><br><br>
+            <button id="expert">Raske tase</button>
+            </div> 
+        </div>
+
     
-        <div id="kategooriaPopup" class="hide">
+        <div id="kategooriaPopup" class="hide fade-in">
             <img class="county" width="500px" src="images/eesti-hall.png"/>
         </div>
         <div id="skoorike" class="hide"></div>
@@ -105,13 +108,16 @@
         <button class="btn vastusenupp" id="variant4">Vastus 4</button>
         </div>
         <div id="nerdFactContainer" class="hide fade-in">
+            <p>KAS TEADSID, ET: </p>
         <div id="nF"></div></div>
-        <div id="nextQuest"><button class="btn j2rgminekyss">Järgmist küsimust vastama!</button></div>
+        <div id="nextQuest"><button class="btn j2rgminekyss">Järgmine küsimus</button></div>
         </div>
         <div id="skoorEdetabelisse" class="modal">
         <div id="gameEnd" class="hide"><p >Skoor lisatud andmebaasi.</p><br><br><input type="button" id='mineAvaleheleModaalist' value="Mine tagasi avalehele"></div>
         <div id="skoorEdetabelisseInput">
-        <div id="skoorEdetabelisseHtmlDiv"></div>
+        <div id="skoorEdetabelisseHtmlDiv">
+            <img class="county" width="500px" src="images/eesti-hall.png"/>
+        </div>
         <label>Mängija nimi:</label>
         <input type="text" id="m2ngijaNimi"<br><br>
         <input type="button" value="Lisa edetabelisse" onclick="skoorFirebase()"></div>

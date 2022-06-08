@@ -43,6 +43,7 @@ const avaleheNupp = document.getElementById('avalehele')
 const yksikNupp = document.getElementById('yksikM2ng');
 const avaleht = document.getElementById('avaleht');
 const kysimuseleht = document.getElementById('kysimuseleht');
+const avalehenupud = document.getElementById('avalehenupud');
 /////////////////////////////////////////////////////////////////////////
 // Raskustaseme valimine 
 const raskustase = document.getElementById('raskustasemevaade');
@@ -58,6 +59,7 @@ let m2nguVali2 = [1, 1, 2, 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 
 let raskusTaseNr;
 noobButton.addEventListener('click', function() {
     raskustase.style.setProperty('display', 'none');
+    avaleht.style.setProperty('display', 'none');
     m2nguVali = m2nguVali1;
     maxVigu = maxVigu1;
     raskusTaseNr = 1;
@@ -65,6 +67,7 @@ noobButton.addEventListener('click', function() {
 });
 expertButton.addEventListener('click', function() {
     raskustase.style.setProperty('display', 'none');
+    avaleht.style.setProperty('display', 'none');
     maxVigu = maxVigu2;
     m2nguVali = m2nguVali2
     raskusTaseNr = 2;
@@ -167,8 +170,8 @@ const uusInfo =  function() {
 }
 
 function yksikM2ng() {
-    avaleht.style.setProperty('display', 'none');
-    raskustase.style.setProperty('display', 'flex');
+    avalehenupud.style.setProperty('display', 'none')
+    raskustase.style.setProperty('display', 'block');
     avaleheNupp.classList.remove('hide');
     return
 }
@@ -180,108 +183,108 @@ const popup = document.getElementById('kategooriaPopup');
 let popupinit = popup.innerHTML;
 const showCategory = async function(nr) {
      if(nr == 1) {
-        await wait(700);
+        await wait(500);
         popup.innerHTML += `<img class="county fade-in" width="500px" src="images/harju.png"/><img class="county zoomword" src="images/harjutekst.png"/>`;
     } else if (nr == 2) {
-        await wait(700);
+        await wait(500);
         popup.innerHTML += `<img class="county fade-in" width="500px" src="images/hiiu.png"/><img class="county zoomword" src="images/hiiutekst.png"/>`;
     } else if (nr == 3) {
-        await wait(700);
+        await wait(500);
         popup.innerHTML += `<img class="county fade-in" width="500px" src="images/idaviru.png"/><img class="county zoomword" src="images/idatekst.png"/>`;
     } else if (nr == 4) {
-        await wait(700);
+        await wait(500);
         popup.innerHTML += `<img class="county fade-in" width="500px" src="images/jarvemaa.png"/><img class="county zoomword" src="images/jarvatekst.png"/>`;
     }
     else if (nr == 5) {
-        await wait(700);
+        await wait(500);
         popup.innerHTML += `<img class="county fade-in" width="500px" src="images/jogeva.png"/><img class="county zoomword" src="images/jogevatekst.png"/>`;
     }
     else if (nr == 6) {
-        await wait(700);
+        await wait(500);
         popup.innerHTML += `<img class="county fade-in" width="500px" src="images/laanemaa.png"/><img class="county zoomword" src="images/laanetekst.png"/>`;
     } else if (nr == 7) {
-        await wait(700);
+        await wait(500);
         popup.innerHTML += `<img class="county fade-in" width="500px" src="images/laaneviru.png"/><img class="county zoomword" src="images/laanevirutekst.png"/>`;
     } else if (nr == 8) {
-        await wait(700);
+        await wait(500);
         popup.innerHTML += `<img class="county fade-in" width="500px" src="images/parnu.png"/><img class="county zoomword" src="images/parnutekst.png"/>`;
     } else if (nr == 9) {
-        await wait(700);
+        await wait(500);
         popup.innerHTML += `<img class="county fade-in" width="500px" src="images/polva.png"/><img class="county zoomword" src="images/polvatekst.png"/>`;
     } else if (nr == 10) {
-        await wait(700);
+        await wait(500);
         popup.innerHTML += `<img class="county fade-in" width="500px" src="images/raplamaa.png"/><img class="county zoomword" src="images/raplatekst.png"/>`;
     } else if (nr == 11) {
-        await wait(700);
+        await wait(500);
         popup.innerHTML += `<img class="county fade-in" width="500px" src="images/saare.png"/><img class="county zoomword" src="images/saaretekst.png"/>`;
     } else if (nr == 12) {
-        await wait(700);
+        await wait(500);
         popup.innerHTML += `<img class="county fade-in" width="500px" src="images/tartumaa.png"/><img class="county zoomword" src="images/tartutekst.png"/>`;
     } else if (nr == 13) {
-        await wait(700);
+        await wait(500);
         popup.innerHTML += `<img class="county fade-in" width="500px" src="images/valga.png"/><img class="county zoomword" src="images/valgatekst.png"/>`;
     } else if (nr == 14) {
-        await wait(700);
+        await wait(500);
         popup.innerHTML += `<img class="county fade-in" width="500px" src="images/viljandi.png"/><img class="county zoomword" src="images/viljanditekst.png"/>`;
     } else if (nr == 15) {
-        await wait(700);
+        await wait(500);
         popup.innerHTML += `<img class="county fade-in" width="500px" src="images/voru.png"/><img class="county zoomword" src="images/vorutekst.png"/>`;
     }    
 }
-const showMap = function() {
+const showMap = function(somewhere) {
     if (!m2nguVali.includes(1)) {
-        popup.innerHTML += `<img class="county" width="500px" src="images/harju.png"/>` 
+        somewhere.innerHTML += `<img class="county" width="500px" src="images/harju.png"/>` 
     } 
     if (!m2nguVali.includes(2)) {
-        popup.innerHTML += `<img class="county" width="500px" src="images/hiiu.png"/>`
+        somewhere.innerHTML += `<img class="county" width="500px" src="images/hiiu.png"/>`
     }
     if (!m2nguVali.includes(3)) {
-        popup.innerHTML += `<img class="county" width="500px" src="images/idaviru.png"/>`
+        somewhere.innerHTML += `<img class="county" width="500px" src="images/idaviru.png"/>`
     }
     if (!m2nguVali.includes(4)) {
-        popup.innerHTML += `<img class="county" width="500px" src="images/jarvemaa.png"/>`;
+        somewhere.innerHTML += `<img class="county" width="500px" src="images/jarvemaa.png"/>`;
     }
 /*     if (!m2nguVali.includes(5)) {
-        popup.innerHTML += `<img class="county" width="500px" src="images/jogeva.png"/>`;
+        somewhere.innerHTML += `<img class="county" width="500px" src="images/jogeva.png"/>`;
     } 
     if (!m2nguVali.includes(6)) {
-        popup.innerHTML += `<img class="county"  width="500px" src="images/laanemaa.png"/>`;
+        somewhere.innerHTML += `<img class="county"  width="500px" src="images/laanemaa.png"/>`;
     }  */
     if (!m2nguVali.includes(7)) {
-        popup.innerHTML += `<img class="county"  width="500px" src="images/laaneviru.png"/>`;
+        somewhere.innerHTML += `<img class="county"  width="500px" src="images/laaneviru.png"/>`;
     } 
     if (!m2nguVali.includes(8)) {
-        popup.innerHTML += `<img class="county"  width="500px" src="images/parnu.png"/>`;
+        somewhere.innerHTML += `<img class="county"  width="500px" src="images/parnu.png"/>`;
     } 
     if (!m2nguVali.includes(9)) {
-        popup.innerHTML += `<img class="county"  width="500px" src="images/polva.png"/>`;
+        somewhere.innerHTML += `<img class="county"  width="500px" src="images/polva.png"/>`;
     } 
     if (!m2nguVali.includes(10)) {
-        popup.innerHTML += `<img class="county"  width="500px" src="images/raplamaa.png"/>`;
+        somewhere.innerHTML += `<img class="county"  width="500px" src="images/raplamaa.png"/>`;
     } 
     if (!m2nguVali.includes(11)) {
-        popup.innerHTML += `<img class="county"  width="500px" src="images/saare.png"/>`;
+        somewhere.innerHTML += `<img class="county"  width="500px" src="images/saare.png"/>`;
     } 
     if (!m2nguVali.includes(12)) {
-        popup.innerHTML += `<img class="county"  width="500px" src="images/tartumaa.png"/>`;
+        somewhere.innerHTML += `<img class="county"  width="500px" src="images/tartumaa.png"/>`;
     } 
     if (!m2nguVali.includes(13)) {
-        popup.innerHTML += `<img class="county"  width="500px" src="images/valga.png"/>`;
+        somewhere.innerHTML += `<img class="county"  width="500px" src="images/valga.png"/>`;
     } 
     if (!m2nguVali.includes(14)) {
-        popup.innerHTML += `<img class="county"  width="500px" src="images/viljandi.png"/>`;
+        somewhere.innerHTML += `<img class="county"  width="500px" src="images/viljandi.png"/>`;
     } 
     if (!m2nguVali.includes(15)) {
-        popup.innerHTML += `<img class="county"  width="500px" src="images/voru.png"/>`;
+        somewhere.innerHTML += `<img class="county"  width="500px" src="images/voru.png"/>`;
     } 
 }
 const kysimus = async function() {
-    showMap();
+    showMap(popup);
     kategooriaNr = getRand();
     showCategory(kategooriaNr);
     popup.style.setProperty("display", "flex")
     //await wait(1000);
-    await wait(3300);
+    await wait(2000);
     popup.style.setProperty("display", "none")
     popup.innerHTML = popupinit;
     //kysimuseleht.classList.remove('hide');
@@ -308,7 +311,8 @@ if(confirm('Tahad minna tagasi avalehele?')==true) {
     juhuslikValik = '';
     kysimusedDbst = [];
     avaleht.style.setProperty('display', 'flex');
-    raskustase.classList.add('hide');
+    avalehenupud.style.setProperty('display', 'block');
+    raskustase.style.setProperty('display', 'none');
     kysimuseleht.classList.add('hide');
     nerdFactContainer.classList.add('hide');
     btnEnabler();
@@ -323,7 +327,7 @@ if(confirm('Tahad minna tagasi avalehele?')==true) {
     valedVastused = 0;
     skoorEdetabelisse.classList.add('hide');
     skoorEdetabelisseInput.classList.remove('hide');
-    skoorEdetabelisseHtmlDiv.innerHTML = ("");
+    skoorEdetabelisseHtmlDiv.innerHTML = ("");  // !!!!!!!!!!
     const gameEnd = document.getElementById('gameEnd');
     gameEnd.classList.add('hide');
     closeModal(skoorEdetabelisse);
@@ -374,8 +378,7 @@ v4btn.style.cssText = "";
 /////////////////////////////////////////////////////////////////////////
 // Vastatud kysimuse v6rdlus
 const checkAnswer = async (event) =>{
-    let vastatudVariant = event.target.innerHTML;
-    
+    let vastatudVariant = event.target.innerHTML;  
     if(vastatudVariant == rightAnswer) {
         //console.log('aeg',timeLeft);
         clearInterval(startCountDown);
@@ -384,17 +387,20 @@ const checkAnswer = async (event) =>{
         skoorike.innerHTML=`Skoor: ${totalScore}`;
         timeLeft = 20;
         //alert('õige'); 
-        event.target.style.cssText = "background-color: green;"; 
+        event.target.style.cssText = "background-color: #04AA6D; color: white"; 
         await wait(500);
         showNerdFact();
         btnDisabler();
+        var audioElement = new Audio('/audio/somesound.wav');
+        audioElement.play();
         kysimusedDbst = [];
         if(m2nguVali.length === 0){
             await wait(1000);
             //kysimuseleht.classList.add('hide');
             skoorEdetabelisse.classList.remove('hide');
             skoorEdetabelisseHtmlDiv.classList.remove("hide");
-            skoorEdetabelisseHtmlDiv.innerHTML = (`Palju õnne, mäng sai läbi. <br><br>Sinu skooriks tuli: ${totalScore}<br>`);
+            showMap(skoorEdetabelisseHtmlDiv);
+            skoorEdetabelisseHtmlDiv.innerHTML += (`Palju õnne, mäng sai läbi. <br><br>Sinu skooriks tuli: ${totalScore}<br>`);
             openModal(skoorEdetabelisse);
         } else {
            // nextQ.classList.remove('hide');
@@ -412,13 +418,13 @@ const checkAnswer = async (event) =>{
             skoorEdetabelisseHtmlDiv.innerHTML = (`Vastasid liiga palju kordi valesti, sinu mängu skooriks tuli: ${totalScore}<br>`);
             openModal(skoorEdetabelisse);
             if(v1btn.innerHTML == rightAnswer){
-                v1btn.style.cssText = "background-color: green;"
+                v1btn.style.cssText = "background-color: #04AA6D; color: white;"
             } else if(v2btn.innerHTML == rightAnswer){
-                v2btn.style.cssText = "background-color: green;"
+                v2btn.style.cssText = "background-color: #04AA6D; color: white;"
             } else if(v3btn.innerHTML == rightAnswer){
-                v3btn.style.cssText = "background-color: green;"
+                v3btn.style.cssText = "background-color: #04AA6D; color: white;"
             } else if(v4btn.innerHTML == rightAnswer){
-                v4btn.style.cssText = "background-color: green;"
+                v4btn.style.cssText = "background-color: #04AA6D; color: white;"
             };
             event.target.style.cssText = "background-color: red;";
             btnDisabler();
@@ -428,15 +434,15 @@ const checkAnswer = async (event) =>{
         kysimusedDbst = [];
 
         if(v1btn.innerHTML == rightAnswer){
-            v1btn.style.cssText = "background-color: green;"
+            v1btn.style.cssText = "background-color: #04AA6D; color: white;"
         } else if(v2btn.innerHTML == rightAnswer){
-            v2btn.style.cssText = "background-color: green;"
+            v2btn.style.cssText = "background-color: #04AA6D; color: white;"
         } else if(v3btn.innerHTML == rightAnswer){
-            v3btn.style.cssText = "background-color: green;"
+            v3btn.style.cssText = "background-color: #04AA6D; color: white;"
         } else if(v4btn.innerHTML == rightAnswer){
-            v4btn.style.cssText = "background-color: green;"
+            v4btn.style.cssText = "background-color: #04AA6D; color: white;"
         };
-        event.target.style.cssText = "background-color: red;";
+        event.target.style.cssText = "background-color: red; color: white;";
         await wait(500);
         showNerdFact();
         btnDisabler();
