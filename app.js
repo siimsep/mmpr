@@ -11,7 +11,8 @@ openModalButton.forEach(button=> {
         const modal = document.querySelector(button.dataset.modalTarget);
         kergeRaskusEdekas();
         raskeRaskusEdekas();
-        openModal(modal)
+        openModal(modal);
+        createsound('Menuu_Nupp');        
     })
 })
 overlay.addEventListener('click', () => {
@@ -23,7 +24,8 @@ overlay.addEventListener('click', () => {
 closeModalButton.forEach(button=> {
     button.addEventListener('click', () => {
         const modal = button.closest('.modal');
-        closeModal(modal)
+        closeModal(modal);
+        
     })
 })
 function openModal(modal){
@@ -33,6 +35,7 @@ function openModal(modal){
 }
 function closeModal(modal){
     if (modal == null) return;
+    createsound('Nupp');
     modal.classList.remove('active');
     overlay.classList.remove('active');
     kergeKasutaja.innerHTML = '';
@@ -54,10 +57,11 @@ let maxVigu;
 let maxVigu1 = 3;
 let maxVigu2 = 3;
 let m2nguVali;
-let m2nguVali1 = [1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+let m2nguVali1 = [1, 2/* , 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15 */];
 let m2nguVali2 = [1, 1, 2, 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 let raskusTaseNr;
 noobButton.addEventListener('click', function() {
+    createsound('Nupp');
     raskustase.style.setProperty('display', 'none');
     avaleht.style.setProperty('display', 'none');
     m2nguVali = m2nguVali1;
@@ -66,6 +70,7 @@ noobButton.addEventListener('click', function() {
     kysimus()
 });
 expertButton.addEventListener('click', function() {
+    createsound('Nupp');
     raskustase.style.setProperty('display', 'none');
     avaleht.style.setProperty('display', 'none');
     maxVigu = maxVigu2;
@@ -100,7 +105,52 @@ set(child(uusKyss, "v3"), v3);
 set(child(uusKyss, "v4"), v4);
 set(child(uusKyss, "nF"), nF);
 }
-//kirjutaKysimus(2, 'Mis teed veel?', 'Vastan', 'Mõtlen küsimusi', 'Arendan', 'Katsetan', 'Eks ta ole.')
+//kirjutaKysimus(2, 'Siin on küsimus?', 'Vale 1', 'Vale 2', 'Vale 3', 'Õige', 'Nii-nimetatud nerd-fact lisaks')
+/////////////////////////////////////////////////////////////////////////
+// Kasutaja Kysimus Firebase andmebaasi
+
+
+const kysimusKasutajalt = async function() {
+    const submitCategory = document.getElementById('submitCat').value;
+    const submitQuestion = document.getElementById("submittedQuestion");
+    const submitV1 = document.getElementById("v1");
+    const submitV2 = document.getElementById("v2");
+    const submitV3 = document.getElementById("v3");
+    const submitV4 = document.getElementById("v4");
+    const submitMemo = document.getElementById('memo');
+    const submitNf = document.getElementById("nfact");
+    const submitJuser = document.getElementById("juser");
+    if (submitQuestion.value == '') {
+        alert('Küsimus on puudu!! :(');
+        return
+    }
+    if (submitV4.value == '') {
+        alert('Vastus on puudu!! :(');
+        return
+    }    
+    const uusKyss = push(ref(db, `kyssadKasutajatelt/`+submitCategory)); 
+    set(child(uusKyss, "kyss"), submitQuestion.value);
+    set(child(uusKyss, "v1"), submitV1.value);
+    set(child(uusKyss, "v2"), submitV2.value);
+    set(child(uusKyss, "v3"), submitV3.value);
+    set(child(uusKyss, "v4"), submitV4.value);
+    set(child(uusKyss, "memo"), submitMemo.value);
+    set(child(uusKyss, "nF"), submitNf.value);
+    set(child(uusKyss, "juser"), submitJuser.value);
+    submitQuestion.value = '';
+    submitV1.value = '';
+    submitV2.value = '';
+    submitV3.value = '';
+    submitV4.value = '';
+    submitMemo.value = '';
+    submitNf.value='';
+    submitJuser.value='';
+    document.getElementById("sendQsuccess").style.setProperty('display', 'block');
+    await wait(3000);
+    document.getElementById("sendQsuccess").style.setProperty('display', 'none');
+  }
+const sendQ = document.getElementById("sendQ");
+sendQ.addEventListener("click", kysimusKasutajalt);
 /////////////////////////////////////////////////////////////////////////
 // Firebasest kysimuse lugemine
 const dbRef = ref(getDatabase());
@@ -170,6 +220,7 @@ const uusInfo =  function() {
 }
 
 function yksikM2ng() {
+    createsound('Nupp');
     avalehenupud.style.setProperty('display', 'none')
     raskustase.style.setProperty('display', 'block');
     avaleheNupp.classList.remove('hide');
@@ -184,105 +235,154 @@ let popupinit = popup.innerHTML;
 const showCategory = async function(nr) {
      if(nr == 1) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/harju.png"/><img class="county zoomword" src="images/harjutekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/harju.png"/><img class="county zoomword" src="images/harjutekst.png"/>`;
     } else if (nr == 2) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/hiiu.png"/><img class="county zoomword" src="images/hiiutekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/hiiu.png"/><img class="county zoomword" src="images/hiiutekst.png"/>`;
     } else if (nr == 3) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/idaviru.png"/><img class="county zoomword" src="images/idatekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/idaviru.png"/><img class="county zoomword" src="images/idatekst.png"/>`;
     } else if (nr == 4) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/jarvemaa.png"/><img class="county zoomword" src="images/jarvatekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/jarvemaa.png"/><img class="county zoomword" src="images/jarvatekst.png"/>`;
     }
-    else if (nr == 5) {
+/*     else if (nr == 5) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/jogeva.png"/><img class="county zoomword" src="images/jogevatekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/jogeva.png"/><img class="county zoomword" src="images/jogevatekst.png"/>`;
     }
     else if (nr == 6) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/laanemaa.png"/><img class="county zoomword" src="images/laanetekst.png"/>`;
-    } else if (nr == 7) {
+        popup.innerHTML += `<img class="county fade-in" src="images/laanemaa.png"/><img class="county zoomword" src="images/laanetekst.png"/>`; 
+    } */else if (nr == 7) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/laaneviru.png"/><img class="county zoomword" src="images/laanevirutekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/laaneviru.png"/><img class="county zoomword" src="images/laanevirutekst.png"/>`;
     } else if (nr == 8) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/parnu.png"/><img class="county zoomword" src="images/parnutekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/parnu.png"/><img class="county zoomword" src="images/parnutekst.png"/>`;
     } else if (nr == 9) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/polva.png"/><img class="county zoomword" src="images/polvatekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/polva.png"/><img class="county zoomword" src="images/polvatekst.png"/>`;
     } else if (nr == 10) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/raplamaa.png"/><img class="county zoomword" src="images/raplatekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/raplamaa.png"/><img class="county zoomword" src="images/raplatekst.png"/>`;
     } else if (nr == 11) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/saare.png"/><img class="county zoomword" src="images/saaretekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/saare.png"/><img class="county zoomword" src="images/saaretekst.png"/>`;
     } else if (nr == 12) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/tartumaa.png"/><img class="county zoomword" src="images/tartutekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/tartumaa.png"/><img class="county zoomword" src="images/tartutekst.png"/>`;
     } else if (nr == 13) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/valga.png"/><img class="county zoomword" src="images/valgatekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/valga.png"/><img class="county zoomword" src="images/valgatekst.png"/>`;
     } else if (nr == 14) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/viljandi.png"/><img class="county zoomword" src="images/viljanditekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/viljandi.png"/><img class="county zoomword" src="images/viljanditekst.png"/>`;
     } else if (nr == 15) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" width="500px" src="images/voru.png"/><img class="county zoomword" src="images/vorutekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/voru.png"/><img class="county zoomword" src="images/vorutekst.png"/>`;
     }    
 }
+const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 const showMap = function(somewhere) {
+    
+
     if (!m2nguVali.includes(1)) {
-        somewhere.innerHTML += `<img class="county" width="500px" src="images/harju.png"/>` 
+        somewhere.innerHTML += `<img class="county" src="images/harju.png"/>` 
     } 
+    if ((countOccurrences(m2nguVali, 1)===1) && (raskusTaseNr === 2)){
+        somewhere.innerHTML += `<img class="countygrey" src="images/harju.png"/>` 
+    }
     if (!m2nguVali.includes(2)) {
-        somewhere.innerHTML += `<img class="county" width="500px" src="images/hiiu.png"/>`
+        somewhere.innerHTML += `<img class="county" src="images/hiiu.png"/>`
+    }
+    if ((countOccurrences(m2nguVali, 2)===1) && (raskusTaseNr === 2)){
+        somewhere.innerHTML += `<img class="countygrey" src="images/hiiu.png"/>`
     }
     if (!m2nguVali.includes(3)) {
-        somewhere.innerHTML += `<img class="county" width="500px" src="images/idaviru.png"/>`
+        somewhere.innerHTML += `<img class="county" src="images/idaviru.png"/>`
+    }
+    if ((countOccurrences(m2nguVali, 3)===1) && (raskusTaseNr === 2)){
+        somewhere.innerHTML += `<img class="countygrey" src="images/idaviru.png"/>`
     }
     if (!m2nguVali.includes(4)) {
-        somewhere.innerHTML += `<img class="county" width="500px" src="images/jarvemaa.png"/>`;
+        somewhere.innerHTML += `<img class="county" src="images/jarvemaa.png"/>`;
     }
-/*     if (!m2nguVali.includes(5)) {
-        somewhere.innerHTML += `<img class="county" width="500px" src="images/jogeva.png"/>`;
+    if ((countOccurrences(m2nguVali, 4)===1) && (raskusTaseNr === 2)){
+        somewhere.innerHTML += `<img class="countygrey" src="images/jarvemaa.png"/>`
+    }
+    /* if (!m2nguVali.includes(5)) {
+        somewhere.innerHTML += `<img class="county" src="images/jogeva.png"/>`;
     } 
+     if ((countOccurrences(m2nguVali, 5)===1) && (raskusTaseNr === 2)){
+        somewhere.innerHTML += `<img class="countygrey" src="images/jogeva.png"/>`
+    }
     if (!m2nguVali.includes(6)) {
-        somewhere.innerHTML += `<img class="county"  width="500px" src="images/laanemaa.png"/>`;
-    }  */
+        somewhere.innerHTML += `<img class="county"  src="images/laanemaa.png"/>`;
+    } 
+    if ((countOccurrences(m2nguVali, 6)===1) && (raskusTaseNr === 2)){
+        somewhere.innerHTML += `<img class="countygrey" src="images/laanemaa.png"/>`
+    } */
+
     if (!m2nguVali.includes(7)) {
-        somewhere.innerHTML += `<img class="county"  width="500px" src="images/laaneviru.png"/>`;
+        somewhere.innerHTML += `<img class="county"  src="images/laaneviru.png"/>`;
     } 
+    if ((countOccurrences(m2nguVali, 7)===1) && (raskusTaseNr === 2)){
+        somewhere.innerHTML += `<img class="countygrey" src="images/laaneviru.png"/>`
+    }
     if (!m2nguVali.includes(8)) {
-        somewhere.innerHTML += `<img class="county"  width="500px" src="images/parnu.png"/>`;
+        somewhere.innerHTML += `<img class="county"  src="images/parnu.png"/>`;
     } 
+    if ((countOccurrences(m2nguVali, 8)===1) && (raskusTaseNr === 2)){
+        somewhere.innerHTML += `<img class="countygrey" src="images/parnu.png"/>`
+    }
     if (!m2nguVali.includes(9)) {
-        somewhere.innerHTML += `<img class="county"  width="500px" src="images/polva.png"/>`;
+        somewhere.innerHTML += `<img class="county"  src="images/polva.png"/>`;
     } 
+    if ((countOccurrences(m2nguVali, 9)===1) && (raskusTaseNr === 2)){
+        somewhere.innerHTML += `<img class="countygrey" src="images/polva.png"/>`
+    }
     if (!m2nguVali.includes(10)) {
-        somewhere.innerHTML += `<img class="county"  width="500px" src="images/raplamaa.png"/>`;
+        somewhere.innerHTML += `<img class="county"  src="images/raplamaa.png"/>`;
     } 
+    if ((countOccurrences(m2nguVali, 10)===1) && (raskusTaseNr === 2)){
+        somewhere.innerHTML += `<img class="countygrey" src="images/raplamaa.png"/>`
+    }
     if (!m2nguVali.includes(11)) {
-        somewhere.innerHTML += `<img class="county"  width="500px" src="images/saare.png"/>`;
+        somewhere.innerHTML += `<img class="county"  src="images/saare.png"/>`;
     } 
+    if ((countOccurrences(m2nguVali, 11)===1) && (raskusTaseNr === 2)){
+        somewhere.innerHTML += `<img class="countygrey" src="images/saare.png"/>`
+    }
     if (!m2nguVali.includes(12)) {
-        somewhere.innerHTML += `<img class="county"  width="500px" src="images/tartumaa.png"/>`;
+        somewhere.innerHTML += `<img class="county"  src="images/tartumaa.png"/>`;
     } 
+    if ((countOccurrences(m2nguVali, 12)===1) && (raskusTaseNr === 2)){
+        somewhere.innerHTML += `<img class="countygrey" src="images/tartumaa.png"/>`
+    }
     if (!m2nguVali.includes(13)) {
-        somewhere.innerHTML += `<img class="county"  width="500px" src="images/valga.png"/>`;
+        somewhere.innerHTML += `<img class="county"  src="images/valga.png"/>`;
     } 
+    if ((countOccurrences(m2nguVali, 13)===1) && (raskusTaseNr === 2)){
+        somewhere.innerHTML += `<img class="countygrey" src="images/valga.png"/>`
+    }
     if (!m2nguVali.includes(14)) {
-        somewhere.innerHTML += `<img class="county"  width="500px" src="images/viljandi.png"/>`;
+        somewhere.innerHTML += `<img class="county"  src="images/viljandi.png"/>`;
     } 
+    if ((countOccurrences(m2nguVali, 14)===1) && (raskusTaseNr === 2)){
+        somewhere.innerHTML += `<img class="countygrey" src="images/viljandi.png"/>`
+    }
     if (!m2nguVali.includes(15)) {
-        somewhere.innerHTML += `<img class="county"  width="500px" src="images/voru.png"/>`;
+        somewhere.innerHTML += `<img class="county"  src="images/voru.png"/>`;
     } 
+    if ((countOccurrences(m2nguVali, 14)===1) && (raskusTaseNr === 2)){
+        somewhere.innerHTML += `<img class="countygrey" src="images/voru.png"/>`
+    }
 }
 const kysimus = async function() {
-    showMap(popup);
+    await showMap(popup);
     kategooriaNr = getRand();
     showCategory(kategooriaNr);
-    popup.style.setProperty("display", "flex")
+    popup.style.setProperty("display", "flex");
     //await wait(1000);
     await wait(2000);
     popup.style.setProperty("display", "none")
@@ -301,12 +401,12 @@ const massiivistKysimuseni = function(n2idis){
     document.getElementById('variant3').innerHTML=n2idis[3];
     document.getElementById('variant4').innerHTML=n2idis[4];
     kysimuseleht.classList.remove('hide');
-    startCountDown = setInterval(countDown, 1000)
+    startCountDown = setInterval(countDown, 1000);
+    createsound("Aeg");
     return
 }
 
 function mineAvalehele() { // v6iks kuidagi paremini selle nullimise teha, esialgu nii
-if(confirm('Tahad minna tagasi avalehele?')==true) {
     vastatudKysimused = [];
     juhuslikValik = '';
     kysimusedDbst = [];
@@ -331,8 +431,7 @@ if(confirm('Tahad minna tagasi avalehele?')==true) {
     const gameEnd = document.getElementById('gameEnd');
     gameEnd.classList.add('hide');
     closeModal(skoorEdetabelisse);
-    return
-} else {return}
+    
 }
 avaleheNupp.addEventListener('click', mineAvalehele)
 yksikNupp.addEventListener('click', yksikM2ng);
@@ -391,8 +490,7 @@ const checkAnswer = async (event) =>{
         await wait(500);
         showNerdFact();
         btnDisabler();
-        var audioElement = new Audio('/audio/somesound.wav');
-        audioElement.play();
+        createsound('Vale'); // mis helifaili tahetakse (praegu m2ngib somesound.wav)
         kysimusedDbst = [];
         if(m2nguVali.length === 0){
             await wait(1000);
@@ -408,6 +506,7 @@ const checkAnswer = async (event) =>{
         }
 
     } else { 
+        createsound('Vale');
         ++valedVastused;
         m2nguVali.push(kategooriaNr);
         clearInterval(startCountDown);
@@ -426,7 +525,7 @@ const checkAnswer = async (event) =>{
             } else if(v4btn.innerHTML == rightAnswer){
                 v4btn.style.cssText = "background-color: #04AA6D; color: white;"
             };
-            event.target.style.cssText = "background-color: red;";
+            event.target.style.cssText = "background-color: rgb(221, 98, 78);";
             btnDisabler();
             showNerdFact();
         } else {
@@ -442,7 +541,7 @@ const checkAnswer = async (event) =>{
         } else if(v4btn.innerHTML == rightAnswer){
             v4btn.style.cssText = "background-color: #04AA6D; color: white;"
         };
-        event.target.style.cssText = "background-color: red; color: white;";
+        event.target.style.cssText = "background-color: rgb(221, 98, 78); color: white;";
         await wait(500);
         showNerdFact();
         btnDisabler();
@@ -457,6 +556,7 @@ v3btn.addEventListener('click', checkAnswer);
 v4btn.addEventListener('click', checkAnswer);
 const uueleRingile = () => {
     btnEnabler();
+    createsound('Nupp');
     kysimuseleht.classList.add('hide');
     nextQ.style.setProperty("display", "none")
     //nextQ.classList.add('hide');
@@ -562,23 +662,37 @@ const raskeRaskusEdekas = function() {
 
 /////////////////////////////////////////////////////////////////////////
 // Audio on-off icon toggle
-const ico = document.getElementById("audioIcon");
-ico.addEventListener("click", function(){
-    ico.classList.toggle("fa-volume-off")
-})
-/////////////////////////////////////////////////////////////////////////
-// Audio on-off icon toggle
-var acc = document.getElementsByClassName("accordion");
-var i;
+var silence = false;
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    }
-  });
+function muteAudio() {
+silence = !silence
 }
+const ico = document.getElementById("audioIcon");
+
+function chngimg() {
+    var img = ico.src;
+    if (img.indexOf('yessound.png')!=-1) {
+        ico.src  = 'images/nosound.png';
+    }
+     else {
+       ico.src = 'images/yessound.png';
+   }
+
+}
+ico.addEventListener("click", function(){
+    //ico.classList.toggle("fa-volume-xmark");
+    muteAudio();
+    chngimg();
+})
+//////////////////////////////////////////////////////////////////////
+var html5_audiotypes={ //define list of audio file extensions and their associated audio types. Add to it if your specified audio file isn't on this list:
+    "mp3": "audio/mpeg",
+    "wav": "audio/wav"
+}
+function createsound(sound){
+    var audioElement = new Audio(`audio/${sound}.wav`);
+    if (silence) audioElement.muted = true;
+    else audioElement.muted = false;
+            audioElement.play();
+}
+    

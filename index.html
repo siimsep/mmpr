@@ -14,7 +14,8 @@
 </head>
 <body class="container">   
     <div id="kogusisu">
-        <i id="avalehele" class="btn hide fade-in"><i class="fa-solid fa-house"></i></i><br><br>
+            <div class="btn fade-in"><img id="audioIcon" src="images/yessound.png"></img></div> 
+            <div id="avalehele"  class="btn hide fade-in"><img  id="avaleheicon" src="images/home.png"></img></div><br><br> 
         <div id="avaleht">
             <img src="images/eestivalge.png" alt="eestimang" id="m2ngulogo">
             <div id="avalehenupud">
@@ -22,16 +23,19 @@
             <div id="juhistekonteiner">
                 <button data-modal-target="#modal" class="juhisenupp">JUHISED</button>
                 <div id="modal" class="modal">
-                    <!-- <div class="modal-header">
-                        <div class="juhiste-pealkiri">Siit loed juhiseid</div>
-                        <button data-close-button class="close-btn">&times;</button> &times; kasutades tuleb iga fondiga ilus rist
-                    </div> -->
-                    <div class="modal-body"><object data="juhised.html" width=100% height="720"></object></div>
+                    <div class="modal-header">
+                        <button data-close-button class="close-btn">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <object data="juhised.html" width=100% height="720"></object></div>
                 </div>
             </div>
             <div id="edetabelikonteiner">
                 <button data-modal-target="#modal2" id="edetabelinupp">EDETABEL</button>
                 <div id="modal2" class="modal">
+                    <div class="modal-header">
+                        <button data-close-button class="close-btn">&times;</button>
+                    </div>
                     <div class="modal-body">
                         <div id="edetabelisisu">
                             <p>Kergema raskustasemega: <br><br>
@@ -43,9 +47,13 @@
                     </div>
             </div>
             
-        </div><div id="lisakysimus">
-            <button data-modal-target="#modal3" class="saadakyss">PAKU KÜSIMUS</button>
+        </div>
+        <div id="lisakysimus">
+            <button data-modal-target="#modal3" class="saadakyss">KÜSI ISE</button>
             <div id="modal3" class="modal">
+                <div class="modal-header">
+                    <button data-close-button class="close-btn">&times;</button>
+                </div>
                 <div class="modal-body" id="lisaKysimus">
                     <form id ="myForm">
                         <label for="category">Vali maakond:</label>
@@ -66,7 +74,7 @@
                           <option value="14">Viljandi maakond</option>
                           <option value="15">Võru maakond</option>
                         </select><br><br>
-                        <label>Küsimus</label>
+                        <label>Küsimus:</label>
                         <input type="text" id="submittedQuestion"><br><br>
                         <label>Vastusevariant 1:</label>
                         <input type="text" id="v1"><br>
@@ -76,13 +84,13 @@
                         <input type="text" id="v3"><br>
                           <label>Vastusevariant 4 ja ühtlasi õige:</label>
                         <input type="text" id="v4"><br>
-                        <label>Mingi huvitav lisafakt küsimuse kohta</label>
+                        <label>Mingi huvitav lisafakt küsimuse kohta:</label>
                         <input type="text" id="nfact"><br>
-                        <label>Allikas, viide, link, kommentaar</label>
+                        <label>Allikas, viide, link, kommentaar:</label>
                         <input type="text" id="memo"><br>
                         <label>Lisa oma nimi ka, siis teised näevad ka, kes nii ägeda küsimuse lisas</label>
                         <input type="text" id="juser"><br>
-                        <input type="button" value="Saada ära!" onclick="kysimusKasutajalt()">
+                        <input type="button" value="Saada ära!" id="sendQ"><br><br><div class="hide" id="sendQsuccess">Täname küsimuse eest!</br>
                       </form>
                 </div>
             </div>
@@ -96,35 +104,42 @@
 
     
         <div id="kategooriaPopup" class="hide fade-in">
-            <img class="county" width="500px" src="images/eesti-hall.png"/>
+            <img class="county" src="images/hallkaart.png"/>
         </div>
         <div id="skoorike" class="hide"></div>
         <div id="kysimuseleht" class="hide fade-in"> 
-        <div id="kysimus">Siin on kysimus!?</div>
+        <div id="kysimusekast">      
+              <img src="images/kusimus.png" alt="kusimus" id="kusimus">
+              <div id="kysimus"></div>
+            </div>
         <div id="vastusenupud" class="btn-grid">
         <button class="btn vastusenupp" id="variant1">Vastus 1</button>
         <button class="btn vastusenupp" id="variant2">Vastus 2</button>
         <button class="btn vastusenupp" id="variant3">Vastus 3</button>
         <button class="btn vastusenupp" id="variant4">Vastus 4</button>
         </div>
-        <div id="nerdFactContainer" class="hide fade-in">
-            <p>KAS TEADSID, ET: </p>
+        <div class="round-time-bar" style="--duration: 20;" data-style="smooth">
+            <div></div>
+          </div>
+          <div id="nerdFactContainer" class="hide fade-in"> <img src="images/kas teadsid.png" alt="kasteadsidet" id="kasteadsidet">
         <div id="nF"></div></div>
         <div id="nextQuest"><button class="btn j2rgminekyss">Järgmine küsimus</button></div>
         </div>
         <div id="skoorEdetabelisse" class="modal">
+            <div class="modal-header">
+                <button data-close-button class="close-btn">&times;</button>
+            </div>
         <div id="gameEnd" class="hide"><p >Skoor lisatud andmebaasi.</p><br><br><input type="button" id='mineAvaleheleModaalist' value="Mine tagasi avalehele"></div>
         <div id="skoorEdetabelisseInput">
         <div id="skoorEdetabelisseHtmlDiv">
             <img class="county" width="500px" src="images/eesti-hall.png"/>
         </div>
         <label>Mängija nimi:</label>
-        <input type="text" id="m2ngijaNimi"<br><br>
-        <input type="button" value="Lisa edetabelisse" onclick="skoorFirebase()"></div>
+        <input type="text" id="m2ngijaNimi"><br><br>
+        <input type="button" id='lisaedetabelisse' value="Lisa edetabelisse" onclick="skoorFirebase()"></div>
         </div>
         <div id="overlay"></div> <!-- Et Modaalakna (juhised) taga oleks tumedam pilt -->
         <br><br>
-        <!-- <i id="audioIcon" class="fa-solid fa-volume-high"></i> -->
     </div>
     </div>
 <script type="module" src="app.js" defer></script>
