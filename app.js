@@ -12,7 +12,7 @@ openModalButton.forEach(button=> {
         kergeRaskusEdekas();
         raskeRaskusEdekas();
         openModal(modal);
-        createsound('Menuu_Nupp');        
+        createsound('pop_up_nupp');        
     })
 })
 overlay.addEventListener('click', () => {
@@ -35,7 +35,7 @@ function openModal(modal){
 }
 function closeModal(modal){
     if (modal == null) return;
-    createsound('Nupp');
+    createsound('nupp');
     modal.classList.remove('active');
     overlay.classList.remove('active');
     kergeKasutaja.innerHTML = '';
@@ -57,11 +57,11 @@ let maxVigu;
 let maxVigu1 = 3;
 let maxVigu2 = 3;
 let m2nguVali;
-let m2nguVali1 = [1, 2/* , 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15 */];
-let m2nguVali2 = [1, 1, 2, 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+let m2nguVali1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+let m2nguVali2 = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 let raskusTaseNr;
 noobButton.addEventListener('click', function() {
-    createsound('Nupp');
+    createsound('nupp');
     raskustase.style.setProperty('display', 'none');
     avaleht.style.setProperty('display', 'none');
     m2nguVali = m2nguVali1;
@@ -70,7 +70,7 @@ noobButton.addEventListener('click', function() {
     kysimus()
 });
 expertButton.addEventListener('click', function() {
-    createsound('Nupp');
+    createsound('nupp');
     raskustase.style.setProperty('display', 'none');
     avaleht.style.setProperty('display', 'none');
     maxVigu = maxVigu2;
@@ -96,7 +96,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 /////////////////////////////////////////////////////////////////////////
 // Kysimus Firebase andmebaasi
-function kirjutaKysimus(catId, kyss, v1, v2, v3, v4, nF) {
+/* function kirjutaKysimus(catId, kyss, v1, v2, v3, v4, nF) {
 const uusKyss = push(ref(db, "kyssad/"+catId)); 
 set(child(uusKyss, "kyss"), kyss);
 set(child(uusKyss, "v1"), v1);
@@ -104,7 +104,7 @@ set(child(uusKyss, "v2"), v2);
 set(child(uusKyss, "v3"), v3);
 set(child(uusKyss, "v4"), v4);
 set(child(uusKyss, "nF"), nF);
-}
+} */
 //kirjutaKysimus(2, 'Siin on küsimus?', 'Vale 1', 'Vale 2', 'Vale 3', 'Õige', 'Nii-nimetatud nerd-fact lisaks')
 /////////////////////////////////////////////////////////////////////////
 // Kasutaja Kysimus Firebase andmebaasi
@@ -220,7 +220,7 @@ const uusInfo =  function() {
 }
 
 function yksikM2ng() {
-    createsound('Nupp');
+    createsound('nupp');
     avalehenupud.style.setProperty('display', 'none')
     raskustase.style.setProperty('display', 'block');
     avaleheNupp.classList.remove('hide');
@@ -233,6 +233,7 @@ function getRand(){
 const popup = document.getElementById('kategooriaPopup');
 let popupinit = popup.innerHTML;
 const showCategory = async function(nr) {
+    createsound('maakonna_ilmumine')
      if(nr == 1) {
         await wait(500);
         popup.innerHTML += `<img class="county fade-in" src="images/harju.png"/><img class="county zoomword" src="images/harjutekst.png"/>`;
@@ -246,14 +247,14 @@ const showCategory = async function(nr) {
         await wait(500);
         popup.innerHTML += `<img class="county fade-in" src="images/jarvemaa.png"/><img class="county zoomword" src="images/jarvatekst.png"/>`;
     }
-/*     else if (nr == 5) {
+    else if (nr == 5) {
         await wait(500);
         popup.innerHTML += `<img class="county fade-in" src="images/jogeva.png"/><img class="county zoomword" src="images/jogevatekst.png"/>`;
     }
     else if (nr == 6) {
         await wait(500);
         popup.innerHTML += `<img class="county fade-in" src="images/laanemaa.png"/><img class="county zoomword" src="images/laanetekst.png"/>`; 
-    } */else if (nr == 7) {
+    }else if (nr == 7) {
         await wait(500);
         popup.innerHTML += `<img class="county fade-in" src="images/laaneviru.png"/><img class="county zoomword" src="images/laanevirutekst.png"/>`;
     } else if (nr == 8) {
@@ -310,7 +311,7 @@ const showMap = function(somewhere) {
     if ((countOccurrences(m2nguVali, 4)===1) && (raskusTaseNr === 2)){
         somewhere.innerHTML += `<img class="countygrey" src="images/jarvemaa.png"/>`
     }
-    /* if (!m2nguVali.includes(5)) {
+    if (!m2nguVali.includes(5)) {
         somewhere.innerHTML += `<img class="county" src="images/jogeva.png"/>`;
     } 
      if ((countOccurrences(m2nguVali, 5)===1) && (raskusTaseNr === 2)){
@@ -321,8 +322,7 @@ const showMap = function(somewhere) {
     } 
     if ((countOccurrences(m2nguVali, 6)===1) && (raskusTaseNr === 2)){
         somewhere.innerHTML += `<img class="countygrey" src="images/laanemaa.png"/>`
-    } */
-
+    } 
     if (!m2nguVali.includes(7)) {
         somewhere.innerHTML += `<img class="county"  src="images/laaneviru.png"/>`;
     } 
@@ -400,20 +400,22 @@ const massiivistKysimuseni = function(n2idis){
     document.getElementById('variant2').innerHTML=n2idis[2];
     document.getElementById('variant3').innerHTML=n2idis[3];
     document.getElementById('variant4').innerHTML=n2idis[4];
-    kysimuseleht.classList.remove('hide');
+    kysimuseleht.style.setProperty('display', 'block')
     startCountDown = setInterval(countDown, 1000);
-    createsound("Aeg");
+    //createsound("timer");
+    playAudio();
     return
 }
 
 function mineAvalehele() { // v6iks kuidagi paremini selle nullimise teha, esialgu nii
+    pauseAudio();
     vastatudKysimused = [];
     juhuslikValik = '';
     kysimusedDbst = [];
     avaleht.style.setProperty('display', 'flex');
     avalehenupud.style.setProperty('display', 'block');
     raskustase.style.setProperty('display', 'none');
-    kysimuseleht.classList.add('hide');
+    kysimuseleht.style.setProperty('display', 'none')
     nerdFactContainer.classList.add('hide');
     btnEnabler();
     nextQ.style.setProperty("display", "none")
@@ -422,8 +424,8 @@ function mineAvalehele() { // v6iks kuidagi paremini selle nullimise teha, esial
     skoorike.classList.add('hide');
     skoorike.innerHTML = '';
     totalScore = 0;
-    m2nguVali1 = [1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-    m2nguVali2 = [1, 1, 2, 2, 3, 3, 4, 4, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+    m2nguVali1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    m2nguVali2 = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
     valedVastused = 0;
     skoorEdetabelisse.classList.add('hide');
     skoorEdetabelisseInput.classList.remove('hide');
@@ -454,6 +456,7 @@ const v3btn = document.getElementById('variant3');
 const v4btn = document.getElementById('variant4');
 const nextQ = document.getElementById('nextQuest');
 const skoorike = document.getElementById('skoorike');
+let timerbar = document.getElementById("timerbar");
 /////////////////////////////////////////////////////////////////////////
 // Vastamise korral vastuste nuppude deaktiveerimine
 const btnDisabler = ()=> {
@@ -477,36 +480,34 @@ v4btn.style.cssText = "";
 /////////////////////////////////////////////////////////////////////////
 // Vastatud kysimuse v6rdlus
 const checkAnswer = async (event) =>{
+    timerbar.style.setProperty("display", "none");
+    pauseAudio();
     let vastatudVariant = event.target.innerHTML;  
     if(vastatudVariant == rightAnswer) {
-        //console.log('aeg',timeLeft);
+        createsound('oige');
         clearInterval(startCountDown);
         totalScore += timeLeft;
-        //console.log('skoor: ',totalScore);
         skoorike.innerHTML=`Skoor: ${totalScore}`;
-        timeLeft = 20;
-        //alert('õige'); 
+        timeLeft = 20; 
         event.target.style.cssText = "background-color: #04AA6D; color: white"; 
         await wait(500);
         showNerdFact();
         btnDisabler();
-        createsound('Vale'); // mis helifaili tahetakse (praegu m2ngib somesound.wav)
         kysimusedDbst = [];
         if(m2nguVali.length === 0){
-            await wait(1000);
-            //kysimuseleht.classList.add('hide');
+            await wait(2000);
             skoorEdetabelisse.classList.remove('hide');
             skoorEdetabelisseHtmlDiv.classList.remove("hide");
-            showMap(skoorEdetabelisseHtmlDiv);
+            showMap(skoorEdetabelisseHtmlDivImg);
+            createsound('celebration');
             skoorEdetabelisseHtmlDiv.innerHTML += (`Palju õnne, mäng sai läbi. <br><br>Sinu skooriks tuli: ${totalScore}<br>`);
             openModal(skoorEdetabelisse);
+
         } else {
-           // nextQ.classList.remove('hide');
             nextQ.style.setProperty("display", "flex")    
         }
-
     } else { 
-        createsound('Vale');
+        createsound('vale');
         ++valedVastused;
         m2nguVali.push(kategooriaNr);
         clearInterval(startCountDown);
@@ -514,8 +515,8 @@ const checkAnswer = async (event) =>{
         if(valedVastused === maxVigu){
             skoorEdetabelisse.classList.remove('hide');
             skoorEdetabelisseHtmlDiv.classList.remove("hide");
-            skoorEdetabelisseHtmlDiv.innerHTML = (`Vastasid liiga palju kordi valesti, sinu mängu skooriks tuli: ${totalScore}<br>`);
-            openModal(skoorEdetabelisse);
+            showMap(skoorEdetabelisseHtmlDivImg);
+            skoorEdetabelisseHtmlDiv.innerHTML += (`Vastasid liiga palju kordi valesti, sinu mängu skooriks tuli: ${totalScore}<br>`);
             if(v1btn.innerHTML == rightAnswer){
                 v1btn.style.cssText = "background-color: #04AA6D; color: white;"
             } else if(v2btn.innerHTML == rightAnswer){
@@ -526,12 +527,12 @@ const checkAnswer = async (event) =>{
                 v4btn.style.cssText = "background-color: #04AA6D; color: white;"
             };
             event.target.style.cssText = "background-color: rgb(221, 98, 78);";
+            await wait(2500)
+            openModal(skoorEdetabelisse);
             btnDisabler();
             showNerdFact();
         } else {
-        //alert('vale');    
         kysimusedDbst = [];
-
         if(v1btn.innerHTML == rightAnswer){
             v1btn.style.cssText = "background-color: #04AA6D; color: white;"
         } else if(v2btn.innerHTML == rightAnswer){
@@ -545,7 +546,6 @@ const checkAnswer = async (event) =>{
         await wait(500);
         showNerdFact();
         btnDisabler();
-        //nextQ.classList.remove('hide');
         nextQ.style.setProperty("display", "flex")    
     }
     };
@@ -556,12 +556,13 @@ v3btn.addEventListener('click', checkAnswer);
 v4btn.addEventListener('click', checkAnswer);
 const uueleRingile = () => {
     btnEnabler();
-    createsound('Nupp');
-    kysimuseleht.classList.add('hide');
+    createsound('nupp');
+    kysimuseleht.style.setProperty('display', 'none')
     nextQ.style.setProperty("display", "none")
     //nextQ.classList.add('hide');
     nerdFactContainer.classList.add('hide');
     skoorike.classList.add('hide');
+    timerbar.style.setProperty("display", "block");
     kysimus()
 }
 nextQ.addEventListener('click', uueleRingile);
@@ -690,9 +691,17 @@ var html5_audiotypes={ //define list of audio file extensions and their associat
     "wav": "audio/wav"
 }
 function createsound(sound){
-    var audioElement = new Audio(`audio/${sound}.wav`);
+    var audioElement = new Audio(`audio/${sound}.mp3`);
     if (silence) audioElement.muted = true;
     else audioElement.muted = false;
             audioElement.play();
 }
-    
+var x = document.getElementById("myAudio"); 
+function playAudio() { 
+    if (silence) x.muted = true;
+    else x.muted = false;
+    x.play(); 
+} 
+function pauseAudio() { 
+  x.pause(); 
+} 

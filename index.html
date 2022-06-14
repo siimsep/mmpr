@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eesti mäng</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/40978ebb6b.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,9 +74,9 @@
                           <option value="13">Valga maakond</option>
                           <option value="14">Viljandi maakond</option>
                           <option value="15">Võru maakond</option>
-                        </select><br><br>
+                        </select><br>
                         <label>Küsimus:</label>
-                        <input type="text" id="submittedQuestion"><br><br>
+                        <input type="text" id="submittedQuestion"><br>
                         <label>Vastusevariant 1:</label>
                         <input type="text" id="v1"><br>
                           <label>Vastusevariant 2:</label>
@@ -90,20 +91,20 @@
                         <input type="text" id="memo"><br>
                         <label>Lisa oma nimi ka, siis teised näevad ka, kes nii ägeda küsimuse lisas</label>
                         <input type="text" id="juser"><br>
-                        <input type="button" value="Saada ära!" id="sendQ"><br><br><div class="hide" id="sendQsuccess">Täname küsimuse eest!</br>
+                        <input type="button" value="Saada ära!" id="sendQ"><br><br><div class="hide" id="sendQsuccess">Täname küsimuse eest!</div></br>
                       </form>
                 </div>
             </div>
 
         </div></div>        
         <div id="raskustasemevaade">
-            <button id="noob">Kerge tase</button><br><br>
-            <button id="expert">Raske tase</button>
+            <button id="noob">KERGE TASE</button><br><br>
+            <button id="expert">RASKE TASE</button>
             </div> 
         </div>
 
     
-        <div id="kategooriaPopup" class="hide fade-in">
+        <div id="kategooriaPopup" class="fade-in">
             <img class="county" src="images/hallkaart.png"/>
         </div>
         <div id="skoorike" class="hide"></div>
@@ -118,8 +119,11 @@
         <button class="btn vastusenupp" id="variant3">Vastus 3</button>
         <button class="btn vastusenupp" id="variant4">Vastus 4</button>
         </div>
-        <div class="round-time-bar" style="--duration: 20;" data-style="smooth">
-            <div></div>
+        <div id="timerbar" class="round-time-bar" style="--duration: 20;" data-style="smooth">
+            <div><audio id="myAudio">
+                <source src="audio/timer.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio></div>
           </div>
           <div id="nerdFactContainer" class="hide fade-in"> <img src="images/kas teadsid.png" alt="kasteadsidet" id="kasteadsidet">
         <div id="nF"></div></div>
@@ -132,8 +136,9 @@
         <div id="gameEnd" class="hide"><p >Skoor lisatud andmebaasi.</p><br><br><input type="button" id='mineAvaleheleModaalist' value="Mine tagasi avalehele"></div>
         <div id="skoorEdetabelisseInput">
         <div id="skoorEdetabelisseHtmlDiv">
-            <img class="county" width="500px" src="images/eesti-hall.png"/>
-        </div>
+            <div id="skoorEdetabelisseHtmlDivImg">
+                <img class="county" src="images/eesti-hall.png"/>
+            </div>        </div>
         <label>Mängija nimi:</label>
         <input type="text" id="m2ngijaNimi"><br><br>
         <input type="button" id='lisaedetabelisse' value="Lisa edetabelisse" onclick="skoorFirebase()"></div>
@@ -141,9 +146,7 @@
         <div id="overlay"></div> <!-- Et Modaalakna (juhised) taga oleks tumedam pilt -->
         <br><br>
     </div>
-    </div>
 <script type="module" src="app.js" defer></script>
-<script type="module" src="firebase.js"></script>
 
     
 </body>

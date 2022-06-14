@@ -155,7 +155,14 @@ html {
   }
 }
 #skoorEdetabelisseHtmlDiv {
-  height: 500px;
+  height: 400px;
+}
+#skoorEdetabelisseHtmlDivImg {
+  display: flex;
+  height: 300px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .county {
   position: absolute;
@@ -491,6 +498,7 @@ input[type=text], select {
   background: rgb(20, 122, 51);
   animation: roundtime calc(var(--duration) * 1s) steps(var(--duration)) forwards;
   transform-origin: left center;
+  margin: 5px;
 }
 @keyframes roundtime {
   to {
@@ -503,9 +511,9 @@ input[type=text], select {
 }
 #sendQ {
   border: none;
-  margin-top: 24px;
+  margin-top: 3px;
   margin-right: 24px;
-  padding: 15px 32px;
+  padding: 10px 15px;
   outline: none;
   cursor: pointer;
   text-align: center;
