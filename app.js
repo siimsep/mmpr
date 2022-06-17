@@ -66,6 +66,7 @@ noobButton.addEventListener('click', function() {
     avaleht.style.setProperty('display', 'none');
     m2nguVali = m2nguVali1;
     maxVigu = maxVigu1;
+    valedVastused = 0;
     raskusTaseNr = 1;
     kysimus()
 });
@@ -76,6 +77,7 @@ expertButton.addEventListener('click', function() {
     maxVigu = maxVigu2;
     m2nguVali = m2nguVali2
     raskusTaseNr = 2;
+    valedVastused = 0;
     kysimus()
 });
 /////////////////////////////////////////////////////////////////////////
@@ -106,6 +108,7 @@ set(child(uusKyss, "v4"), v4);
 set(child(uusKyss, "nF"), nF);
 } */
 //kirjutaKysimus(2, 'Siin on küsimus?', 'Vale 1', 'Vale 2', 'Vale 3', 'Õige', 'Nii-nimetatud nerd-fact lisaks')
+
 /////////////////////////////////////////////////////////////////////////
 // Kasutaja Kysimus Firebase andmebaasi
 
@@ -245,11 +248,11 @@ const showCategory = async function(nr) {
         popup.innerHTML += `<img class="county fade-in" src="images/idaviru.png"/><img class="county zoomword" src="images/idatekst.png"/>`;
     } else if (nr == 4) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" src="images/jarvemaa.png"/><img class="county zoomword" src="images/jarvatekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/jogeva.png"/><img class="county zoomword" src="images/jogevatekst.png"/>`;
     }
     else if (nr == 5) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" src="images/jogeva.png"/><img class="county zoomword" src="images/jogevatekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/jarvemaa.png"/><img class="county zoomword" src="images/jarvatekst.png"/>`;
     }
     else if (nr == 6) {
         await wait(500);
@@ -259,10 +262,10 @@ const showCategory = async function(nr) {
         popup.innerHTML += `<img class="county fade-in" src="images/laaneviru.png"/><img class="county zoomword" src="images/laanevirutekst.png"/>`;
     } else if (nr == 8) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" src="images/parnu.png"/><img class="county zoomword" src="images/parnutekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/polva.png"/><img class="county zoomword" src="images/polvatekst.png"/>`;
     } else if (nr == 9) {
         await wait(500);
-        popup.innerHTML += `<img class="county fade-in" src="images/polva.png"/><img class="county zoomword" src="images/polvatekst.png"/>`;
+        popup.innerHTML += `<img class="county fade-in" src="images/parnu.png"/><img class="county zoomword" src="images/parnutekst.png"/>`;
     } else if (nr == 10) {
         await wait(500);
         popup.innerHTML += `<img class="county fade-in" src="images/raplamaa.png"/><img class="county zoomword" src="images/raplatekst.png"/>`;
@@ -305,16 +308,16 @@ const showMap = function(somewhere) {
     if ((countOccurrences(m2nguVali, 3)===1) && (raskusTaseNr === 2)){
         somewhere.innerHTML += `<img class="countygrey" src="images/idaviru.png"/>`
     }
-    if (!m2nguVali.includes(4)) {
+    if (!m2nguVali.includes(5)) {
         somewhere.innerHTML += `<img class="county" src="images/jarvemaa.png"/>`;
     }
-    if ((countOccurrences(m2nguVali, 4)===1) && (raskusTaseNr === 2)){
+    if ((countOccurrences(m2nguVali, 5)===1) && (raskusTaseNr === 2)){
         somewhere.innerHTML += `<img class="countygrey" src="images/jarvemaa.png"/>`
     }
-    if (!m2nguVali.includes(5)) {
+    if (!m2nguVali.includes(4)) {
         somewhere.innerHTML += `<img class="county" src="images/jogeva.png"/>`;
     } 
-     if ((countOccurrences(m2nguVali, 5)===1) && (raskusTaseNr === 2)){
+     if ((countOccurrences(m2nguVali, 4)===1) && (raskusTaseNr === 2)){
         somewhere.innerHTML += `<img class="countygrey" src="images/jogeva.png"/>`
     }
     if (!m2nguVali.includes(6)) {
@@ -329,16 +332,16 @@ const showMap = function(somewhere) {
     if ((countOccurrences(m2nguVali, 7)===1) && (raskusTaseNr === 2)){
         somewhere.innerHTML += `<img class="countygrey" src="images/laaneviru.png"/>`
     }
-    if (!m2nguVali.includes(8)) {
+    if (!m2nguVali.includes(9)) {
         somewhere.innerHTML += `<img class="county"  src="images/parnu.png"/>`;
     } 
-    if ((countOccurrences(m2nguVali, 8)===1) && (raskusTaseNr === 2)){
+    if ((countOccurrences(m2nguVali, 9)===1) && (raskusTaseNr === 2)){
         somewhere.innerHTML += `<img class="countygrey" src="images/parnu.png"/>`
     }
-    if (!m2nguVali.includes(9)) {
+    if (!m2nguVali.includes(8)) {
         somewhere.innerHTML += `<img class="county"  src="images/polva.png"/>`;
     } 
-    if ((countOccurrences(m2nguVali, 9)===1) && (raskusTaseNr === 2)){
+    if ((countOccurrences(m2nguVali, 8)===1) && (raskusTaseNr === 2)){
         somewhere.innerHTML += `<img class="countygrey" src="images/polva.png"/>`
     }
     if (!m2nguVali.includes(10)) {
@@ -381,6 +384,7 @@ const showMap = function(somewhere) {
 const kysimus = async function() {
     await showMap(popup);
     kategooriaNr = getRand();
+    avaleheNupp.removeEventListener("click", mineAvalehele);
     showCategory(kategooriaNr);
     popup.style.setProperty("display", "flex");
     //await wait(1000);
@@ -389,7 +393,9 @@ const kysimus = async function() {
     popup.innerHTML = popupinit;
     //kysimuseleht.classList.remove('hide');
     skoorike.classList.remove('hide');
+    document.getElementById("eluke1").classList.remove("hide");
     timeLeft = 20;
+    avaleheNupp.addEventListener("click", mineAvalehele);
     return kategooriaJargiKysimused();       
 }
 
@@ -402,7 +408,7 @@ const massiivistKysimuseni = function(n2idis){
     document.getElementById('variant4').innerHTML=n2idis[4];
     kysimuseleht.style.setProperty('display', 'block')
     startCountDown = setInterval(countDown, 1000);
-    //createsound("timer");
+    document.getElementById('kusimuseMaakond').src = `images/${kategooriaNr}.png`;
     playAudio();
     return
 }
@@ -423,17 +429,21 @@ function mineAvalehele() { // v6iks kuidagi paremini selle nullimise teha, esial
     avaleheNupp.classList.add('hide');
     skoorike.classList.add('hide');
     skoorike.innerHTML = '';
+
+    document.getElementById("eluke1").classList.add("hide");
+    document.getElementById("eluke1").src = "images/sydamega.png"
+ 
+
     totalScore = 0;
     m2nguVali1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
     m2nguVali2 = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
     valedVastused = 0;
     skoorEdetabelisse.classList.add('hide');
     skoorEdetabelisseInput.classList.remove('hide');
-    skoorEdetabelisseHtmlDiv.innerHTML = ("");  // !!!!!!!!!!
+    skoorEdetabelisseHtmlDiv.innerHTML = (`<div id="skoorEdetabelisseHtmlDivImg"><img class="county" src="images/eesti-hall.png"/></div>`);  // !!!!!!!!!!
     const gameEnd = document.getElementById('gameEnd');
     gameEnd.classList.add('hide');
-    closeModal(skoorEdetabelisse);
-    
+    closeModal(skoorEdetabelisse);    
 }
 avaleheNupp.addEventListener('click', mineAvalehele)
 yksikNupp.addEventListener('click', yksikM2ng);
@@ -484,6 +494,7 @@ const checkAnswer = async (event) =>{
     pauseAudio();
     let vastatudVariant = event.target.innerHTML;  
     if(vastatudVariant == rightAnswer) {
+        btnDisabler();
         createsound('oige');
         clearInterval(startCountDown);
         totalScore += timeLeft;
@@ -492,7 +503,6 @@ const checkAnswer = async (event) =>{
         event.target.style.cssText = "background-color: #04AA6D; color: white"; 
         await wait(500);
         showNerdFact();
-        btnDisabler();
         kysimusedDbst = [];
         if(m2nguVali.length === 0){
             await wait(2000);
@@ -502,21 +512,31 @@ const checkAnswer = async (event) =>{
             createsound('celebration');
             skoorEdetabelisseHtmlDiv.innerHTML += (`Palju õnne, mäng sai läbi. <br><br>Sinu skooriks tuli: ${totalScore}<br>`);
             openModal(skoorEdetabelisse);
-
         } else {
             nextQ.style.setProperty("display", "flex")    
         }
     } else { 
         createsound('vale');
+        btnDisabler();
         ++valedVastused;
         m2nguVali.push(kategooriaNr);
         clearInterval(startCountDown);
+
+        if(valedVastused === 1) {
+            (document.getElementById("eluke1")).src = "images/syda2.png"
+        }
+        if(valedVastused === 2) {
+            (document.getElementById("eluke1")).src = "images/syda3.png"
+        }
+        if(valedVastused === 3) {
+            (document.getElementById("eluke1")).src = "images/sydameta.png"
+        }
         timeLeft = 20;
         if(valedVastused === maxVigu){
             skoorEdetabelisse.classList.remove('hide');
             skoorEdetabelisseHtmlDiv.classList.remove("hide");
             showMap(skoorEdetabelisseHtmlDivImg);
-            skoorEdetabelisseHtmlDiv.innerHTML += (`Vastasid liiga palju kordi valesti, sinu mängu skooriks tuli: ${totalScore}<br>`);
+            skoorEdetabelisseHtmlDiv.innerHTML += (`Vastasid liiga palju kordi valesti, sinu mängu skooriks tuli: ${totalScore}`);
             if(v1btn.innerHTML == rightAnswer){
                 v1btn.style.cssText = "background-color: #04AA6D; color: white;"
             } else if(v2btn.innerHTML == rightAnswer){
@@ -545,7 +565,6 @@ const checkAnswer = async (event) =>{
         event.target.style.cssText = "background-color: rgb(221, 98, 78); color: white;";
         await wait(500);
         showNerdFact();
-        btnDisabler();
         nextQ.style.setProperty("display", "flex")    
     }
     };
@@ -562,6 +581,9 @@ const uueleRingile = () => {
     //nextQ.classList.add('hide');
     nerdFactContainer.classList.add('hide');
     skoorike.classList.add('hide');
+
+    document.getElementById("eluke1").classList.add("hide");
+
     timerbar.style.setProperty("display", "block");
     kysimus()
 }
@@ -628,7 +650,7 @@ const kergeRaskusEdekas = function() {
             });     
             for (let i =0;i<5;i++){       
             let r = nm[i]; 
-            kergeKasutaja.innerHTML += r.m2ngijaNimi + ` ` + r.skoor +`<br>`;
+            kergeKasutaja.innerHTML += `${i+1}. ` + r.m2ngijaNimi + ` ` + r.skoor +`<br>`;
             }
             
         } else {
@@ -650,7 +672,7 @@ const raskeRaskusEdekas = function() {
 
             for (let i =0;i<5;i++){       
             let r = nm[i]; 
-            raskeKasutaja.innerHTML += r.m2ngijaNimi + ` ` + r.skoor +`<br>`;
+            raskeKasutaja.innerHTML +=  `${i+1}. ` + r.m2ngijaNimi + ` ` + r.skoor +`<br>`;
             }
             
         } else {
@@ -674,6 +696,7 @@ function chngimg() {
     var img = ico.src;
     if (img.indexOf('yessound.png')!=-1) {
         ico.src  = 'images/nosound.png';
+        pauseAudio();
     }
      else {
        ico.src = 'images/yessound.png';

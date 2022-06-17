@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eesti mäng</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/40978ebb6b.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,9 @@
 <body class="container">   
     <div id="kogusisu">
             <div class="btn fade-in"><img id="audioIcon" src="images/yessound.png"></img></div> 
-            <div id="avalehele"  class="btn hide fade-in"><img  id="avaleheicon" src="images/home.png"></img></div><br><br> 
+            <div id="avalehele"  class="btn hide fade-in"><img  id="avaleheicon" src="images/home.png"></img></div>
+            <img id="eluke1" class="hide" src="images/syda1.png">
+        <br><br> 
         <div id="avaleht">
             <img src="images/eestivalge.png" alt="eestimang" id="m2ngulogo">
             <div id="avalehenupud">
@@ -39,9 +41,9 @@
                     </div>
                     <div class="modal-body">
                         <div id="edetabelisisu">
-                            <p>Kergema raskustasemega: <br><br>
-                                 <span id="kergeKasutaja"></span></p><br><hr>
-                            <p>Raskema raskustasemega: <br><br>
+                            <p>Kergema raskustasemega: <br>
+                                 <span id="kergeKasutaja"></span></p><br>
+                            <p>Raskema raskustasemega: <br>
                                 <span id="raskeKasutaja"></span>
                                </p>
                         </div>
@@ -109,10 +111,11 @@
         </div>
         <div id="skoorike" class="hide"></div>
         <div id="kysimuseleht" class="hide fade-in"> 
-        <div id="kysimusekast">      
-              <img src="images/kusimus.png" alt="kusimus" id="kusimus">
-              <div id="kysimus"></div>
-            </div>
+        <div id="kysimusekast">    
+            <img alt="kysimuseMaakond" id="kusimuseMaakond">  
+           <!--  <img src="images/kusimus.png" alt="kusimus" id="kusimus"> -->
+            <div id="kysimus"></div>
+        </div>
         <div id="vastusenupud" class="btn-grid">
         <button class="btn vastusenupp" id="variant1">Vastus 1</button>
         <button class="btn vastusenupp" id="variant2">Vastus 2</button>
@@ -129,7 +132,7 @@
         <div id="nF"></div></div>
         <div id="nextQuest"><button class="btn j2rgminekyss">Järgmine küsimus</button></div>
         </div>
-        <div id="skoorEdetabelisse" class="modal">
+        <div id="skoorEdetabelisse" class="modal fade-in">
             <div class="modal-header">
                 <button data-close-button class="close-btn">&times;</button>
             </div>
@@ -138,7 +141,7 @@
         <div id="skoorEdetabelisseHtmlDiv">
             <div id="skoorEdetabelisseHtmlDivImg">
                 <img class="county" src="images/eesti-hall.png"/>
-            </div>        </div>
+            </div></div>
         <label>Mängija nimi:</label>
         <input type="text" id="m2ngijaNimi"><br><br>
         <input type="button" id='lisaedetabelisse' value="Lisa edetabelisse" onclick="skoorFirebase()"></div>
